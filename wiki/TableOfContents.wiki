@@ -1,6 +1,3 @@
-#sidebar TableOfContents
- 
- * [TableOfContents Table Of Contents]
  * [Test1 Test Page]
    * [Test1 Test Page]
  * [PageName Tims Test Page :)]
