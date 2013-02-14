@@ -1,0 +1,31 @@
+#summary Testje voor de Wiki-syntax
+
+= Introductie =
+
+Add your content here.
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
+
+= Inhoud =
+
+<wiki:toc max_depth="3" />
+
+= Hoofdstuk 1 =
+== H1 Paragraaf 1 ==
+== H1 Paragraaf 2 ==
+
+= Hoofdstuk 2 =
+== H2 Paragraaf 1 ==
+== H2 Paragraaf 2 ==
+
+= Hoofdstuk 3 =
+== H3 Paragraaf 1 ==
+== H3 Paragraaf 2 ==
+=== H3 Paragraaf 2 Deel 1 ===
+=== H3 Paragraaf 2 Deel 2  ===
