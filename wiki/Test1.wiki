@@ -8,7 +8,7 @@ Test issue link: issue 1.
 
 Test revision link: r1.
 
-== SubHeader ==
+== Intro2 ==
 
 Test wiki link:  [Test1#Anchor]
 Test wiki link2: [Test1#Anchor Test 1]
