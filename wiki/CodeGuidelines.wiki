@@ -42,10 +42,10 @@ finalThing();
  * Elke methode wordt gedeclareerd in een header (`.h`) file en geïmplementeerd in een .cpp file.
  * Namen van variabelen en objecten worden gescheiden door een `_`, voor methodes wordt lower camel case gebruikt en voor klassen upper camel case  bijvoorbeeld:
 {{{
-class VerrySpecialClass
+class VerySpecialClass
 {
 public:
-    void myVerryOwnFunction(int argument_variable);
+    void myVeryOwnFunction(int argument_variable);
 
 private:
     int my_integer;
@@ -54,17 +54,17 @@ private:
  * Doxygen commentaar wordt in de header files geplaatst:
 {{{
 /**
-    \class VerrySpecialClass
-    \brief A verry special class */
-class VerrySpecialClass
+    \class VerySpecialClass
+    \brief A very special class */
+class VerySpecialClass
 {
 public:
     /** This function does really special stuff.
         \param argument_variable this variable if used in the function. */
-    void myVerryOwnFunction(int argument_variable);
+    void myVeryOwnFunction(int argument_variable);
 
 private:
-    /** Verry special variable */
+    /** Very special variable */
     int my_integer;
 };
 }}}
@@ -76,13 +76,13 @@ private:
  * Plaatst boven elke functie een scheidingslijn als volgt:
 {{{
 // ---------------------------------------------------------------------------
-void myVerryOwnFunction(int argument_variable)
+void myVeryOwnFunction(int argument_variable)
 {
     // Do something
 }
 
 // ---------------------------------------------------------------------------
-void anotherVerryOwnFunction(int argument_variable)
+void anotherVeryOwnFunction(int argument_variable)
 {
     // Do something else
 }
