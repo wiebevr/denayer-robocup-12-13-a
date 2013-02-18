@@ -1,4 +1,4 @@
  * [Test1 Test Page]
    * [Test1 Test Page]
  * [PageName Tims Test Page :)]
- * [CodingGuidlines Coding Guidlines]
+ * [CodingGuidelines Coding Guidelines]
