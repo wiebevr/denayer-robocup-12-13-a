@@ -73,7 +73,7 @@ private:
  * `#include ".."` wordt gebruikt voor eigen files en `#include <..>` voor andere.
  * Code wordt geïndenteerd met 4 spaties.
  * Commentaar en namen worden in het engels geschreven.
- * plaatst boven elke functie een scheidingslijn als volgt:
+ * Plaatst boven elke functie een scheidingslijn als volgt:
 {{{
 // ---------------------------------------------------------------------------
 void myVerryOwnFunction(int argument_variable)
