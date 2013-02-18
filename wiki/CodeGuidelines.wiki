@@ -1,7 +1,7 @@
 = Coding Guidelines =
 == Het gebruik van verschillende files ==
  * Er worden geen hoofdletters gebruikt in filenames, er wordt een `_` geplaatst tussen de verschillende woorden in de klasse naam.
-  De klasse WifiCommunication wordt bijvoorbeeld in de file wifi`_`communication.h en wifi`_`communication.cpp files geplaatst.
+  De klasse `WifiCommunication` wordt bijvoorbeeld in de file wifi`_`communication.h en wifi`_`communication.cpp files geplaatst.
  * De klasse definitie in de header file wordt geplaatst tussen #ifndef preprocessor commando's als volgt:
 {{{
 #ifndef WIFI_COMMUNICATION_H
