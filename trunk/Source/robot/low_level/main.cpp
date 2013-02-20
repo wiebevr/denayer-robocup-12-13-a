@@ -15,7 +15,6 @@ int main(int argc, char **argv)
 
     while (true)
     {
-        // Send the data coming from wifi directly to low_level.
         std::cout << strategy << std::endl;
     }
 
