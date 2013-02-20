@@ -1,0 +1,32 @@
+Voorbeeldje van hoe best coderen, dat doxygen daar een mooi bestandje in HTML van maakt.
+
+/**
+ * De time klasse stelt een tijdstip voor.
+ *
+ * \author John Doe
+ * met de \author of @author kan men een auteur aangeven
+ */
+class Time {
+
+  /**
+   * Constructor die de tijd een bepaalde opgegeven waarde meegeeft.
+   * \param timemillis is het aantal milliseconden sinds 1 januari 1970
+   * met \param of @param geef je aan dat je de parameter(s) beschrijft
+   */
+  Time(int timemillis) {
+    ...
+  }
+
+  /**
+   * Geef de huidige tijd.
+   * \return Een time object dat de huidige tijd bevat.
+   * met *\return* geef je aan dat je de return waarde beschrijft
+   */
+  static Time now() {
+    ...
+  }
+}
+
+Dus \param voor parameters
+    \authors voor de auteur aan te geven
+    \return voor de return waarde aan te geven
