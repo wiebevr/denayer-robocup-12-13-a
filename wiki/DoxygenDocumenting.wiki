@@ -1,11 +1,11 @@
 Voorbeeldje van hoe best coderen, dat doxygen daar een mooi bestandje in HTML van maakt.
-`
-/**
- * De time klasse stelt een tijdstip voor.
- *
- * \author John Doe
- * met de \author of @author kan men een auteur aangeven
- */
+
+`/**`
+` * De time klasse stelt een tijdstip voor.`
+ `*`
+ `* \author John Doe`
+ `* met de \author of @author kan men een auteur aangeven`
+ `*/`
 class Time {
 
   /**
