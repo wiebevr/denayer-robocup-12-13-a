@@ -14,9 +14,9 @@ Test wiki link:  [Test1#Anchor]
 Test wiki link2: [Test1#Anchor Test 1]
 
 
-Testing images (goo.gl/4Esuf points to images folder in wiki):
+Testing images
 
-http://goo.gl/4Esuf/test.png
+http://denayer-robocup-12-13-a.googlecode.com/svn/wiki/images/test.png
 
 
 = Details =
