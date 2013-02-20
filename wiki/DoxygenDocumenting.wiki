@@ -1,5 +1,5 @@
 Voorbeeldje van hoe best coderen, dat doxygen daar een mooi bestandje in HTML van maakt.
-
+`
 /**
  * De time klasse stelt een tijdstip voor.
  *
@@ -26,7 +26,7 @@ class Time {
     ...
   }
 }
-
+`
 Dus \param voor parameters
     \authors voor de auteur aan te geven
     \return voor de return waarde aan te geven
