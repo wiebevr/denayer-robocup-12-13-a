@@ -1,5 +1,6 @@
 #summary Explains the Image Processing module
 ||<wiki:toc max_depth="2" />||
+
 = Introduction =
 
 Add your content here.
