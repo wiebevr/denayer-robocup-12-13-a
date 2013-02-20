@@ -13,5 +13,9 @@ Test revision link: r1.
 Test wiki link:  [Test1#Anchor]
 Test wiki link2: [Test1#Anchor Test 1]
 
+[images/test.png]
+
+images/test.png
+
 
 = Details =
