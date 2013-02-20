@@ -1,0 +1,39 @@
+#summary Project Overview
+||<wiki:toc max_depth="2" />||
+= Introduction =
+
+Add your content here.
+
+
+= Architecture =
+
+TODO: Describe main architecture here
+
+= Modules =
+== Image Processing ==
+        ||see [ImageProcessingIndex Image Processing]||
+
+
+Short description^(1)^
+
+== Wifi Communication ==
+        ||see [WifiIndex Wifi Communication]||
+Short description
+
+== Strategy ==
+        ||see [StrategyIndex Strategy]||
+Short description
+
+== Low-level Communication ==
+        ||see [LowLevelIndex Low-level Communication]||
+Short description
+
+= Technologies and Frameworks =
+List of all technologies and frameworks
+
+= References =
+List of references
+
+ ^(1)^ Ref 1<br/>
+ ^(2)^ Ref 2<br/>
+ ^(3)^ Ref 3<br/>
