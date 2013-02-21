@@ -4,4 +4,4 @@
    * [StrategyIndex Strategy]
    * [LowLevelIndex Low-level Communication]
  * [CodeGuidelines Coding Guidelines]
- * [PageName Tims Test Page :)]
+ * [DoxygenDocumenting Info over de Doxygen Documentation]
