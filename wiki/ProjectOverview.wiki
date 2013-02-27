@@ -30,7 +30,16 @@ Short description
 Short description
 
 = Technologies and Frameworks =
-List of all technologies and frameworks
+== Cross compileren ==
+Het maaken van een executable dat draait op het beagle board gebeurt als volgt:
+ * Ga naar de map `Source/robot/env/` in deze map staat een script `set_me_up.sh`, dit script zal de omgeving (libraries, cross compiler ..) downloaden en uitpakken in de map env.
+ * Hierna moet cmake als volgt uitgevoerd worden:
+   * In de map build:
+{{{
+cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain-bb.cmake ..
+}}}
+  Dit laad de toolchain file toolchain-bb.cmake waarin alle opties voor cmake en de compiler staan ingesteld.
+ * Daarna moet enkel nog `make` uitgevoerd worden en de arm executables staan klaar in het build/bin folder.
 
 = References =
 List of references
