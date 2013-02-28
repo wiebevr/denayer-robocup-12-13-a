@@ -11,7 +11,7 @@ The total architecture of this project is divided into 4 subsystems. First, the 
 
 = Modules =
 == Image Processing (IP-unit) ==
-        ||see [ImageProcessingIndex Image Processing] for the routines and internal architecture||
+        ||see [ImageProcessingIndex Image Processing] for the routines and detailed information||
 
 A camera positioned above the field provides images to the central computer at a framerate of 4fps. These images are processed by the IP-unit. You can find an example of an image underneath.
 
@@ -22,21 +22,22 @@ Out of these images, the coördinates of each object on the field will be calcul
 Now that the coördinates are known, they have to be send to the robot. The coördinates are delivered to the WIFI-unit.
 
 
-
-
-Short description^(1)^
+Example of a reference^(1)^
 
 == Wifi Communication ==
-        ||see [WifiIndex Wifi Communication]||
-Short description
+        ||see [WifiIndex Wifi Communication] for the routines and detailed information||
+
+The information received from the IP-unit has to be send to the robot. The Wifi unit collects the data and assembles it into 1 object. Via protocol buffers the data is transmitted over the WIFI-network. The protocol used for this transmission is UDP. There will be know acknowledgement from the robot that he's received the package. If he were to miss one package, the next one will arrive shortly without too much data-loss.
 
 == Strategy ==
-        ||see [StrategyIndex Strategy]||
-Short description
+        ||see [StrategyIndex Strategy] for the routines and detailed information||
+
+The robot needs to interpret the coordinates received over WIFI. The strategy determines whether the robot has to kick the ball, or keep the ball out of the goal. For example: in which direction does the robot need to turn, move or kick. These instructions are given to the low level communication-unit.
 
 == Low-level Communication ==
-        ||see [LowLevelIndex Low-level Communication]||
-Short description
+        ||see [LowLevelIndex Low-level Communication] for the routines and detailed information||
+
+The Low-level Communication-unit receives instruction from the strategy-unit. Based on these instructions and their parameters the robot has to drive forward or turn around until a stop-instruction is received. For this to happen, the engines of the robot have to be controlled.
 
 = Technologies and Frameworks =
 == Cross compileren ==
