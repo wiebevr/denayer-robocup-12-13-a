@@ -1,0 +1,34 @@
+/******************************************************************************
+*
+* @Author Bart Volkaerts
+* @version 1.0
+* @date 02-2013
+*
+******************************************************************************/
+
+message Robot {
+    required float x = 1;
+    required float y = 2;
+    required float rotate_x = 3;
+    required float rotate_y = 4;
+}
+
+message Ball {
+    required float x = 1;
+    required float y = 2;
+}
+
+message Goal {
+    required float pole1_x = 1;
+    required float pole1_y = 2;
+    required float pole2_x = 3;
+    required float pole2_y = 4;
+}
+
+message Game {
+    repeated Robot robot_a = 1;
+    repeated Robot robot_b = 2;
+    repeated Ball ball = 3;
+    repeated Goal goal = 4;
+}
+
