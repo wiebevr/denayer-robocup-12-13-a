@@ -7,11 +7,12 @@ For our course in Smart Embedded Systems at Lessius Mechelen Campus De Nayer, we
 
 = Architecture =
 
-TODO: Describe main architecture here
+The total architecture of this project is divided into 4 subsystems. First, the Image Processing-unit will process the images received by the camera. Then, the Wifi-unit will send the information from the local computer to the robot over Wifi. Afterwards, the Strategy-unit provides a strategy on what the robot should do. And finally, the Low Level Communication-unit will control the wheels of the robot. Every unit is explained more detailed underneath.
 
 = Modules =
 == Image Processing ==
-        ||see [ImageProcessingIndex Image Processing]||
+        ||see [ImageProcessingIndex Image Processing] for the routines and internal architecture||
+
 
 
 Short description^(1)^
