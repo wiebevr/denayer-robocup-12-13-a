@@ -13,7 +13,10 @@ The total architecture of this project is divided into 4 subsystems. First, the 
 == Image Processing (IP-unit) ==
         ||see [ImageProcessingIndex Image Processing] for the routines and internal architecture||
 
-A camera positioned above the field provides images to the central computer at a framerate of 4fps. These images are processed by the IP-unit. 
+A camera positioned above the field provides images to the central computer at a framerate of 4fps. These images are processed by the IP-unit. You can find an example of an image underneath.
+
+<img src="http://denayer-robocup-12-13-a.googlecode.com/svn/wiki/images/afbeelding.jpg" alt="Pulpit rock" width="304" height="228">
+
 
 [http://denayer-robocup-12-13-a.googlecode.com/svn/wiki/images/afbeelding.jpg]
 
