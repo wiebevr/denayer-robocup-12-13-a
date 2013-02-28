@@ -15,7 +15,7 @@ The total architecture of this project is divided into 4 subsystems. First, the 
 
 A camera positioned above the field provides images to the central computer at a framerate of 4fps. These images are processed by the IP-unit. You can find an example of an image underneath.
 
-<img src="http://denayer-robocup-12-13-a.googlecode.com/svn/wiki/images/afbeelding.jpg" alt="Pulpit rock" width="500" height="360" align="center">
+<img src="http://denayer-robocup-12-13-a.googlecode.com/svn/wiki/images/afbeelding.jpg" alt="Pulpit rock" width="500" height="360" float="center">
 
 Out of these images, the coördinates of each object on the field will be calculated. With the field being green, the ball being orange, and a pattern present on the robot, the most logical technique to use, is Color Segmentation.
 
