@@ -17,9 +17,6 @@ A camera positioned above the field provides images to the central computer at a
 
 <img src="http://denayer-robocup-12-13-a.googlecode.com/svn/wiki/images/afbeelding.jpg" alt="Pulpit rock" width="500" height="360">
 
-
-[http://denayer-robocup-12-13-a.googlecode.com/svn/wiki/images/afbeelding.jpg]
-
 Out of these images, the coördinates of each object on the field will be calculated. With the field being green, the ball being orange, and a pattern present on the robot, the most logical technique to use, is Color Segmentation.
 
 Now that the coördinates are known, they have to be send to the robot. The coördinates are delivered to the WIFI-unit.
