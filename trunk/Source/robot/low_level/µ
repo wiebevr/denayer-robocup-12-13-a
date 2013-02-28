@@ -11,8 +11,6 @@
 LowLevel::LowLevel()
 {
     serial = new Serial(38400, 8 ,1);
-    if(serial->init())
-        exit();
 }
 LowLevel::~LowLevel()
 {
@@ -49,11 +47,6 @@ void LowLevel::stopMoving(void)
    serial->write("s\r");
 }
 
-// ---------------------------------------------------------------------------
-void LowLevel::ledTest(void)
-{
-   serial->write("t\r");
-}
 
 // Private functions
 // ---------------------------------------------------------------------------
