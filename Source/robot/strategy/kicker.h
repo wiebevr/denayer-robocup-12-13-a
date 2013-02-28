@@ -1,5 +1,5 @@
 /*
- * Kicker.h
+ * kicker.h
  *
  *  Created on: 21-feb.-2013
  *      Author: Pascal Muys
@@ -13,7 +13,8 @@
 	\brief Executes the kicking algorithm.
 	\author Pascal Muys
 */
-class Kicker {
+class Kicker : public Robot
+{
 public:
 	Kicker();
 	virtual ~Kicker();
@@ -27,6 +28,7 @@ public:
 	void calcKickPos();
 	/** 
 		Something small to calculate distances.
+		Uses sqrt(), so try something els
 		\param x horizontal length.
 		\param y vertical length.
 		\return long distance of the triangle
@@ -53,6 +55,12 @@ private:
 	int kick_distance; //distance between ball and optimal kicking position
 	int max_speed;	// maximum speed for lowlevel
 	int walk_speed; // normal speed for lowlevel
+	int rob_posx; // robot position x and y, for easier access
+	int rob_posy;
+	int ball_posx; // ball position x and y, for easier access
+	int ball_posy;
+	int rob_rot; // robot rotation in degrees
+	int rob_roty // y value of robot rotation
 };
 
 #endif /* KICKER_H_ */

@@ -5,7 +5,7 @@
  *      Author: Pascal Muys
  */
 
-#include "Kicker.h"
+#include "kicker.h"
 #include <stdio.h>
 #include <math.h>
 
@@ -13,6 +13,7 @@ Kicker::Kicker()
 {
 	// TODO Auto-generated constructor stub
 	kick_distance = 50;
+	max_speed = 100;
 }
 
 Kicker::~Kicker()
@@ -24,14 +25,9 @@ void Kicker::run()
 {
 	calcKickPos();
 
-	int rob_posx = Coords::getRobotX();
-	int rob_posy = Coords::getRobotY();
-	int ball_posx = Coords::getBallX();
-	int ball_posy = Coords::getBallY();
-
 	if( rob_posx == kick_posx && rob_posy == kick_posy ) //Robot at kicking position
 	{
-		if( turnTo(ball_posx, ball_posy) == 1 )	 //Robot turned towards ball
+		if( turnTo(ball_posx, ball_posy) == 0 )	 //Robot turned towards ball
 		{
 			driveTo(ball_posx, ball_posy);	 //Let's kick!
 		}
@@ -68,22 +64,27 @@ int Kicker::pythagoras(int x, int y)
 
 int Kicker::turnTo(int x, int y)
 {
-	//TODO again find proper functions
-	int x_t = x - Coords::getRobotX();
-	int y_t = x - Coords::getRobotY();
+	int x_t = x - rob_posx;
+	int y_t = y - rob_posy;
 
-	int alpha = Coords::getRobotAngle();
-	int beta = atan2(x_t, y_t);
+	if(x == 0) {
+		// Turn till rotation = 90
+	}
 
-	LowLevel::Turn(alpha-beta);
+	//int beta = atan2(x_t, y_t); // veeeery slooow atan
+	int f = rob_roty/rob_rotx	// let image processing do the hard work
+	
+	int y_d = x*f;
 
-	if(alpha-beta == 0)
+	if(y_d != y_t)
 	{
-		return 1;
+		
+		ll::turnLeft(max_speed);
+		return 1;	// turning...
 	}
 	else
 	{
-		return 0;
+		return 0;	// turned towards point!
 	}
 }
 

@@ -4,6 +4,14 @@ include_directories("${ROBOT_SOURCE_DIR}")
 
 link_directories("${ROBOT_BINARY_DIR}/lib")
 
-add_executable(strategy main.cpp)
+set(strategy_source_files
+	main.cpp	
+	kicker.cpp
+	kicker.h
+	robot.cpp
+	robot.h
+)
+
+add_executable(strategy ${strategy_source_files})
 
 target_link_libraries(strategy ipc)
