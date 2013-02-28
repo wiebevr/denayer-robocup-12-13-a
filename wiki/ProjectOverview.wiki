@@ -5,7 +5,6 @@
 
 For our course in Smart Embedded Systems at Lessius Mechelen Campus De Nayer, we have to create a RoboCup SSL-project. The goal of this project is to create an autonomous robot, that can play a simplified version of soccer.
 
-
 = Architecture =
 
 TODO: Describe main architecture here
