@@ -7,6 +7,7 @@
 
 #include "kicker.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
 Kicker::Kicker()
@@ -25,15 +26,15 @@ void Kicker::run()
 {
 	calcKickPos();
 
-	if( rob_posx == kick_posx && rob_posy == kick_posy ) //Robot at kicking position
+	if( co::robot1x == kick_posx && co::robot1y == kick_posy ) //Robot at kicking position
 	{
-		if( turnTo(ball_posx, ball_posy) == 0 )	 //Robot turned towards ball
+		if( turnTo(co::ballx, co::bally) == 0 )	 //Robot turned towards ball
 		{
-			driveTo(ball_posx, ball_posy);	 //Let's kick!
+			driveTo(co::ballx, co::bally);	 //Let's kick!
 		}
 		else
 		{
-			return 0;			 //Not completely turned yet
+			return;			 //Not completely turned yet
 		}
 	}
 	else if( turnTo(kick_posx, kick_posy) == 1)	 //Turned to kicking position?
@@ -44,9 +45,9 @@ void Kicker::run()
 
 void Kicker::calcKickPos()
 {
-	//TODO find proper functions to get coordinates
-	int x = Coords::getGoalX() - Coords::getBallX();
-	int y = Coords::getGoalY() - Coords::getBallY();
+	//TODO get rid of pythagoras
+	int x = co::goal1x - ballx;
+	int y = goal1y - bally;
 
 	int ball_goal_distance = pythagoras(x, y);
 	int factor = kick_distance/ball_goal_distance;
@@ -64,36 +65,86 @@ int Kicker::pythagoras(int x, int y)
 
 int Kicker::turnTo(int x, int y)
 {
-	int x_t = x - rob_posx;
-	int y_t = y - rob_posy;
+	int x_t = x - co::robot1x;		//make triangle of robotcoords and pointcoords
+	int y_t = y - co::robot1y;		//these are hor. and vert. sides
 
-	if(x == 0) {
-		// Turn till rotation = 90
+	if(x_t == 0)				// point is above us!
+	{					
 	}
+	else					// slightly more complex turning
+	{	
+		int q_p = checkQuadrant(x_t,y_t);
+		int q_r = checkQuadrant(co::robot1rotx, co::robot1roty);
+		// if robot is looking in same quadrant as point
+		if( q_p == q_r )
+		{
+			double f = co::robot1roty/co::robot1rotx;	// vector of the robots rotation
+									// recalculate to smaller triangle
+			int y_s = x_t*f;				// y/x = y'/x'= f => y = f*x
 
-	//int beta = atan2(x_t, y_t); // veeeery slooow atan
-	int f = rob_roty/rob_rotx	// let image processing do the hard work
-	
-	int y_d = x*f;
-
-	if(y_d != y_t)
-	{
-		
-		ll::turnLeft(max_speed);
-		return 1;	// turning...
-	}
-	else
-	{
-		return 0;	// turned towards point!
+			if( abs(y_s) > abs(y_t) )			// if small triangle does not equal point-triangle
+			{
+				ll::turnRight(max_speed);		// turning...
+				return 0;
+			}
+			else if( abs(y_s) < abs(y_t) )
+			{
+				ll::turnLeft(max_speed);
+				return 0;
+			}
+			else						// y_s == y_t
+			{
+				return 1;				// turned towards point!
+			}
+		}
+		else if( (q_p < 0 && q_r < 0) || (q_p > 0 && q_r > 0) ) // both in upper or lower half
+		{
+			if( abs(q_r) > abs(q_p) )
+			{
+				ll::turnRight(max_speed);		// turn towards point-quadrant
+				return 0;
+			}
+			else
+			{
+				ll::turnLeft(max_speed);
+				return 0;
+			}
+		}
+		else if( abs(q_r) == abs(q_p) )				// different sign, equal value
+		{							// in opposing quadrants
+			if( abs(x_t) > abs(y_t) )
+			{
+				ll::turnRight(max_speed);		// turn towards closest other quadrant
+				return 0;
+			}
+			else
+			{
+				ll::turnLeft(max_speed);
+				return 0;
+			}
+		}
+		else							// both in left or right half
+		{
+			if( abs(q_r) > abs(q_p) )			// same as in upper-lower, but turn other way
+			{
+				ll::turnLeft(max_speed);		// turning...
+				return 0;
+			}
+			else
+			{
+				ll::turnRight(max_speed);
+				return 0;
+			}
+		}
 	}
 }
 
 int Kicker::driveTo(int x, int y)
 {
-	if(Coords::getRobotX() == x && Coords::getRobotY() == y)
+	if(co::robot1x == x && co::robot1y == y)
 	{
 		LowLevel::Drive(0);
-		return 1;
+		return 0;
 	}
 	else
 	{
@@ -101,3 +152,36 @@ int Kicker::driveTo(int x, int y)
 		return 0;
 	}
 }
+
+int Kicker::checkQuadrant(int x, int y)
+{
+	/* check for point on origin  or axis */
+	if (x_coordinate == 0 || y_coordinate == 0)
+	{	
+		return 0;
+	}
+    	/* check for quadrant I */
+    	else if(x_coordinate > 0 && y_coordinate > 0)
+	{
+        	return -1;
+    	}
+    	/* check for quadrant II */
+    	else if(x_coordinate < 0 && y_coordinate > 0)
+	{
+        	return -2;
+    	}
+    	/* check for quadrant III */
+    	else if(x_coordinate < 0 && y_coordinate < 0)
+	{
+    		return 2;
+    	}
+    	/* check for quadrant IV */
+    	else
+	{
+        	return 1;
+    	}
+    	/* all possibilities covered by now */
+    	/* terminate successfully */
+    	return 0;
+} 
+

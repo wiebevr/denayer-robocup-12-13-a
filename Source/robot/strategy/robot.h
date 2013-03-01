@@ -5,6 +5,7 @@
 	\brief Parent class for Kicker and Keeper
 	\author Gert Mertes
 */
+
 class Robot {
 	public:
 		Robot();
@@ -27,7 +28,7 @@ class Robot {
 		/*
 			Pointers to the coordinate and lowlevel objects so that they can be accessed by the child robots.
 		*/
-		Coords *co;
+		VisionData *co;
 		LowLevel *ll;
 }
 
