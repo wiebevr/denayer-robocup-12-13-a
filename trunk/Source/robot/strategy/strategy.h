@@ -9,6 +9,8 @@
 #include "low_level.h"
 #include "vision_data.h"
 #include "robot.h"
+#include "keeper.h"
+#include "kicker.h"
 
 class Strategy {
 	public:
