@@ -14,6 +14,8 @@ LowLevel::LowLevel()
     if(serial->init())
         exit();
 }
+
+// ---------------------------------------------------------------------------
 LowLevel::~LowLevel()
 {
     delete serial;
