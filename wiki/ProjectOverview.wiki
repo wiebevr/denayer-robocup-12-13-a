@@ -82,8 +82,8 @@ De `..` verwijst naar de root directory van de broncode, de `CMakeLists.txt` fil
 
 Als het compileren zonder error's is verlopen worden alle gegenereerde executables in de map `robot/build/bin` gezet.
 
-*Zorg er ook steeds voor dat code die gecommit word naar de repo's steeds
-compileerd zodat andere groepen deze code zonder problemen kunnen binnen halen.*
+*Zorg er ook steeds voor dat code die gecommit wordt naar de repo's steeds
+compileerd zodat andere groepen deze code zonder problemen kunnen binnen halen en compileren.*
 
 ==== Cross compileren ====
 Het maken van een executable dat draait op het beagle board gebeurt als volgt:
