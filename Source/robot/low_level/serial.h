@@ -1,4 +1,4 @@
-/*  serial.h 
+/**  serial.h 
  *  Header file for the serial (rs232) communication 
  *  @author Jasper Vercammen & Ken Peersman
  */
@@ -33,23 +33,23 @@ private:
     speed_t baudrate;
     int databits;
     int stopbits;
-    /* Function for intitialising the serial port */
+    /** Function for intitialising the serial port */
     int initport(void );
-    /* Function for converting a double to a baudratespeed 
+    /** Function for converting a double to a baudratespeed 
      * @param baud Double value that represents the baudrate 
      * @return speed_t that gives the te baudrate */
     speed_t convertBaud ( double baud )
 
 public:
-    /* Constructor */
+    /** Constructor */
     Serial::Serial();
-    /* Constructor 2 
+    /** Constructor 
      * @param baud Integer that defines the baudrate
      * @param databits Integer that defines the number of databits
      * @param stopbits Integer that defines the number of stopbits 
      */
     Serial::Serial( int baud, int databits, int stopbits ); 
-    /* Destructor */
+    /** Destructor */
     Serial::~Serial();
     int writeport(int, unsigned char *);
     int readport(int , unsigned char *);

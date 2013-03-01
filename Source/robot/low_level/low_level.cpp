@@ -1,4 +1,4 @@
-/* Low level class
+/** Low level class
  * Functions for low level communication 
  * @author Jasper
  * @author Ken
