@@ -1,3 +1,8 @@
+/**
+	\brief Strategy main
+	\author Gert Mertes
+*/
+
 #include <iostream>
 
 #include "strategy.h"

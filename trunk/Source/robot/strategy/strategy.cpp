@@ -1,3 +1,9 @@
+/**
+	\class Strategy
+	\brief Top level Strategy class
+	\author Gert Mertes
+*/
+
 #include "strategy.h"
 
 #include "ipc/ipc_client.h"

@@ -1,3 +1,9 @@
+/**
+	\class Robot
+	\brief Parent class for Kicker and Keeper
+	\author Gert Mertes
+*/
+
 #include "robot.h"
 
 // ---------------------------------------------------------------------------
