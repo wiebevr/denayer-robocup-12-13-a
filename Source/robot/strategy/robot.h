@@ -7,11 +7,11 @@
 */
 
 #include "low_level.h"
-#include "strategy.h"
+#include "vision_data.h"
 
 class Robot {
 	public:
-		Robot();
+		Robot(VisionData *co, LowLevel *ll);
 		~Robot();
 
         /*
@@ -24,18 +24,12 @@ class Robot {
 			To be implemented by the child class.
 		*/
 		virtual void run();
-		/*
-			Kills the enemy robot. Weapon and method of choice to be decided.
-
-			@returns true if successful.
-		*/
-		bool kill();
 
 	private:
 		/*
 			Pointers to the coordinate and lowlevel objects so that they can be accessed by the child robots.
 		*/
-		Coords *co;
+		VisionData *co;
 		LowLevel *ll;
 		/*
             Contains the current instruction fot the robot.

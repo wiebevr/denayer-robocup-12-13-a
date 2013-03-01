@@ -1,20 +1,18 @@
 #include "robot.h"
 
-using namespace std;
-
-    ///@fn  Robot  constructor
-    Robot::Robot()
-    {
-        ll = new LowLevel();
-        co = new Coords();
+// ---------------------------------------------------------------------------
+Robot::Robot(VisionData *co, LowLevel *ll)
+{
+/*
+	Initialize pointer locations
+*/
+        this.co = co;
+		this.ll = ll;
         lastInstruction = '';
-    }     //ctor
+}
 
-    ///@fn  ~Robot destructor
-    Robot::~Robot()
-    {
-        //verwijder ll en co
-    }    //dtor
-
-    virtual void run() = 0;
-    virtual void init();
+// ---------------------------------------------------------------------------
+Robot::~Robot()
+{
+	//unused
+}
