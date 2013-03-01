@@ -4,7 +4,7 @@
 /**
  * @brief The VisionData class Deze klasse zal aan de wifi door geven waar eigen Robot, (optioneel) andere robot, ball en goal zich bevind.
  * Elke robot heeft zijn eigen x, y coordinaten samen met 2 richtings coordinaten. De goal wordt opgedeelt in 2 x en y coordinaten,
- * een vor elke paal. De bal heeft enkel een x en y coordinaat.
+ * een vor elke paal. De bal heeft enkel een x en y coordinaat. 
  */
 class VisionData
 {
