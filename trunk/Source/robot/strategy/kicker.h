@@ -24,30 +24,46 @@ public:
 	void run();
 	/** 
 		This function calculates the optimal kicking position to score a goal.
+		After that, it tries to reach this point based on its current position and rotation
          */
 	void calcKickPos();
 	/** 
 		Something small to calculate distances.
-		Uses sqrt(), so try something els
+		Uses sqrt(), so try something else if it has to be fast
 		\param x horizontal length.
 		\param y vertical length.
-		\return long distance of the triangle
+		\return long distance of the triangle.
          */
 	int pythagoras(int x, int y);
 	/** 
 		Turns towards a point.
-		\param x horizontal coordinate.
-		\param y vertical coordinate.
-		\return gives 1 if turning completed, 0 if not
+		We do this by checking for the quadrants of robotvector and pointvector.
+		Then try to get them in the same quadrant.
+		Once thats done, use triangles to check if we're turned towards the point.
+		\param x horizontal coordinate of point.
+		\param y vertical coordinate of point.
+		\return gives 1 if turning completed, 0 if not.
          */
 	int turnTo(int x, int y);
 	/** 
 		Drive towards a point.
-		\param x horizontal coordinate.
-		\param y vertical coordinate.
-		\return gives 1 if driving completed, 0 if not
+		\param x horizontal coordinate of point.
+		\param y vertical coordinate of point.
+		\return gives 1 if driving completed, 0 if not.
          */
 	int driveTo(int x, int y);
+	/** 
+		Checks in which quadrant a point is.
+		
+		   -2   |  -1
+		---------------
+		    1   |   2
+
+		\param x horizontal coordinate of point.
+		\param y vertical coordinate of point.
+		\return gives a number according to description if succesfull, 0 if not.
+         */
+	int Kicker::checkQuadrant(int x, int y)
 
 private:
 	int kick_posx; //optimal position to start kicking from, X and Y coordinates
@@ -55,12 +71,6 @@ private:
 	int kick_distance; //distance between ball and optimal kicking position
 	int max_speed;	// maximum speed for lowlevel
 	int walk_speed; // normal speed for lowlevel
-	int rob_posx; // robot position x and y, for easier access
-	int rob_posy;
-	int ball_posx; // ball position x and y, for easier access
-	int ball_posy;
-	int rob_rot; // robot rotation in degrees
-	int rob_roty // y value of robot rotation
 };
 
 #endif /* KICKER_H_ */
