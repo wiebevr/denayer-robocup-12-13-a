@@ -67,7 +67,7 @@ float percentToValue(int percent, int max)
 }
 
 // ---------------------------------------------------------------------------
-void LowLevel::drive(int speed, char richting)
+void LowLevel::drive(int speed, char direction)
 {
     string buffer;
     stringstream ss;
@@ -76,7 +76,7 @@ void LowLevel::drive(int speed, char richting)
 
     buffer = "d";
     buffer.append(" ");
-    buffer.append(richting);
+    buffer.append(direction);
     buffer.append(" ");
     buffer.append(ss.str());
     buffer.append(" ");

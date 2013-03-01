@@ -11,28 +11,29 @@
 class LowLevel
 {
     public:
+		/* Constructor */
         LowLevel();
+		/* Destructor */
         ~LowLevel();
         
     protected:
         /* Function to drive the robot forward
-         * @param speed integer of speed in percent
+         * @param percentSpeed Integer of the speed in percent (0 - 100)
          */
         void driveForward(int percentSpeed);
         /* Function to drive the robot backwards 
-         * @param speed integer of speed in percent
+         * @param percentSpeed Integer of the speed in percent (0 - 100)
          */
         void driveBackwards(int percentSpeed);
         /* Function to rotate the robot to the left 
-         * @param speed integer of speed in percent
+         * @param percentSpeed Integer of the speed in percent (0 - 100)
          */
         void turnLeft(int percentSpeed);
         /* Function to rotate the robot to the right
-         * @param speed integer of speed in percent
+         * @param percentSpeed Integer of the speed in percent (0 - 100)
          */
         void turnRight(int percentSpeed);
-        /* Function to stop al movement of the robot
-         * @param speed integer of speed in percent
+        /* Function to stop all movement of the robot
          */
         void stopMoving(void);         
         /* Function to test the leds on the robot
@@ -41,16 +42,18 @@ class LowLevel
 
     private:
         /* Function to calculate the value of percent
-         * @param integer that represent the percent
-         * @param integer that represent the maximum
+         * @param percent Integer of the percent value (0 - 100)
+         * @param max Integer that represent the maximum 
+		 * @return float Converted percentage in function of the max value 
          */
         float percentToValue(int percent, int max);
         /* Function to send command to the robot
-         * @param interger with the actuel speed
-         * @param character of the direction
+         * @param speed Interger with the actual speed
+         * @param direction Character of the direction (F, B, L, R)
          */
-        void drive(int speed, char richting);
-
+        void drive(int speed, char direction);
+		/* Serial object that preformes the serial communication with the robot\
+		 */
         Serial * serial;
 }
 #endif //LOW_LEVEL_H
