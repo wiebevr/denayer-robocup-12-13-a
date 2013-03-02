@@ -27,17 +27,23 @@ class Serial {
 
 private:
     volatile int STOP=FALSE; 
+    /** Filedescriptor of the serial connection */
     int fd;
     ssize_t size = 9;
     fd_set input_fdset;
+    /** char array used as checksum for sending and recieving */
+    unsigned char Cmd[10];
+    /** The baudrate that we are using */
     speed_t baudrate;
+    /** The databits used for the serial connection */
     int databits;
+    /** The stopbits used for the serial conenction */
     int stopbits;
-    /** Function for intitialising the serial port */
-    int initport(void );
+    /** The path that defines which serial port we are going to use */ 
+    string path; 
     /** Function for converting a double to a baudratespeed 
      * @param baud Double value that represents the baudrate 
-     * @return speed_t that gives the te baudrate */
+     * @return speed_t that gives the baudrate */
     speed_t convertBaud ( double baud )
 
 public:
@@ -48,12 +54,16 @@ public:
      * @param databits Integer that defines the number of databits
      * @param stopbits Integer that defines the number of stopbits 
      */
-    Serial::Serial( int baud, int databits, int stopbits ); 
+    Serial::Serial( string path,  int baud, int databits, int stopbits ); 
     /** Destructor */
     Serial::~Serial();
+    /** Function for intitialising the serial connection 
+     * @return Gives 0 if init succeeded, gives 1 if failed */
+    int init(void );
+    
     int writeport(int, unsigned char *);
     int readport(int , unsigned char *);
-    int getbaud(int );
+    int getbaud( void );
     void checksum(unsigned char *);
 
 protected:

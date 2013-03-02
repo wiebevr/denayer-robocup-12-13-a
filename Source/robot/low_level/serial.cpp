@@ -7,6 +7,7 @@ Serial::Serial()
    this->baudrate = BAUDRATE;
    this->stopbits = STOPBITS;
    this->databits = DATABITS; 
+   this->path = PORT_0;
 }
 
 
@@ -17,18 +18,83 @@ Serial::~Serial()
 }
 
 // ---------------------------------------------------------------------------
-Serial::Serial( int baud, int databits, int stopbits ); 
+Serial::Serial( string path, int baud, int databits, int stopbits ); 
 {
     this->baudrate = convertBaud( baud );
     this->stopbits = stopbits;
     this->databits = databits;
+    this->path = path;
 }
 
+// ---------------------------------------------------------------------------
+int init(void){
+	struct termios old_flags; 
+	struct termios term_attr;
 
+    if ((this->fd = open(this->path, O_RDWR | O_NOCTTY | O_NDELAY)) == -1) 
+    { 
+        perror("terminal: Can't open device " PORT_0); 
+        return(1); 
+    } 
+    /* configurare RS232 */ 
+    if (tcgetattr(this->fd, &term_attr) != 0) 
+    { 
+        perror("terminal: tcgetattr() failed"); 
+        return(1); 
+    } 
+    /* save old flags */ 
+    old_flags = term_attr; 
+    cfsetispeed(&term_attr, BAUDRATE); 
+    cfsetospeed(&term_attr, BAUDRATE); 
+    cfmakeraw(&term_attr);
+
+	term_attr.c_iflag = 0; 
+	term_attr.c_oflag = 0; 
+	term_attr.c_lflag = 0;
+	term_attr.c_cflag = 0;
+
+ 
+    term_attr.c_cc[VMIN] = 1;                 // finished after one bye 
+    term_attr.c_cc[VTIME] = 8;             // or 800ms time out 
+
+    term_attr.c_cflag &= ~(PARENB | CSTOPB | CSIZE); //added
+    term_attr.c_cflag |= (this->baudrate | CS8 | CRTSCTS | CLOCAL | HUPCL);  // using flow control via CTS/RTS 
+
+
+	term_attr.c_oflag |= (OPOST | ONLCR); 
+
+
+	 /* save old configuration */ 
+
+	old_flags = term_attr; 
+	term_attr.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG); 
+
+                                                            
+    if (tcsetattr(this->fd, TCSAFLUSH, &term_attr) != 0) 
+    { 
+        perror("terminal: tcsetattr() failed"); 
+        return(1); 
+    } 
+
+    /* change standard input */ 
+    if (tcgetattr(STDIN_FILENO, &term_attr) != 0) 
+    { 
+        perror("terminal: tcgetattr() failed"); 
+        return(1); 
+    } 
+
+    if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &term_attr) != 0) 
+        perror("terminal: tcsetattr() failed"); 
+
+    FD_SET(this->fd, &input_fdset);                          /* Select the first channel 1 */ 
+
+    return 0; 
+}
+
+// ---------------------------------------------------------------------------
 int main(void) {
 
 	int counter, i;
-	unsigned char Cmd[10];
 	unsigned char Result[10];
 
 	
@@ -37,17 +103,20 @@ int main(void) {
 	printf("baud after init  = %d\n", getbaud(fd));
 
 	
-	Cmd[0] = 0x02;		//       Module 2
-	Cmd[1] = 0x06;		//	Get Axis Parameter (GAP) 
-	Cmd[2] = 0xD1;		//	209 Get Encoder Position
-	Cmd[3] = 0x01;		//	Encoder number 1
-	Cmd[4] = 0; Cmd[5] = 0; Cmd[6] = 0; Cmd[7] = 0;
-	checksum(Cmd);
+	this->Cmd[0] = 0x02;		//       Module 2
+	this->Cmd[1] = 0x06;		//	Get Axis Parameter (GAP) 
+	this->Cmd[2] = 0xD1;		//	209 Get Encoder Position
+	this->Cmd[3] = 0x01;		//	Encoder number 1
+	this->Cmd[4] = 0; 
+	this->Cmd[5] = 0; 
+	this->Cmd[6] = 0; 
+	this->Cmd[7] = 0;
+	checksum(this->Cmd);
 
 
 	printf("write..."); 
 
-	printf("%d bytes!\n",writeport(fd, Cmd));
+	printf("%d bytes!\n",writeport(this->fd, this->Cmd));
 	
 	for(i = 0; i < 9; i++) printf("%d; ", Cmd[i]); printf("\n");
 	
@@ -64,15 +133,14 @@ int main(void) {
 	return 0;
 }
 
-
-
+// ---------------------------------------------------------------------------
 void checksum(unsigned char *Cmd){
 	int i; Cmd[8] = 0;
 	for(i = 0; i < 8; i++) Cmd[8] += Cmd[i];
 	return;
 }
 
-
+// ---------------------------------------------------------------------------
 int writeport(int fd, unsigned char *Cmd)
 {
 	int check; char n;
@@ -92,18 +160,19 @@ int writeport(int fd, unsigned char *Cmd)
 
 	if (check < 0) {
 		fputs("write failed!\n", stderr);
-		close(fd);
+		//close(fd);
 		return -1;
 	}
 	else if(check == 0){
 		printf("no bytes transmitted");
-		close(fd);
+		//close(fd);
 		return 0;
 	}
 
-return check;                                                                       	                                
+	return check;                                                                       	                                
 }
 
+// ---------------------------------------------------------------------------
 int readport(int fd, unsigned char *Result) 
 {
 	printf("read(2) function\n");
@@ -120,14 +189,15 @@ int readport(int fd, unsigned char *Result)
     return    receivedbyte;
 }
 
-int getbaud(int fd) 
+// ---------------------------------------------------------------------------
+int getbaud( ) 
 {
 	//printf("getbaud\n");
 	struct termios termAttr;
 	int inputSpeed = -1;
 	speed_t baudRate;
-	tcgetattr(fd, &termAttr);
-	/* Get the input speed.                              */
+	tcgetattr(this->fd, &termAttr);
+	/* Get the input speed. */
 	baudRate = cfgetispeed(&termAttr);
 	switch (baudRate) {
 		case B0:      inputSpeed = 0; break;
@@ -171,68 +241,4 @@ speed_t convertBaud ( double baud )
 	}
 
     return BAUDRATE;
-}
-
-int initport(void){
-	struct termios old_flags; 
-	struct termios term_attr;
-
-    if ((fd = open(PORT_0, O_RDWR | O_NOCTTY | O_NDELAY)) == -1) 
-    { 
-        perror("terminal: Can't open device " PORT_0); 
-        return(1); 
-    } 
-    /* configurare RS232 */ 
-    if (tcgetattr(fd, &term_attr) != 0) 
-    { 
-        perror("terminal: tcgetattr() failed"); 
-        return(1); 
-    } 
-    /* save old flags */ 
-    old_flags = term_attr; 
-    cfsetispeed(&term_attr, BAUDRATE); 
-    cfsetospeed(&term_attr, BAUDRATE); 
-    cfmakeraw(&term_attr);
-
-	term_attr.c_iflag = 0; 
-	term_attr.c_oflag = 0; 
-	term_attr.c_lflag = 0;
-	term_attr.c_cflag = 0;
-
- 
-    term_attr.c_cc[VMIN] = 1;                 // finished after one bye 
-    term_attr.c_cc[VTIME] = 8;             // or 800ms time out 
-
-    term_attr.c_cflag &= ~(PARENB | CSTOPB | CSIZE); //added
-    term_attr.c_cflag |= (BAUDRATE | CS8 | CRTSCTS | CLOCAL | HUPCL);  // using flow control via CTS/RTS 
-
-
-	term_attr.c_oflag |= (OPOST | ONLCR); 
-
-
-	 /* save old configuration */ 
-
-  old_flags = term_attr; 
-  term_attr.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG); 
-
-                                                            
-    if (tcsetattr(fd, TCSAFLUSH, &term_attr) != 0) 
-        { 
-        perror("terminal: tcsetattr() failed"); 
-        return(1); 
-        } 
-
-    /* change standard input */ 
-    if (tcgetattr(STDIN_FILENO, &term_attr) != 0) 
-        { 
-        perror("terminal: tcgetattr() failed"); 
-        return(1); 
-        } 
-
-    if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &term_attr) != 0) 
-        perror("terminal: tcsetattr() failed"); 
-
-    FD_SET(fd, &input_fdset);                          /* Select the first channel 1 */ 
-
-    return 0; 
 }
