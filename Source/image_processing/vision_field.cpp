@@ -1,4 +1,4 @@
-/*
+/**
  * @author Den Dooven Raphael
  */
 
@@ -113,13 +113,15 @@ Mat VisionField::getCorrectedImage( Mat img )
 }
 
 //---------------------------------------------------------------------------------------
-Vector<Point2f> VisionField::getCoordianteGoal()
+Vector<Point2f> VisionField::getCoordinateGoal()
 {
-    return this->getCoordiante(cornersGoal);
+    //cout << "   [VisionField::getCoordinateGoal] points Goal: " << cornersGoal << endl;
+    //return this->getCoordinate(cornersGoal);
+    return cornersGoal;
 }
 
 //---------------------------------------------------------------------------------------
-Vector<Point2f> VisionField::getCoordiante(Vector<Point2f> pixel)
+Vector<Point2f> VisionField::getCoordinate(Vector<Point2f> pixel)
 {
     Vector<Point2f> coordinateList;
 
