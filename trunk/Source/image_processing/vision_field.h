@@ -76,17 +76,17 @@ public:
     Mat getCorrectedImage( Mat img );
 
     /**
-     * @brief getCoordianteGoal Met deze methode krijg je de veld coordinaten van de goal terug
+     * @brief getCoordinateGoal Met deze methode krijg je de veld coordinaten van de goal terug
      * @return vector van 2 coordinaten (elks x en y waarde)
      */
-    Vector<Point2f> getCoordianteGoal();
+    Vector<Point2f> getCoordinateGoal();
 
     /**
-     * @brief getCoordiante Zet de pixel waarde om naar veld coordinaten
+     * @brief getCoordinate Zet de pixel waarde om naar veld coordinaten
      * @param pixel
      * @return
      */
-    Vector<Point2f> getCoordiante(Vector<Point2f> pixel);
+    Vector<Point2f> getCoordinate(Vector<Point2f> pixel);
 };
 
 #endif // VISION_FIELD_H
