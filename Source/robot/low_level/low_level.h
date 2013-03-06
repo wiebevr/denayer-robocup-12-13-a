@@ -6,6 +6,8 @@
 #ifndef LOW_LEVEL_H
 #define LOW_LEVEL_H
 
+#include "serial.h"
+
 #define MAX_SPEED 200
 
 class LowLevel
@@ -55,5 +57,5 @@ class LowLevel
 		/** Serial object that preformes the serial communication with the robot\
 		 */
         Serial * serial;
-}
+};
 #endif //LOW_LEVEL_H

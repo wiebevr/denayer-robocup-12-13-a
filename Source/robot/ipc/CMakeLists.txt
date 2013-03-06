@@ -11,4 +11,4 @@ set(shared_source_files
     ipc_client.h
 )
 
-add_library(ipc ${shared_source_files})
+add_library(libipc ${shared_source_files})

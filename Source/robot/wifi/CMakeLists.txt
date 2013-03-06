@@ -4,6 +4,7 @@ include_directories("${ROBOT_SOURCE_DIR}")
 
 link_directories("${ROBOT_BINARY_DIR}/lib")
 
+add_library(libwifi main.cpp)
 add_executable(wifi main.cpp)
 
-target_link_libraries(wifi ipc)
+target_link_libraries(wifi libipc)

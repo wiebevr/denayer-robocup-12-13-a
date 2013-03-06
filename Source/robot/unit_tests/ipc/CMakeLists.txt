@@ -7,5 +7,5 @@ link_directories("${ROBOT_BINARY_DIR}/lib")
 add_executable(test_server ipc_server_test.cpp)
 add_executable(test_client ipc_client_test.cpp)
 
-target_link_libraries(test_server ipc)
-target_link_libraries(test_client ipc)
+target_link_libraries(test_server libipc)
+target_link_libraries(test_client libipc)

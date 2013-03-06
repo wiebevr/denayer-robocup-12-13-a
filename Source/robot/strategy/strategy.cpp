@@ -26,21 +26,23 @@ Strategy::~Strategy()
 // ---------------------------------------------------------------------------
 void Strategy::run()
 {
-	while(1)
-	{
-		this.co = getCoords();
-		
-		if(ll.iets == true)
-		{
-			keeper->run();
-		}
-		else
-		{
-			kicker->run();
-		}
-	}
+    if(ll.iets == true)
+    {
+        keeper->run();
+    }
+    else
+    {
+        kicker->run();
+    }
 }
 
+// ---------------------------------------------------------------------------
+void Strategy::setGame(const Game & game)
+{
+    this->co = game;
+}
+
+#if 0
 // ---------------------------------------------------------------------------
 VisionData Strategy::getCoords()
 {
@@ -65,3 +67,6 @@ VisionData Strategy::getCoords()
     return 0;
 */
 }
+#endif
+
+
