@@ -6,10 +6,10 @@
 	\author Gert Mertes
 */
 
-#include "low_level.h"
-#include "vision_data.h"
+#include "low_level/low_level.h"
+#include "wifi/game.pb.h"
 #include "robot.h"
-#include "keeper.h"
+#include "Keeper.h"
 #include "kicker.h"
 
 class Strategy {
@@ -17,26 +17,26 @@ class Strategy {
 		Strategy();
 		~Strategy();
 	
-	/*
+	/**
 		Contains the endless loop used to execute the strategy.
 	*/
 		void run();
-	/*
+	/**
 		Grabs the latest coordinates from wifi.
 	*/
-		VisionData getCoords();
+		void setGame(const Game & game);
 		
 	private:
-	/*
+	/**
 		Robots
 	*/
 		Keeper *keeper;
 		Kicker *kicker;
-	/*
+	/**
 		The actual coordinate and lowlevel objects.
 	*/
-		VisionData co;
+		Game & co;
 		LowLevel ll;
-}
+};
 
 #endif

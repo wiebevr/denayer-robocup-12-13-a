@@ -6,7 +6,7 @@
 *
 ******************************************************************************/
 
-message Robot {
+message Player {
     required float x = 1;
     required float y = 2;
     required float rotate_x = 3;
@@ -26,8 +26,8 @@ message Goal {
 }
 
 message Game {
-    repeated Robot robot_a = 1;
-    repeated Robot robot_b = 2;
+    repeated Player player_a = 1;
+    repeated Player player_b = 2;
     repeated Ball ball = 3;
     repeated Goal goal = 4;
 }

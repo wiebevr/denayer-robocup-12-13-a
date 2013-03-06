@@ -4,7 +4,7 @@
  */
         
 #include <stdio.h>   /* Standard input/output definitions */
-#include <string.h>  /* String function definitions */
+#include <string>  /* String function definitions */
 #include <unistd.h>  /* UNIX standard function definitions */
 #include <fcntl.h>   /* File control definitions */
 #include <errno.h>   /* Error number definitions */
@@ -40,23 +40,23 @@ private:
     /** The stopbits used for the serial conenction */
     int stopbits;
     /** The path that defines which serial port we are going to use */ 
-    string path; 
+    std::string path; 
     /** Function for converting a double to a baudratespeed 
      * @param baud Double value that represents the baudrate 
      * @return speed_t that gives the baudrate */
-    speed_t convertBaud ( double baud )
+    speed_t convertBaud ( double baud );
 
 public:
     /** Constructor */
-    Serial::Serial();
+    Serial();
     /** Constructor 
      * @param baud Integer that defines the baudrate
      * @param databits Integer that defines the number of databits
      * @param stopbits Integer that defines the number of stopbits 
      */
-    Serial::Serial( string path,  int baud, int databits, int stopbits ); 
+    Serial( std::string path,  int baud, int databits, int stopbits ); 
     /** Destructor */
-    Serial::~Serial();
+    ~Serial();
     /** Function for intitialising the serial connection 
      * @return Gives 0 if init succeeded, gives 1 if failed */
     int init(void );
@@ -68,4 +68,4 @@ public:
 
 protected:
 
-}
+};
