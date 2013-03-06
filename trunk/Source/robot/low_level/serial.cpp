@@ -18,7 +18,7 @@ Serial::~Serial()
 }
 
 // ---------------------------------------------------------------------------
-Serial::Serial( string path, int baud, int databits, int stopbits ); 
+Serial::Serial( string path, int baud, int databits, int stopbits ) 
 {
     this->baudrate = convertBaud( baud );
     this->stopbits = stopbits;
@@ -27,11 +27,12 @@ Serial::Serial( string path, int baud, int databits, int stopbits );
 }
 
 // ---------------------------------------------------------------------------
-int init(void){
+int Serial::init(void)
+{
 	struct termios old_flags; 
 	struct termios term_attr;
 
-    if ((this->fd = open(this->path, O_RDWR | O_NOCTTY | O_NDELAY)) == -1) 
+    if ((this->fd = open(this->path.data(), O_RDWR | O_NOCTTY | O_NDELAY)) == -1) 
     { 
         perror("terminal: Can't open device " PORT_0); 
         return(1); 
@@ -92,15 +93,15 @@ int init(void){
 }
 
 // ---------------------------------------------------------------------------
-int main(void) {
+int Serial::main(void) {
 
 	int counter, i;
 	unsigned char Result[10];
 
 	
-	printf("open USB0......\n");
-	printf("initPort: %d\n",initport());
-	printf("baud after init  = %d\n", getbaud(fd));
+	printf( "open USB0......\n" );
+	printf( "initPort: %d\n", init() );
+	printf( "baud after init  = %lf\n", getbaud() );
 
 	
 	this->Cmd[0] = 0x02;		//       Module 2
@@ -116,7 +117,7 @@ int main(void) {
 
 	printf("write..."); 
 
-	printf("%d bytes!\n",writeport(this->fd, this->Cmd));
+	printf("%d bytes!\n", sWrite(this->Cmd));
 	
 	for(i = 0; i < 9; i++) printf("%d; ", Cmd[i]); printf("\n");
 	
@@ -125,7 +126,7 @@ int main(void) {
 	fcntl(fd, F_SETFL, FNDELAY); // don't block serial read
 	
 	printf("read...\n");
-	printf("%d bytes\n", readport(fd,Result));
+	printf("%d bytes\n", sRead(Result));
 	
 	printf("read    = ");	for(i = 0; i < 9; i++) printf("%d; ", Cmd[i]); printf("\n");
 
@@ -134,16 +135,19 @@ int main(void) {
 }
 
 // ---------------------------------------------------------------------------
-void checksum(unsigned char *Cmd){
-	int i; Cmd[8] = 0;
-	for(i = 0; i < 8; i++) Cmd[8] += Cmd[i];
+void Serial::checksum(unsigned char *Cmd){
+	int i; 
+    this->Cmd[8] = 0;
+	for(i = 0; i < 8; i++) 
+        this->Cmd[8] += this->Cmd[i];
 	return;
 }
 
 // ---------------------------------------------------------------------------
-int writeport(int fd, unsigned char *Cmd)
+int Serial::sWrite(unsigned char *Cmd)
 {
-	int check; char n;
+	int check; 
+    char n;
 	fd_set nfds;
 	struct timeval timeout;
 
@@ -154,7 +158,7 @@ int writeport(int fd, unsigned char *Cmd)
 	printf("write(2) function\n");
 
 
-	check = write(fd, Cmd, 	size);		//originally strlen(bCmd) but there are some zero Bytes in the Cmd
+	check = write(this->fd, Cmd, 	size);		//originally strlen(bCmd) but there are some zero Bytes in the Cmd
 	
 	tcdrain(fd); //waits until all output written to the object referred to by fildes is transmitted
 
@@ -173,7 +177,7 @@ int writeport(int fd, unsigned char *Cmd)
 }
 
 // ---------------------------------------------------------------------------
-int readport(int fd, unsigned char *Result) 
+int Serial::sRead( unsigned char *Result) 
 {
 	printf("read(2) function\n");
 	int max = 12;				// 9 bytes as an answer to a Command
@@ -190,11 +194,11 @@ int readport(int fd, unsigned char *Result)
 }
 
 // ---------------------------------------------------------------------------
-int getbaud( ) 
+double Serial::getbaud( void ) 
 {
 	//printf("getbaud\n");
 	struct termios termAttr;
-	int inputSpeed = -1;
+	double inputSpeed = -1;
 	speed_t baudRate;
 	tcgetattr(this->fd, &termAttr);
 	/* Get the input speed. */
@@ -220,24 +224,33 @@ int getbaud( )
 }
 
 // ---------------------------------------------------------------------------
-speed_t convertBaud ( double baud )
+speed_t Serial::convertBaud ( double baud )
 {
-	switch (baud) {
+    int baud_int = 0;
+    if ( baud < sizeof( int ) )
+    {
+        baud_int = baud;
+    }
+    else 
+    {
+        if ( baud == 38400 ) 
+            return B38400;
+    }
+	switch (baud_int) {
 		case 0:      return B0; break;
-		case 50:     return = B50; break;
-		case 110:    return = B110; break;
-		case 134:    return = B134; break;
-		case 150:    return = B150; break;
-		case 200:    return = B200; break;
-		case 300:    return = B300; break;
-		case 600:    return = B600; break;
-		case 1200:   return = B1200; break;
-		case 1800:   return = B1800; break;
-		case 2400:   return = B2400; break;
-		case 4800:   return = B4800; break;
-		case 9600:   return = B9600; break;
-		case 19200:  return = B19200; break;
-		case 38400:  return = B38400; break;
+		case 50:     return B50; break;
+		case 110:    return B110; break;
+		case 134:    return B134; break;
+		case 150:    return B150; break;
+		case 200:    return B200; break;
+		case 300:    return B300; break;
+		case 600:    return B600; break;
+		case 1200:   return B1200; break;
+		case 1800:   return B1800; break;
+		case 2400:   return B2400; break;
+		case 4800:   return B4800; break;
+		case 9600:   return B9600; break;
+		case 19200:  return B19200; break;
 	}
 
     return BAUDRATE;

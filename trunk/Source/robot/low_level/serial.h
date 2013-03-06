@@ -22,6 +22,7 @@
 #define FALSE 0
 #define TRUE 1
 
+using namespace std;
 
 class Serial {
 
@@ -54,18 +55,28 @@ public:
      * @param databits Integer that defines the number of databits
      * @param stopbits Integer that defines the number of stopbits 
      */
-    Serial( std::string path,  int baud, int databits, int stopbits ); 
+    Serial( string path,  int baud, int databits, int stopbits ); 
     /** Destructor */
     ~Serial();
     /** Function for intitialising the serial connection 
      * @return Gives 0 if init succeeded, gives 1 if failed */
     int init(void );
-    
-    int writeport(int, unsigned char *);
-    int readport(int , unsigned char *);
-    int getbaud( void );
+    /** Function for writing data to the serial port 
+     * @param String that will be written to the port
+     * @return int Integer gives the number of sent bytes */
+    int sWrite(unsigned char *);
+    /** Function for reading data from the serial port 
+     * @param String that does something 
+     * @return int INteger that returns the number of read bytes */
+    int sRead(unsigned char *);
+    /** Function for retrieving the baudrate of the serial connection 
+     * @return double Double with the value of the baudrate */
+    double getbaud( void );
+    // NEEDED??
     void checksum(unsigned char *);
+    // MUST DISAPPEAR WITHIN A COUPLE OF WEEKS!!! 
+    int main( void );
 
-protected:
+//protected:
 
 };
