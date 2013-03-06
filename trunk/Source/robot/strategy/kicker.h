@@ -13,13 +13,19 @@
 	\brief Executes the kicking algorithm.
 	\author Pascal Muys
 */
-class Kicker : public Robot
+
+#include "robot.cpp"
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+class Kicker : public Robot 
 {
 public:
 	Kicker();
 	virtual ~Kicker();
 	/** 
-		This function is repeatably called and decides next step from the new coordinates.
+		This function is repeatedly called and decides next step from the new coordinates.
          */
 	void run();
 	/** 
@@ -63,7 +69,7 @@ public:
 		\param y vertical coordinate of point.
 		\return gives a number according to description if succesfull, 0 if not.
          */
-	int Kicker::checkQuadrant(int x, int y)
+	int checkQuadrant(int x, int y);
 
 private:
 	int kick_posx; //optimal position to start kicking from, X and Y coordinates
