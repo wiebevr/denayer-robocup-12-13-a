@@ -7,14 +7,14 @@
 #include "robot.h"
 
 // ---------------------------------------------------------------------------
-Robot::Robot(VisionData *co, LowLevel *ll)
+Robot::Robot(VisionData *c, LowLevel *l)
 {
 /*
 	Initialize pointer locations
 */
-        this.co = co;
-		this.ll = ll;
-        lastInstruction = '';
+	co = c;
+	ll = l;
+        lastInstruction = 'a';
 }
 
 // ---------------------------------------------------------------------------

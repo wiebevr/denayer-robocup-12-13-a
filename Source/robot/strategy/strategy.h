@@ -21,7 +21,6 @@ class Strategy {
 		Contains the endless loop used to execute the strategy.
 	*/
 		void run();
-		
 	/*
 		Grabs the latest coordinates from wifi.
 	*/
