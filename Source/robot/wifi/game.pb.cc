@@ -157,9 +157,9 @@ void protobuf_AddDesc_game_2eproto() {
     "\"\034\n\004Ball\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\"J\n\004Goal\022\017"
     "\n\007pole1_x\030\001 \002(\002\022\017\n\007pole1_y\030\002 \002(\002\022\017\n\007pole"
     "2_x\030\003 \002(\002\022\017\n\007pole2_y\030\004 \002(\002\"f\n\004Game\022\031\n\010pl"
-    "ayer_a\030\001 \003(\0132\007.Player\022\031\n\010player_b\030\002 \003(\0132"
-    "\007.Player\022\023\n\004ball\030\003 \003(\0132\005.Ball\022\023\n\004goal\030\004 "
-    "\003(\0132\005.Goal", 290);
+    "ayer_a\030\001 \002(\0132\007.Player\022\031\n\010player_b\030\002 \002(\0132"
+    "\007.Player\022\023\n\004ball\030\003 \002(\0132\005.Ball\022\023\n\004goal\030\004 "
+    "\002(\0132\005.Goal", 290);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "game.proto", &protobuf_RegisterTypes);
   Player::default_instance_ = new Player();
@@ -1082,6 +1082,10 @@ Game::Game()
 }
 
 void Game::InitAsDefaultInstance() {
+  player_a_ = const_cast< ::Player*>(&::Player::default_instance());
+  player_b_ = const_cast< ::Player*>(&::Player::default_instance());
+  ball_ = const_cast< ::Ball*>(&::Ball::default_instance());
+  goal_ = const_cast< ::Goal*>(&::Goal::default_instance());
 }
 
 Game::Game(const Game& from)
@@ -1092,6 +1096,10 @@ Game::Game(const Game& from)
 
 void Game::SharedCtor() {
   _cached_size_ = 0;
+  player_a_ = NULL;
+  player_b_ = NULL;
+  ball_ = NULL;
+  goal_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1101,6 +1109,10 @@ Game::~Game() {
 
 void Game::SharedDtor() {
   if (this != default_instance_) {
+    delete player_a_;
+    delete player_b_;
+    delete ball_;
+    delete goal_;
   }
 }
 
@@ -1126,10 +1138,20 @@ Game* Game::New() const {
 }
 
 void Game::Clear() {
-  player_a_.Clear();
-  player_b_.Clear();
-  ball_.Clear();
-  goal_.Clear();
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_player_a()) {
+      if (player_a_ != NULL) player_a_->::Player::Clear();
+    }
+    if (has_player_b()) {
+      if (player_b_ != NULL) player_b_->::Player::Clear();
+    }
+    if (has_ball()) {
+      if (ball_ != NULL) ball_->::Ball::Clear();
+    }
+    if (has_goal()) {
+      if (goal_ != NULL) goal_->::Goal::Clear();
+    }
+  }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -1140,62 +1162,57 @@ bool Game::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .Player player_a = 1;
+      // required .Player player_a = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_player_a:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-                input, add_player_a()));
+               input, mutable_player_a()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(10)) goto parse_player_a;
         if (input->ExpectTag(18)) goto parse_player_b;
         break;
       }
 
-      // repeated .Player player_b = 2;
+      // required .Player player_b = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_player_b:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-                input, add_player_b()));
+               input, mutable_player_b()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(18)) goto parse_player_b;
         if (input->ExpectTag(26)) goto parse_ball;
         break;
       }
 
-      // repeated .Ball ball = 3;
+      // required .Ball ball = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_ball:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-                input, add_ball()));
+               input, mutable_ball()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(26)) goto parse_ball;
         if (input->ExpectTag(34)) goto parse_goal;
         break;
       }
 
-      // repeated .Goal goal = 4;
+      // required .Goal goal = 4;
       case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_goal:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-                input, add_goal()));
+               input, mutable_goal()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(34)) goto parse_goal;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -1218,28 +1235,28 @@ bool Game::MergePartialFromCodedStream(
 
 void Game::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // repeated .Player player_a = 1;
-  for (int i = 0; i < this->player_a_size(); i++) {
+  // required .Player player_a = 1;
+  if (has_player_a()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->player_a(i), output);
+      1, this->player_a(), output);
   }
 
-  // repeated .Player player_b = 2;
-  for (int i = 0; i < this->player_b_size(); i++) {
+  // required .Player player_b = 2;
+  if (has_player_b()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->player_b(i), output);
+      2, this->player_b(), output);
   }
 
-  // repeated .Ball ball = 3;
-  for (int i = 0; i < this->ball_size(); i++) {
+  // required .Ball ball = 3;
+  if (has_ball()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, this->ball(i), output);
+      3, this->ball(), output);
   }
 
-  // repeated .Goal goal = 4;
-  for (int i = 0; i < this->goal_size(); i++) {
+  // required .Goal goal = 4;
+  if (has_goal()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, this->goal(i), output);
+      4, this->goal(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -1250,32 +1267,32 @@ void Game::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* Game::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // repeated .Player player_a = 1;
-  for (int i = 0; i < this->player_a_size(); i++) {
+  // required .Player player_a = 1;
+  if (has_player_a()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        1, this->player_a(i), target);
+        1, this->player_a(), target);
   }
 
-  // repeated .Player player_b = 2;
-  for (int i = 0; i < this->player_b_size(); i++) {
+  // required .Player player_b = 2;
+  if (has_player_b()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        2, this->player_b(i), target);
+        2, this->player_b(), target);
   }
 
-  // repeated .Ball ball = 3;
-  for (int i = 0; i < this->ball_size(); i++) {
+  // required .Ball ball = 3;
+  if (has_ball()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        3, this->ball(i), target);
+        3, this->ball(), target);
   }
 
-  // repeated .Goal goal = 4;
-  for (int i = 0; i < this->goal_size(); i++) {
+  // required .Goal goal = 4;
+  if (has_goal()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        4, this->goal(i), target);
+        4, this->goal(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -1288,38 +1305,36 @@ void Game::SerializeWithCachedSizes(
 int Game::ByteSize() const {
   int total_size = 0;
 
-  // repeated .Player player_a = 1;
-  total_size += 1 * this->player_a_size();
-  for (int i = 0; i < this->player_a_size(); i++) {
-    total_size +=
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->player_a(i));
-  }
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .Player player_a = 1;
+    if (has_player_a()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->player_a());
+    }
 
-  // repeated .Player player_b = 2;
-  total_size += 1 * this->player_b_size();
-  for (int i = 0; i < this->player_b_size(); i++) {
-    total_size +=
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->player_b(i));
-  }
+    // required .Player player_b = 2;
+    if (has_player_b()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->player_b());
+    }
 
-  // repeated .Ball ball = 3;
-  total_size += 1 * this->ball_size();
-  for (int i = 0; i < this->ball_size(); i++) {
-    total_size +=
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->ball(i));
-  }
+    // required .Ball ball = 3;
+    if (has_ball()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->ball());
+    }
 
-  // repeated .Goal goal = 4;
-  total_size += 1 * this->goal_size();
-  for (int i = 0; i < this->goal_size(); i++) {
-    total_size +=
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->goal(i));
-  }
+    // required .Goal goal = 4;
+    if (has_goal()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->goal());
+    }
 
+  }
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -1345,10 +1360,20 @@ void Game::MergeFrom(const ::google::protobuf::Message& from) {
 
 void Game::MergeFrom(const Game& from) {
   GOOGLE_CHECK_NE(&from, this);
-  player_a_.MergeFrom(from.player_a_);
-  player_b_.MergeFrom(from.player_b_);
-  ball_.MergeFrom(from.ball_);
-  goal_.MergeFrom(from.goal_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_player_a()) {
+      mutable_player_a()->::Player::MergeFrom(from.player_a());
+    }
+    if (from.has_player_b()) {
+      mutable_player_b()->::Player::MergeFrom(from.player_b());
+    }
+    if (from.has_ball()) {
+      mutable_ball()->::Ball::MergeFrom(from.ball());
+    }
+    if (from.has_goal()) {
+      mutable_goal()->::Goal::MergeFrom(from.goal());
+    }
+  }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -1365,28 +1390,29 @@ void Game::CopyFrom(const Game& from) {
 }
 
 bool Game::IsInitialized() const {
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
 
-  for (int i = 0; i < player_a_size(); i++) {
-    if (!this->player_a(i).IsInitialized()) return false;
+  if (has_player_a()) {
+    if (!this->player_a().IsInitialized()) return false;
   }
-  for (int i = 0; i < player_b_size(); i++) {
-    if (!this->player_b(i).IsInitialized()) return false;
+  if (has_player_b()) {
+    if (!this->player_b().IsInitialized()) return false;
   }
-  for (int i = 0; i < ball_size(); i++) {
-    if (!this->ball(i).IsInitialized()) return false;
+  if (has_ball()) {
+    if (!this->ball().IsInitialized()) return false;
   }
-  for (int i = 0; i < goal_size(); i++) {
-    if (!this->goal(i).IsInitialized()) return false;
+  if (has_goal()) {
+    if (!this->goal().IsInitialized()) return false;
   }
   return true;
 }
 
 void Game::Swap(Game* other) {
   if (other != this) {
-    player_a_.Swap(&other->player_a_);
-    player_b_.Swap(&other->player_b_);
-    ball_.Swap(&other->ball_);
-    goal_.Swap(&other->goal_);
+    std::swap(player_a_, other->player_a_);
+    std::swap(player_b_, other->player_b_);
+    std::swap(ball_, other->ball_);
+    std::swap(goal_, other->goal_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

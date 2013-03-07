@@ -408,63 +408,59 @@ class Game : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // repeated .Player player_a = 1;
-  inline int player_a_size() const;
+  // required .Player player_a = 1;
+  inline bool has_player_a() const;
   inline void clear_player_a();
   static const int kPlayerAFieldNumber = 1;
-  inline const ::Player& player_a(int index) const;
-  inline ::Player* mutable_player_a(int index);
-  inline ::Player* add_player_a();
-  inline const ::google::protobuf::RepeatedPtrField< ::Player >&
-      player_a() const;
-  inline ::google::protobuf::RepeatedPtrField< ::Player >*
-      mutable_player_a();
+  inline const ::Player& player_a() const;
+  inline ::Player* mutable_player_a();
+  inline ::Player* release_player_a();
+  inline void set_allocated_player_a(::Player* player_a);
 
-  // repeated .Player player_b = 2;
-  inline int player_b_size() const;
+  // required .Player player_b = 2;
+  inline bool has_player_b() const;
   inline void clear_player_b();
   static const int kPlayerBFieldNumber = 2;
-  inline const ::Player& player_b(int index) const;
-  inline ::Player* mutable_player_b(int index);
-  inline ::Player* add_player_b();
-  inline const ::google::protobuf::RepeatedPtrField< ::Player >&
-      player_b() const;
-  inline ::google::protobuf::RepeatedPtrField< ::Player >*
-      mutable_player_b();
+  inline const ::Player& player_b() const;
+  inline ::Player* mutable_player_b();
+  inline ::Player* release_player_b();
+  inline void set_allocated_player_b(::Player* player_b);
 
-  // repeated .Ball ball = 3;
-  inline int ball_size() const;
+  // required .Ball ball = 3;
+  inline bool has_ball() const;
   inline void clear_ball();
   static const int kBallFieldNumber = 3;
-  inline const ::Ball& ball(int index) const;
-  inline ::Ball* mutable_ball(int index);
-  inline ::Ball* add_ball();
-  inline const ::google::protobuf::RepeatedPtrField< ::Ball >&
-      ball() const;
-  inline ::google::protobuf::RepeatedPtrField< ::Ball >*
-      mutable_ball();
+  inline const ::Ball& ball() const;
+  inline ::Ball* mutable_ball();
+  inline ::Ball* release_ball();
+  inline void set_allocated_ball(::Ball* ball);
 
-  // repeated .Goal goal = 4;
-  inline int goal_size() const;
+  // required .Goal goal = 4;
+  inline bool has_goal() const;
   inline void clear_goal();
   static const int kGoalFieldNumber = 4;
-  inline const ::Goal& goal(int index) const;
-  inline ::Goal* mutable_goal(int index);
-  inline ::Goal* add_goal();
-  inline const ::google::protobuf::RepeatedPtrField< ::Goal >&
-      goal() const;
-  inline ::google::protobuf::RepeatedPtrField< ::Goal >*
-      mutable_goal();
+  inline const ::Goal& goal() const;
+  inline ::Goal* mutable_goal();
+  inline ::Goal* release_goal();
+  inline void set_allocated_goal(::Goal* goal);
 
   // @@protoc_insertion_point(class_scope:Game)
  private:
+  inline void set_has_player_a();
+  inline void clear_has_player_a();
+  inline void set_has_player_b();
+  inline void clear_has_player_b();
+  inline void set_has_ball();
+  inline void clear_has_ball();
+  inline void set_has_goal();
+  inline void clear_has_goal();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedPtrField< ::Player > player_a_;
-  ::google::protobuf::RepeatedPtrField< ::Player > player_b_;
-  ::google::protobuf::RepeatedPtrField< ::Ball > ball_;
-  ::google::protobuf::RepeatedPtrField< ::Goal > goal_;
+  ::Player* player_a_;
+  ::Player* player_b_;
+  ::Ball* ball_;
+  ::Goal* goal_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
@@ -715,104 +711,156 @@ inline void Goal::set_pole2_y(float value) {
 
 // Game
 
-// repeated .Player player_a = 1;
-inline int Game::player_a_size() const {
-  return player_a_.size();
+// required .Player player_a = 1;
+inline bool Game::has_player_a() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void Game::set_has_player_a() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void Game::clear_has_player_a() {
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void Game::clear_player_a() {
-  player_a_.Clear();
+  if (player_a_ != NULL) player_a_->::Player::Clear();
+  clear_has_player_a();
 }
-inline const ::Player& Game::player_a(int index) const {
-  return player_a_.Get(index);
+inline const ::Player& Game::player_a() const {
+  return player_a_ != NULL ? *player_a_ : *default_instance_->player_a_;
 }
-inline ::Player* Game::mutable_player_a(int index) {
-  return player_a_.Mutable(index);
-}
-inline ::Player* Game::add_player_a() {
-  return player_a_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::Player >&
-Game::player_a() const {
+inline ::Player* Game::mutable_player_a() {
+  set_has_player_a();
+  if (player_a_ == NULL) player_a_ = new ::Player;
   return player_a_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::Player >*
-Game::mutable_player_a() {
-  return &player_a_;
+inline ::Player* Game::release_player_a() {
+  clear_has_player_a();
+  ::Player* temp = player_a_;
+  player_a_ = NULL;
+  return temp;
+}
+inline void Game::set_allocated_player_a(::Player* player_a) {
+  delete player_a_;
+  player_a_ = player_a;
+  if (player_a) {
+    set_has_player_a();
+  } else {
+    clear_has_player_a();
+  }
 }
 
-// repeated .Player player_b = 2;
-inline int Game::player_b_size() const {
-  return player_b_.size();
+// required .Player player_b = 2;
+inline bool Game::has_player_b() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Game::set_has_player_b() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Game::clear_has_player_b() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void Game::clear_player_b() {
-  player_b_.Clear();
+  if (player_b_ != NULL) player_b_->::Player::Clear();
+  clear_has_player_b();
 }
-inline const ::Player& Game::player_b(int index) const {
-  return player_b_.Get(index);
+inline const ::Player& Game::player_b() const {
+  return player_b_ != NULL ? *player_b_ : *default_instance_->player_b_;
 }
-inline ::Player* Game::mutable_player_b(int index) {
-  return player_b_.Mutable(index);
-}
-inline ::Player* Game::add_player_b() {
-  return player_b_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::Player >&
-Game::player_b() const {
+inline ::Player* Game::mutable_player_b() {
+  set_has_player_b();
+  if (player_b_ == NULL) player_b_ = new ::Player;
   return player_b_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::Player >*
-Game::mutable_player_b() {
-  return &player_b_;
+inline ::Player* Game::release_player_b() {
+  clear_has_player_b();
+  ::Player* temp = player_b_;
+  player_b_ = NULL;
+  return temp;
+}
+inline void Game::set_allocated_player_b(::Player* player_b) {
+  delete player_b_;
+  player_b_ = player_b;
+  if (player_b) {
+    set_has_player_b();
+  } else {
+    clear_has_player_b();
+  }
 }
 
-// repeated .Ball ball = 3;
-inline int Game::ball_size() const {
-  return ball_.size();
+// required .Ball ball = 3;
+inline bool Game::has_ball() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void Game::set_has_ball() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void Game::clear_has_ball() {
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void Game::clear_ball() {
-  ball_.Clear();
+  if (ball_ != NULL) ball_->::Ball::Clear();
+  clear_has_ball();
 }
-inline const ::Ball& Game::ball(int index) const {
-  return ball_.Get(index);
+inline const ::Ball& Game::ball() const {
+  return ball_ != NULL ? *ball_ : *default_instance_->ball_;
 }
-inline ::Ball* Game::mutable_ball(int index) {
-  return ball_.Mutable(index);
-}
-inline ::Ball* Game::add_ball() {
-  return ball_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::Ball >&
-Game::ball() const {
+inline ::Ball* Game::mutable_ball() {
+  set_has_ball();
+  if (ball_ == NULL) ball_ = new ::Ball;
   return ball_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::Ball >*
-Game::mutable_ball() {
-  return &ball_;
+inline ::Ball* Game::release_ball() {
+  clear_has_ball();
+  ::Ball* temp = ball_;
+  ball_ = NULL;
+  return temp;
+}
+inline void Game::set_allocated_ball(::Ball* ball) {
+  delete ball_;
+  ball_ = ball;
+  if (ball) {
+    set_has_ball();
+  } else {
+    clear_has_ball();
+  }
 }
 
-// repeated .Goal goal = 4;
-inline int Game::goal_size() const {
-  return goal_.size();
+// required .Goal goal = 4;
+inline bool Game::has_goal() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void Game::set_has_goal() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void Game::clear_has_goal() {
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void Game::clear_goal() {
-  goal_.Clear();
+  if (goal_ != NULL) goal_->::Goal::Clear();
+  clear_has_goal();
 }
-inline const ::Goal& Game::goal(int index) const {
-  return goal_.Get(index);
+inline const ::Goal& Game::goal() const {
+  return goal_ != NULL ? *goal_ : *default_instance_->goal_;
 }
-inline ::Goal* Game::mutable_goal(int index) {
-  return goal_.Mutable(index);
-}
-inline ::Goal* Game::add_goal() {
-  return goal_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::Goal >&
-Game::goal() const {
+inline ::Goal* Game::mutable_goal() {
+  set_has_goal();
+  if (goal_ == NULL) goal_ = new ::Goal;
   return goal_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::Goal >*
-Game::mutable_goal() {
-  return &goal_;
+inline ::Goal* Game::release_goal() {
+  clear_has_goal();
+  ::Goal* temp = goal_;
+  goal_ = NULL;
+  return temp;
+}
+inline void Game::set_allocated_goal(::Goal* goal) {
+  delete goal_;
+  goal_ = goal;
+  if (goal) {
+    set_has_goal();
+  } else {
+    clear_has_goal();
+  }
 }
 
 
