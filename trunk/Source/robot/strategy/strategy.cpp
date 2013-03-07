@@ -5,9 +5,10 @@
 */
 
 #include "strategy.h"
-
+/*
 #include "ipc/ipc_client.h"
 #include "ipc/ipc_server.h"
+*/
 
 // ---------------------------------------------------------------------------
 Strategy::Strategy()
@@ -26,14 +27,19 @@ Strategy::~Strategy()
 // ---------------------------------------------------------------------------
 void Strategy::run()
 {
-    if(ll.iets == true)
-    {
-        keeper->run();
-    }
-    else
-    {
-        kicker->run();
-    }
+	while(1)
+	{
+		co = getCoords();
+		
+		if(1/*ll.iets == true*/)
+		{
+			keeper->run();
+		}
+		else
+		{
+			kicker->run();
+		}
+	}
 }
 
 // ---------------------------------------------------------------------------
@@ -67,6 +73,3 @@ VisionData Strategy::getCoords()
     return 0;
 */
 }
-#endif
-
-

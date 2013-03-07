@@ -6,8 +6,8 @@
 	\author Gert Mertes
 */
 
-#include "low_level/low_level.h"
-#include "wifi/game.pb.h"
+#include "../low_level/low_level.h"
+#include "../../image_processing/public data/vision_data.cpp"
 #include "robot.h"
 #include "Keeper.h"
 #include "kicker.h"

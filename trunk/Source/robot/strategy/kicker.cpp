@@ -10,8 +10,6 @@
 Kicker::Kicker()
 {
 	// TODO Auto-generated constructor stub
-	//co = c;
-	//ll = l;
 	kick_distance = 50;
 	max_speed = 100;
 }
@@ -142,17 +140,17 @@ int Kicker::driveTo(int x, int y)
 {
 	if(co->robot1x == x && co->robot1y == y)
 	{
-		ll->forward(0);
+		ll->driveForward(0);
 		return 0;
 	}
 	else
 	{
-		ll->forward(max_speed);
+		ll->driveForward(max_speed);
 		return 0;
 	}
 }
 
-int Kicker::checkQuadrant(int x, int y)
+int Kicker::checkQuadrant(int x_coordinate, int y_coordinate)
 {
 	/* check for point on origin  or axis */
 	if (x_coordinate == 0 || y_coordinate == 0)
