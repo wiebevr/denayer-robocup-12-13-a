@@ -18,9 +18,9 @@ Robot::~Robot()
 	//unused
 }
 
-Robot::setGame(const Game & game)
+Robot::setCoords(const VisionData & coords)
 {
-	this->game = game;
+	this->coords = coords;
 }
 
 Robot::setll(LowLevel *ll)
