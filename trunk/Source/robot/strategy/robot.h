@@ -33,7 +33,7 @@ class Robot {
 		/*
 			Pointers to the coordinate and lowlevel objects so that they can be accessed by the child robots.
 		*/
-		VisionData & coords;
+		VisionData & co;
 		LowLevel *ll;
 		/*
             		Contains the current instruction fot the robot.

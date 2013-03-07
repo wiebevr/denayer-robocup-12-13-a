@@ -20,7 +20,7 @@ Robot::~Robot()
 
 Robot::setCoords(const VisionData & coords)
 {
-	this->coords = coords;
+	this->co = coords;
 }
 
 Robot::setll(LowLevel *ll)
