@@ -79,6 +79,7 @@ class Keeper : public Robot            //DE KLASSE KEEPER IS EEN UITBEREIDING VA
         void run();             //KEEPER ACTIVEREN VOOR DE HUIDIGE COORDINATEN (NAAR PLAATS GAAN + KEEPEN)
     protected:
     private:
+        int  maxSpeed;		//DE WAARDE VOOR DE MAXIMALE SNELHEID WAARMEE DE ROBOT KAN RIJDEN
         bool initOK;            //OM AAN TE DUIDEN OF DE ROBOT NOG NAAR ZIJN PLAATS (HET DOEL) MOET RIJDEN
         void goKeeping();       //ACHTERVOLG DE BAL (PRIMITIEVE KEEPERFUNCTIE)
         bool goToInitPlace();   //INITIALISEER DE ROBOT DOOR NAAR ZIJN PLAATS (HET DOEL) TE RIJDEN
