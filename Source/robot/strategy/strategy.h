@@ -35,7 +35,6 @@ class Strategy {
 	/**
 		The actual coordinate and lowlevel objects.
 	*/
-		Game & co;
 		LowLevel ll;
 };
 

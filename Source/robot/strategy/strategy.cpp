@@ -13,8 +13,10 @@
 // ---------------------------------------------------------------------------
 Strategy::Strategy()
 {
-	keeper = new Keeper(&co, &ll);
-	kicker = new Kicker(&co, &ll);
+	keeper = new Keeper();
+	keeper.setll(&ll);
+	kicker = new Kicker();
+	kicker.setll(&ll);
 }
 
 // ---------------------------------------------------------------------------
@@ -27,10 +29,6 @@ Strategy::~Strategy()
 // ---------------------------------------------------------------------------
 void Strategy::run()
 {
-	while(1)
-	{
-		co = getCoords();
-		
 		if(1/*ll.iets == true*/)
 		{
 			keeper->run();
@@ -39,37 +37,15 @@ void Strategy::run()
 		{
 			kicker->run();
 		}
-	}
 }
 
 // ---------------------------------------------------------------------------
 void Strategy::setGame(const Game & game)
 {
-    this->co = game;
+//    this->co = game;
+	keeper.setGame(game);
+	kicker.setGame(game);	
 }
 
 #if 0
 // ---------------------------------------------------------------------------
-VisionData Strategy::getCoords()
-{
-/*
-	IPCClient low_level(IPCSocket::WIFI_STRATEGY);
-    IPCServer wifi(IPCSocket::WIFI_STRATEGY);
-    low_level.open();
-    wifi.open();
-    
-    char buffer[IPCSocket::MAX_MESSAGE_LEN];
-    int length;
-
-    while (true)
-    {
-        // Send the data coming from wifi directly to low_level.
-        length = wifi.read(buffer, IPCSocket::MAX_MESSAGE_LEN);
-        std::cout << "Recieved: '" << buffer << "'" << std::endl;
-        std::cout << "Length: '" << length << "'" << std::endl;
-        low_level.write(buffer, length);
-    }
-
-    return 0;
-*/
-}

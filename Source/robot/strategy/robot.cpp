@@ -7,13 +7,8 @@
 #include "robot.h"
 
 // ---------------------------------------------------------------------------
-Robot::Robot(VisionData *c, LowLevel *l)
+Robot::Robot()
 {
-/*
-	Initialize pointer locations
-*/
-	co = c;
-	ll = l;
         lastInstruction = 'a';
 }
 
@@ -21,4 +16,15 @@ Robot::Robot(VisionData *c, LowLevel *l)
 Robot::~Robot()
 {
 	//unused
+}
+
+Robot::setGame(const Game & game)
+{
+	this->game = game;
+}
+
+Robot::setll(LowLevel *ll)
+{
+	this->ll = ll;
+
 }
