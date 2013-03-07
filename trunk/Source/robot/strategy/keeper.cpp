@@ -12,18 +12,22 @@
 */
 
 
-#include "Keeper.h"
+#include "keeper.h"
 
 using namespace std;
 
     ///@fn  Keeper  constructor
-    Keeper::Keeper() {}     //ctor
+    Keeper::Keeper() 
+    {
+        initOK = false;
+        maxSpeed = 100;
+    }     //ctor
 
     ///@fn  ~Keeper destructor
     Keeper::~Keeper() {}    //dtor
 
     ///@fn  init    maak de robot klaar om te keeperen
-    void Keeper::init() {initOK = false;}   //de robot moet eerst naar zijn plaats rijden! De run functie doet dit als 'initOK' = false
+    void Keeper::init() {}   //de robot moet eerst naar zijn plaats rijden! De run functie doet dit als 'initOK' = false
 
     ///@fn  run Laat de robot keeperen. !! Indien de robot nog niet op zijn initplaats staat, laat hem dan naar zijn initplaats gaan.
     void Keeper::run()
@@ -38,13 +42,13 @@ using namespace std;
     void Keeper::goKeeping()
     {
         //de coordinaten zitten in de hogere klasse, dus niet meer ophalen
-        if (Robot.get_my_Yco() > Robot.get_ball_Yco())     //is de bal boven de robot?
+        if (co->bally > co->robot1y)     //is de bal boven de robot?
         {
-            Lowlevel.forward();                                 //ga naar boven (rij vooruit)
+            Lowlevel.driveForward(maxSpeed);                                 //ga naar boven (rij vooruit)
         }
         else                                               //de bal is onder de robot
         {
-            Lowlevel.backward();                                //ga naar onder (rij achteruit)
+            Lowlevel.driveBackward(maxSpeed);                                //ga naar onder (rij achteruit)
         }
     }
 
@@ -57,47 +61,50 @@ using namespace std;
     bool Keeper::goToPlace()
     {
         //staat de robot op de beginplaats?
-        if (Robot.get_my_place().getX() == Robot.get_goal_place().getX() and Robot.get_my_place().getY() == Robot.get_goal_place().getY())
+        if (co->robot1x == co->goal1x and co->robot1y == co->goal1y)
         {
             //staat de robot in de goede richting?
-            if (Robot.get_my_dir() == 90)
-                return true;                                                //de robot staat helemaal goed => stoppen
+            if (co->robotDir() == 90)
+	    {
+		ll->driveForward(0);
+                return true;  
+	    }                                              //de robot staat helemaal goed => stoppen
             else
             {                                                      //nog draaien zodat we naar boven kijken
-                if (Robot.get_my_dir() < 90 and Robot.get_my_dir > -90)     //indien de robot naar rechts kijkt
-                    Lowlevel.turnLeft();                                        //links draaien
+                if (co->robotDir() < 90 and co->robotDir() > -90)     //indien de robot naar rechts kijkt
+                    ll->turnLeft(maxSpeed);                                        //links draaien
                 else                                                        //indien de robot naar links kijkt
-                    Lowlevel.turnRight();                                       //rechts draaien
+                    ll->turnRight(maxSpeed);                                       //rechts draaien
             }
         }
         else
         {                                                      //nog niet op de goede plaats
             //staat de robot op dezelfde hoogte (Y-co) als zijn doel?
-            if (Robot.get_my_place().getY() == Robot.get_goal_place().getY())
+            if (co->robot1y == co->goal1y)
             {
                 //staat de robot in de goede richting?
-                if (Robot.get_my_dir() == 180)
-                    Lowlevel.forward();                                         //rechtdoor rijden
+                if (co->robotDir() == 180)
+                    ll->driveForward(maxSpeed);                                         //rechtdoor rijden
                 else
                 {                                                      //nog draaien zodat we naar links kijken
-                    if (Robot.get_my_dir() < 180 and Robot.get_my_dir > 0)     //indien de robot naar boven kijkt
-                        Lowlevel.turnLeft();                                        //links draaien
+                    if (co->robotDir() < 180 and co->robotDir())     //indien de robot naar boven kijkt
+                        ll->turnLeft(maxSpeed);                                        //links draaien
                     else                                                        //indien de robot naar onder kijkt
-                        Lowlevel.turnRight();                                       //rechts draaien
+                        ll->turnRight(maxSpeed);                                       //rechts draaien
                 }
             }
             //de robot staat volledig uit positie
             else
             {
                 //staat de robot in de goede richting?
-                if (Robot.get_my_dir() == 90)
-                    Lowlevel.forward();                                          //rechtdoor rijden
+                if (co->robotDir() == 90)
+                    ll->driveForward(maxSpeed);                                          //rechtdoor rijden
                 else
                 {                                                      //nog draaien zodat we naar boven kijken
-                    if (Robot.get_my_dir() < 90 and Robot.get_my_dir > -90)     //indien de robot naar rechts kijkt
-                        Lowlevel.turnLeft();                                        //links draaien
+                    if (co->robotDir() < 90 and co->robotDir() > -90)     //indien de robot naar rechts kijkt
+                        ll->turnLeft(maxSpeed);                                        //links draaien
                     else                                                        //indien de robot naar links kijkt
-                        Lowlevel.turnRight();                                       //rechts draaien
+                        ll->turnRight(maxSpeed);                                       //rechts draaien
                 }
             }
         }
