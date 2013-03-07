@@ -9,7 +9,7 @@
 #include "../low_level/low_level.h"
 #include "../../image_processing/public data/vision_data.cpp"
 #include "robot.h"
-#include "Keeper.h"
+#include "keeper.h"
 #include "kicker.h"
 
 class Strategy {
