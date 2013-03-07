@@ -10,6 +10,7 @@
 Robot::Robot()
 {
         lastInstruction = 'a';
+	co = 0;
 }
 
 // ---------------------------------------------------------------------------
@@ -18,12 +19,12 @@ Robot::~Robot()
 	//unused
 }
 
-Robot::setCoords(const VisionData & coords)
+void Robot::setCoords(VisionData *coords)
 {
 	this->co = coords;
 }
 
-Robot::setll(LowLevel *ll)
+void Robot::setll(LowLevel *ll)
 {
 	this->ll = ll;
 

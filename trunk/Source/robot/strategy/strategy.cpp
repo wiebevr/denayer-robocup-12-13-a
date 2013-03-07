@@ -14,9 +14,9 @@
 Strategy::Strategy()
 {
 	keeper = new Keeper();
-	keeper.setll(&ll);
+	keeper->setll(&ll);
 	kicker = new Kicker();
-	kicker.setll(&ll);
+	kicker->setll(&ll);
 }
 
 // ---------------------------------------------------------------------------
@@ -40,12 +40,11 @@ void Strategy::run()
 }
 
 // ---------------------------------------------------------------------------
-void Strategy::setCoords(const VisionData & coords)
+void Strategy::setCoords(VisionData *coords)
 {
 //    this->co = game;
-	keeper.setCoords(coords);
-	kicker.setCoords(coords);	
+	keeper->setCoords(coords);
+	kicker->setCoords(coords);	
 }
 
-#if 0
 // ---------------------------------------------------------------------------
