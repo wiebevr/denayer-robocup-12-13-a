@@ -40,11 +40,11 @@ void Strategy::run()
 }
 
 // ---------------------------------------------------------------------------
-void Strategy::setGame(const Game & game)
+void Strategy::setCoords(const VisionData & coords)
 {
 //    this->co = game;
-	keeper.setGame(game);
-	kicker.setGame(game);	
+	keeper.setCoords(coords);
+	kicker.setCoords(coords);	
 }
 
 #if 0

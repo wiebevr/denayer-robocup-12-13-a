@@ -14,7 +14,7 @@ class Robot {
 		Robot();
 		virtual ~Robot();
 
-		void setGame(Game & game);
+		void setGame(const VisionData & coords);
 		void setll(LowLevel *ll);
         	/*
             		This function is called to initiate the robot, so it is ready to keep or kick.
@@ -33,7 +33,7 @@ class Robot {
 		/*
 			Pointers to the coordinate and lowlevel objects so that they can be accessed by the child robots.
 		*/
-		Game & game;
+		VisionData & coords;
 		LowLevel *ll;
 		/*
             		Contains the current instruction fot the robot.
