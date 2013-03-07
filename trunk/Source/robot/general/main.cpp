@@ -1,5 +1,5 @@
 #include "wifi/wifi.h"
-#include "wifi/game.pb.h"
+#include "shared/vision_data.h"
 
 int main(int argc, char **argv)
 {
@@ -8,8 +8,8 @@ int main(int argc, char **argv)
 
     while (true)
     {
-        const Game &game = wifi.getGame();
-        strategy.setGame(game);
+        const VisionData data = wifi.getVisionData();
+        strategy.setCoords(&data);
         strategy.run();
     }
 
