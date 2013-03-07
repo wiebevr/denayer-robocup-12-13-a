@@ -33,9 +33,9 @@ using namespace std;
     void Keeper::run()
     {
         if (initOK)                         //als de robot al aan de goal staat kan er gekeeperd wordern
-            this.goKeeping();                   //achtervolg de bal (keeperen)
+            goKeeping();                   //achtervolg de bal (keeperen)
         else                                //als de robot nog ergens anders staat, moet er nog eerst naar de goal worden gegaan
-            initOK = this.goToPlace();          //ga naar de goal en laat weten of we er zijn geraakt
+            initOK = goToInitPlace();          //ga naar de goal en laat weten of we er zijn geraakt
     }
 
     ///@fn  goKeeping   Kijk of de bal op dit moment boven of onder de robot is (volgens de Y-as), en volg de bal.
@@ -44,11 +44,11 @@ using namespace std;
         //de coordinaten zitten in de hogere klasse, dus niet meer ophalen
         if (co.bally > co.robot1y)     //is de bal boven de robot?
         {
-            Lowlevel.driveForward(maxSpeed);                                 //ga naar boven (rij vooruit)
+            ll->driveForward(maxSpeed);                                 //ga naar boven (rij vooruit)
         }
         else                                               //de bal is onder de robot
         {
-            Lowlevel.driveBackward(maxSpeed);                                //ga naar onder (rij achteruit)
+            ll->driveBackwards(maxSpeed);                                //ga naar onder (rij achteruit)
         }
     }
 
@@ -58,10 +58,10 @@ using namespace std;
     * De teruggegeven boolean duid aan of de initialisatie is voltooid (robot staat voor de goal).
     */
     ///@return  Indien = 'true': de robot staat op de goede plaats (en in de goede richting). Indien = 'false': de robot staat nog niet goed.
-    bool Keeper::goToPlace()
+    bool Keeper::goToInitPlace()
     {
         //staat de robot op de beginplaats?
-        if (co.robot1x == co.goal1x and co.robot1y == co.>goal1y)
+        if (co.robot1x == co.goal1x and co.robot1y == co.goal1y)
         {
             //staat de robot in de goede richting?
             if (co.robotDir() == 90)
