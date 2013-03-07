@@ -18,7 +18,6 @@ class LowLevel
 		/** Destructor */
         ~LowLevel();
         
-    protected:
         /** Function to drive the robot forward
          * @param percentSpeed Integer of the speed in percent (0 - 100)
          */
