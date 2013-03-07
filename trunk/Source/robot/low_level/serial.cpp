@@ -14,7 +14,7 @@ Serial::Serial()
 // ---------------------------------------------------------------------------
 Serial::~Serial()
 {
-
+	close(fd);	
 }
 
 // ---------------------------------------------------------------------------
@@ -93,17 +93,11 @@ int Serial::init(void)
 }
 
 // ---------------------------------------------------------------------------
-int Serial::main(void) {
+/*int Serial::main(void) {
 
 	int counter, i;
 	unsigned char Result[10];
 
-	
-	printf( "open USB0......\n" );
-	printf( "initPort: %d\n", init() );
-	printf( "baud after init  = %lf\n", getbaud() );
-
-	
 	this->Cmd[0] = 0x02;		//       Module 2
 	this->Cmd[1] = 0x06;		//	Get Axis Parameter (GAP) 
 	this->Cmd[2] = 0xD1;		//	209 Get Encoder Position
@@ -115,24 +109,12 @@ int Serial::main(void) {
 	checksum(this->Cmd);
 
 
-	printf("write..."); 
-
 	printf("%d bytes!\n", sWrite(this->Cmd));
 	
-	for(i = 0; i < 9; i++) printf("%d; ", Cmd[i]); printf("\n");
-	
-	usleep(500000);		// sleep 500 ms
-	
-	fcntl(fd, F_SETFL, FNDELAY); // don't block serial read
-	
-	printf("read...\n");
 	printf("%d bytes\n", sRead(Result));
-	
-	printf("read    = ");	for(i = 0; i < 9; i++) printf("%d; ", Cmd[i]); printf("\n");
 
-	close(fd);	ssize_t size = 10;
 	return 0;
-}
+}*/
 
 // ---------------------------------------------------------------------------
 void Serial::checksum(unsigned char *Cmd){
@@ -144,7 +126,7 @@ void Serial::checksum(unsigned char *Cmd){
 }
 
 // ---------------------------------------------------------------------------
-int Serial::sWrite(unsigned char *Cmd)
+int Serial::sWrite(const char *Cmd )
 {
 	int check; 
     char n;
@@ -158,7 +140,7 @@ int Serial::sWrite(unsigned char *Cmd)
 	printf("write(2) function\n");
 
 
-	check = write(this->fd, Cmd, 	size);		//originally strlen(bCmd) but there are some zero Bytes in the Cmd
+	check = write(this->fd, Cmd, 10);		//originally strlen(bCmd) but there are some zero Bytes in the Cmd
 	
 	tcdrain(fd); //waits until all output written to the object referred to by fildes is transmitted
 
@@ -177,8 +159,10 @@ int Serial::sWrite(unsigned char *Cmd)
 }
 
 // ---------------------------------------------------------------------------
-int Serial::sRead( unsigned char *Result) 
+int Serial::sRead( string &result) 
 {
+	fcntl(fd, F_SETFL, FNDELAY); // don't block serial read
+    char  buf[100];
 	printf("read(2) function\n");
 	int max = 12;				// 9 bytes as an answer to a Command
 	int    state=1; 
@@ -186,10 +170,11 @@ int Serial::sRead( unsigned char *Result)
 
     while( state > 0 && receivedbyte < max) 
         { 
-        state = read(fd,&Result[receivedbyte],1); 
+        state = read(fd,&buf[receivedbyte],1); 
         if( state > 0 ) 
             receivedbyte++; 
         } 
+    result = buf;
     return    receivedbyte;
 }
 

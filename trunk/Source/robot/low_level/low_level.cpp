@@ -4,15 +4,18 @@
  * @author Ken
  */
 
+#include <stdlib.h>
 #include "low_level.h"
-#include "string.h"
+#include <string>
+
+using namespace std;
 
 // ---------------------------------------------------------------------------
 LowLevel::LowLevel()
 {
-    serial = new Serial(38400, 8 ,1);
+    serial = new Serial( "dev/ttyUSB0", 38400, 8 ,1 );
     if(serial->init())
-        exit();
+        exit(-1);
 }
 
 // ---------------------------------------------------------------------------
@@ -48,18 +51,19 @@ void LowLevel::turnRight(int speed)
 // ---------------------------------------------------------------------------
 void LowLevel::stopMoving(void)
 {
-   serial->write("s\r");
+    string s = "s\r";
+    serial->sWrite(s.data());
 }
 
 // ---------------------------------------------------------------------------
 void LowLevel::ledTest(void)
 {
-   serial->write("t\r");
+   serial->sWrite("t\r");
 }
 
 // Private functions
 // ---------------------------------------------------------------------------
-float percentToValue(int percent, int max)
+float LowLevel::percentToValue(int percent, int max)
 {
     float value = max / 100;
     value *= percent;
@@ -70,18 +74,20 @@ float percentToValue(int percent, int max)
 void LowLevel::drive(int speed, char direction)
 {
     string buffer;
-    stringstream ss;
-    speed = percentToValue(speed, MAX_SPEED);
-    ss << speed;
+    char ss[15];
+    float speed2 = percentToValue(speed, MAX_SPEED);
+    speed = (int) speed2;
+    sprintf(ss,"%d", speed);
 
     buffer = "d";
     buffer.append(" ");
-    buffer.append(direction);
+    buffer.push_back(direction);
     buffer.append(" ");
-    buffer.append(ss.str());
+    buffer.append(ss);
     buffer.append(" ");
-    buffer.append(ss.str());
-    buffer.append('\r');
+    buffer.append(ss);
+    buffer.push_back('\r');
 
-    serial->write(buffer);
+    serial->sWrite(buffer.data());
 }
+
