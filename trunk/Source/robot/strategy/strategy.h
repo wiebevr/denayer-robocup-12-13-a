@@ -7,7 +7,7 @@
 */
 
 #include "../low_level/low_level.h"
-#include "../../image_processing/public data/vision_data.cpp"
+#include "../../image_processing/public data/vision_data.h"
 #include "robot.h"
 #include "keeper.h"
 #include "kicker.h"
@@ -24,7 +24,7 @@ class Strategy {
 	/**
 		Grabs the latest coordinates from wifi.
 	*/
-		void setGame(const Game & game);
+		void setCoords(const VisionData & coords);
 		
 	private:
 	/**
