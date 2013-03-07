@@ -10,7 +10,7 @@
 Kicker::Kicker()
 {
 	// TODO Auto-generated constructor stub
-	kick_distance = 50;
+	kick_distance = 4;
 	max_speed = 100;
 }
 
@@ -23,11 +23,11 @@ void Kicker::run()
 {
 	calcKickPos();
 
-	if( co->robot1x == kick_posx && co->robot1y == kick_posy ) //Robot at kicking position
+	if( co.robot1x == kick_posx && co.robot1y == kick_posy ) //Robot at kicking position
 	{
-		if( turnTo(co->ballx, co->bally) == 1 )	 //Robot turned towards ball
+		if( turnTo(co.ballx, co.bally) == 1 )	 //Robot turned towards ball
 		{
-			driveTo(co->ballx, co->bally);	 //Let's kick!
+			driveTo(co.ballx, co.bally);	 //Let's kick!
 		}
 		else
 		{
@@ -42,15 +42,19 @@ void Kicker::run()
 
 void Kicker::calcKickPos()
 {
-	//TODO get rid of pythagoras
-	int x = co->goal1x - co->ballx;
-	int y = co->goal1y - co->bally;
-
-	//int ball_goal_distance = pythagoras(x, y);
-	int factor = abs(x)/abs(y);
-
-	kick_posx = co->ballx - (factor*x);
-	kick_posy = co->bally - (factor*y);
+	int x = co.goal1x - co.ballx;
+	int y = co.goal1y - co.bally;
+	if(x != 0)
+	{
+		double f = y/x;	
+		kick_posx = co.ballx - kick_distance;
+		kick_posy = co.bally - f*kick_distance;
+	}
+	else
+	{
+		kick_posx = co.ballx;
+		kick_posy = co.bally - kick_distance;
+	}
 }
 
 int Kicker::pythagoras(int x, int y)
@@ -62,8 +66,8 @@ int Kicker::pythagoras(int x, int y)
 
 int Kicker::turnTo(int x, int y)
 {
-	int x_t = x - co->robot1x;		//make triangle of robotcoords and pointcoords
-	int y_t = y - co->robot1y;		//these are hor. and vert. sides
+	int x_t = x - co.robot1x;		//make triangle of robotcoords and pointcoords
+	int y_t = y - co.robot1y;		//these are hor. and vert. sides
 
 	if(x_t == 0)				// point is above us!
 	{					
@@ -71,11 +75,11 @@ int Kicker::turnTo(int x, int y)
 	else					// slightly more complex turning
 	{	
 		int q_p = checkQuadrant(x_t,y_t);
-		int q_r = checkQuadrant(co->robot1rotx, co->robot1roty);
+		int q_r = checkQuadrant(co.robot1rotx, co.robot1roty);
 		// if robot is looking in same quadrant as point
 		if( q_p == q_r )
 		{
-			double f = co->robot1roty/co->robot1rotx;		// vector of the robots rotation
+			double f = co.robot1roty/co.robot1rotx;		// vector of the robots rotation
 									// recalculate to smaller triangle
 			int y_s = x_t*f;				// y/x = y'/x'= f => y = f*x
 
@@ -138,7 +142,7 @@ int Kicker::turnTo(int x, int y)
 
 int Kicker::driveTo(int x, int y)
 {
-	if(co->robot1x == x && co->robot1y == y)
+	if(co.robot1x == x && co.robot1y == y)
 	{
 		ll->driveForward(0);
 		return 0;
