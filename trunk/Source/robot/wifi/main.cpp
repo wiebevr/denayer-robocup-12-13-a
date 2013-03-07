@@ -1,21 +1,12 @@
-// Includes:
-#include "ipc/ipc_client.h"
+// @author Bart Volkaerts
+// Functies voor het testen van de game klasse.
 
-// Standard:
 #include <iostream>
+#include "wifi.h"
 
-// ---------------------------------------------------------------------------
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
-    IPCClient ipc(IPCSocket::WIFI_STRATEGY);
-    char buffer[IPCSocket::MAX_MESSAGE_LEN];
-    ipc.open();
+    Game game;
 
-    while (true)
-    {
-        std::cin.getline(buffer, IPCSocket::MAX_MESSAGE_LEN);
-        ipc << buffer;
-    }
-
-    return 0;
+    return 0;    
 }

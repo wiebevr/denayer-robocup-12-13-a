@@ -26,9 +26,9 @@ message Goal {
 }
 
 message Game {
-    repeated Player player_a = 1;
-    repeated Player player_b = 2;
-    repeated Ball ball = 3;
-    repeated Goal goal = 4;
+    required Player player_a = 1;
+    required Player player_b = 2;
+    required Ball ball = 3;
+    required Goal goal = 4;
 }
 
