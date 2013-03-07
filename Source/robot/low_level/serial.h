@@ -27,10 +27,9 @@ using namespace std;
 class Serial {
 
 private:
-    volatile int STOP=FALSE; 
+//    static volatile int stop =FALSE; 
     /** Filedescriptor of the serial connection */
     int fd;
-    ssize_t size = 9;
     fd_set input_fdset;
     /** char array used as checksum for sending and recieving */
     unsigned char Cmd[10];
@@ -64,18 +63,18 @@ public:
     /** Function for writing data to the serial port 
      * @param String that will be written to the port
      * @return int Integer gives the number of sent bytes */
-    int sWrite(unsigned char *);
+    int sWrite(const char *);
     /** Function for reading data from the serial port 
      * @param String that does something 
      * @return int INteger that returns the number of read bytes */
-    int sRead(unsigned char *);
+    int sRead(string &);
     /** Function for retrieving the baudrate of the serial connection 
      * @return double Double with the value of the baudrate */
     double getbaud( void );
     // NEEDED??
     void checksum(unsigned char *);
     // MUST DISAPPEAR WITHIN A COUPLE OF WEEKS!!! 
-    int main( void );
+    //int main( void );
 
 //protected:
 
