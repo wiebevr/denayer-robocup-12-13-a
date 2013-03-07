@@ -24,7 +24,8 @@ class Strategy {
 	/**
 		Grabs the latest coordinates from wifi.
 	*/
-		void setCoords(const VisionData & coords);
+
+		void setCoords(VisionData *coords);
 		
 	private:
 	/**
