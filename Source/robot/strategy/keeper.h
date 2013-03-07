@@ -60,27 +60,26 @@
 */
 
 /**
-* @fn       Keeper          De constructor van de keeper.
-* @fn       ~Keeper         De deconstructor van de keeper.
-* @fn       init            Initialiseer de robot als keeper.
-* @fn       run             Laat de robot keeperen (roept de functie goKeeping of goToInitPlace op).
-* @param    initOK          Om aan te duiden of de robot nog naar zijn plaats moet rijden (voor zijn doel).
-* @fn       goKeeping       Voor de instructies uit om te keeperen.
-* @fn       goToInitPlace   Deze functie zal de keeper voor zijn doel plaatsen, zodat hij kan keeperen. Returnt een boolean die de voltooing aangeeft.
+* @fn       Keeper          Constructor of the keeper = initialisation.
+* @fn       ~Keeper         Deconstructor of the keeper.
+* @fn       run             Keeping function of the robot (calls either the function 'goKeeping' or 'goToInitPlace').
+* @fn       goKeeping       The actual keeping instruction.
+* @fn       goToInitPlace   Move the keeper towards the init place, his goal. When the keeper is arrived, the function returns 'true'.
+* @var      maxSpeed        Integer, contains the value for the maximum speed to move the robot
+* @var      initOK          Boolean, indicates if the keeper has been initialised yet (= moved to his goal to start keeping)
 */
 #ifndef KEEPER_H
 #define KEEPER_H
 #include "robot.h"
-class Keeper : public Robot            //DE KLASSE KEEPER IS EEN UITBEREIDING VAN DE KLASSE ROBOT
+class Keeper : public Robot     //DE KLASSE KEEPER IS EEN UITBEREIDING VAN DE KLASSE ROBOT
 {
     public:
         Keeper();               //CONSTRUCTOR
         ~Keeper();              //DESTRUCTOR
-        void init();            //ZET ALLES KLAAR OM TE KUNNEN KEEPEN
         void run();             //KEEPER ACTIVEREN VOOR DE HUIDIGE COORDINATEN (NAAR PLAATS GAAN + KEEPEN)
     protected:
     private:
-        int  maxSpeed;		//DE WAARDE VOOR DE MAXIMALE SNELHEID WAARMEE DE ROBOT KAN RIJDEN
+        int  maxSpeed;		    //DE WAARDE VOOR DE MAXIMALE SNELHEID WAARMEE DE ROBOT KAN RIJDEN
         bool initOK;            //OM AAN TE DUIDEN OF DE ROBOT NOG NAAR ZIJN PLAATS (HET DOEL) MOET RIJDEN
         void goKeeping();       //ACHTERVOLG DE BAL (PRIMITIEVE KEEPERFUNCTIE)
         bool goToInitPlace();   //INITIALISEER DE ROBOT DOOR NAAR ZIJN PLAATS (HET DOEL) TE RIJDEN
