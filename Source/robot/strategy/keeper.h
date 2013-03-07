@@ -6,8 +6,6 @@
  *  @pre        Initiate the robot
  */
 
-#ifndef KEEPER_H
-#define KEEPER_H
 /**
 * @class    Keeper  Keeper.h
 * Uitbereiding van de klasse 'Robot'.
@@ -70,6 +68,9 @@
 * @fn       goKeeping       Voor de instructies uit om te keeperen.
 * @fn       goToInitPlace   Deze functie zal de keeper voor zijn doel plaatsen, zodat hij kan keeperen. Returnt een boolean die de voltooing aangeeft.
 */
+#ifndef KEEPER_H
+#define KEEPER_H
+#include "robot.h"
 class Keeper : public Robot            //DE KLASSE KEEPER IS EEN UITBEREIDING VAN DE KLASSE ROBOT
 {
     public:
