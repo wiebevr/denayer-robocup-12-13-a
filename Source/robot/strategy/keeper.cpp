@@ -42,7 +42,7 @@ using namespace std;
     void Keeper::goKeeping()
     {
         //de coordinaten zitten in de hogere klasse, dus niet meer ophalen
-        if (co->bally > co->robot1y)     //is de bal boven de robot?
+        if (co.bally > co.robot1y)     //is de bal boven de robot?
         {
             Lowlevel.driveForward(maxSpeed);                                 //ga naar boven (rij vooruit)
         }
@@ -61,17 +61,17 @@ using namespace std;
     bool Keeper::goToPlace()
     {
         //staat de robot op de beginplaats?
-        if (co->robot1x == co->goal1x and co->robot1y == co->goal1y)
+        if (co.robot1x == co.goal1x and co.robot1y == co.>goal1y)
         {
             //staat de robot in de goede richting?
-            if (co->robotDir() == 90)
+            if (co.robotDir() == 90)
 	    {
 		ll->driveForward(0);
                 return true;  
 	    }                                              //de robot staat helemaal goed => stoppen
             else
             {                                                      //nog draaien zodat we naar boven kijken
-                if (co->robotDir() < 90 and co->robotDir() > -90)     //indien de robot naar rechts kijkt
+                if (co.robotDir() < 90 and co.robotDir() > -90)     //indien de robot naar rechts kijkt
                     ll->turnLeft(maxSpeed);                                        //links draaien
                 else                                                        //indien de robot naar links kijkt
                     ll->turnRight(maxSpeed);                                       //rechts draaien
@@ -80,14 +80,14 @@ using namespace std;
         else
         {                                                      //nog niet op de goede plaats
             //staat de robot op dezelfde hoogte (Y-co) als zijn doel?
-            if (co->robot1y == co->goal1y)
+            if (co.robot1y == co.goal1y)
             {
                 //staat de robot in de goede richting?
-                if (co->robotDir() == 180)
+                if (co.robotDir() == 180)
                     ll->driveForward(maxSpeed);                                         //rechtdoor rijden
                 else
                 {                                                      //nog draaien zodat we naar links kijken
-                    if (co->robotDir() < 180 and co->robotDir())     //indien de robot naar boven kijkt
+                    if (co.robotDir() < 180 and co.robotDir())     //indien de robot naar boven kijkt
                         ll->turnLeft(maxSpeed);                                        //links draaien
                     else                                                        //indien de robot naar onder kijkt
                         ll->turnRight(maxSpeed);                                       //rechts draaien
@@ -97,11 +97,11 @@ using namespace std;
             else
             {
                 //staat de robot in de goede richting?
-                if (co->robotDir() == 90)
+                if (co.robotDir() == 90)
                     ll->driveForward(maxSpeed);                                          //rechtdoor rijden
                 else
                 {                                                      //nog draaien zodat we naar boven kijken
-                    if (co->robotDir() < 90 and co->robotDir() > -90)     //indien de robot naar rechts kijkt
+                    if (co.robotDir() < 90 and co.robotDir() > -90)     //indien de robot naar rechts kijkt
                         ll->turnLeft(maxSpeed);                                        //links draaien
                     else                                                        //indien de robot naar links kijkt
                         ll->turnRight(maxSpeed);                                       //rechts draaien
