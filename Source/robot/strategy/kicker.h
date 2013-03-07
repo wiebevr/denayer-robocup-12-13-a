@@ -14,7 +14,7 @@
 	\author Pascal Muys
 */
 
-#include "robot.cpp"
+#include "robot.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -39,6 +39,7 @@ public:
 		\param x horizontal length.
 		\param y vertical length.
 		\return long distance of the triangle.
+		\deprecated
          */
 	int pythagoras(int x, int y);
 	/** 
@@ -49,11 +50,11 @@ public:
 		\param x horizontal coordinate of point.
 		\param y vertical coordinate of point.
 		\return gives 1 if turning completed, 0 if not.
-         */
+*/
 	int turnTo(int x, int y);
 	/** 
 		Drive towards a point.
-		\param x horizontal coordinate of point.
+		\param x horizont&al coordinate of point.
 		\param y vertical coordinate of point.
 		\return gives 1 if driving completed, 0 if not.
          */
