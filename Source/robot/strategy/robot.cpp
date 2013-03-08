@@ -5,6 +5,7 @@
 */
 
 #include "robot.h"
+#include <iostream>
 
 // ---------------------------------------------------------------------------
 Robot::Robot()
@@ -21,11 +22,17 @@ Robot::~Robot()
 
 void Robot::setCoords(VisionData *coords)
 {
+	std::cout << "robot scoords" << std::endl;	
 	this->co = coords;
 }
 
-void Robot::setll(LowLevel *ll)
+void Robot::setll(LowLevel *lowl)
 {
-	this->ll = ll;
+	this->ll = lowl;
+
+}
+
+void Robot::run()
+{
 
 }

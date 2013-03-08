@@ -5,6 +5,7 @@
 */
 
 #include "strategy.h"
+#include <iostream>
 /*
 #include "ipc/ipc_client.h"
 #include "ipc/ipc_server.h"
@@ -17,6 +18,8 @@ Strategy::Strategy()
 	keeper->setll(&ll);
 	kicker = new Kicker();
 	kicker->setll(&ll);
+	
+	mode = 0;
 }
 
 // ---------------------------------------------------------------------------
@@ -29,7 +32,8 @@ Strategy::~Strategy()
 // ---------------------------------------------------------------------------
 void Strategy::run()
 {
-		if(1/*ll.iets == true*/)
+		std::cout << "strat run" << std::endl;
+		if(mode)
 		{
 			keeper->run();
 		}
