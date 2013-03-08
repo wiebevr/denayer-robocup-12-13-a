@@ -41,7 +41,7 @@ public:
 		\return long distance of the triangle.
 		\deprecated
          */
-	int pythagoras(int x, int y);
+	float pythagoras(float x, float y);
 	/** 
 		Turns towards a point.
 		We do this by checking for the quadrants of robotvector and pointvector.
@@ -51,14 +51,14 @@ public:
 		\param y vertical coordinate of point.
 		\return gives 1 if turning completed, 0 if not.
 */
-	int turnTo(int x, int y);
+	int turnTo(float x, float y);
 	/** 
 		Drive towards a point.
 		\param x horizont&al coordinate of point.
 		\param y vertical coordinate of point.
 		\return gives 1 if driving completed, 0 if not.
          */
-	int driveTo(int x, int y);
+	int driveTo(float x, float y);
 	/** 
 		Checks in which quadrant a point is.
 		
@@ -70,12 +70,12 @@ public:
 		\param y vertical coordinate of point.
 		\return gives a number according to description if succesfull, 0 if not.
          */
-	int checkQuadrant(int x, int y);
+	int checkQuadrant(float x, float y);
 
 private:
-	int kick_posx; //optimal position to start kicking from, X and Y coordinates
-	int kick_posy;
-	int kick_distance; //distance between ball and optimal kicking position
+	float kick_posx; //optimal position to start kicking from, X and Y coordinates
+	float kick_posy;
+	float kick_distance; //distance between ball and optimal kicking position
 	int max_speed;	// maximum speed for lowlevel
 	int walk_speed; // normal speed for lowlevel
 };

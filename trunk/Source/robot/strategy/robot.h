@@ -6,8 +6,8 @@
 	\author Gert Mertes
 */
 
-#include "../low_level/low_level.h"
-#include "../../image_processing/public data/vision_data.cpp"
+#include "tests/low_level.h"
+#include "tests/vision_data.h"
 
 class Robot {
 	public:
@@ -21,7 +21,7 @@ class Robot {
 			It is called once at the beginning.
             		The function is defined in each child class.
 		*/
-        	virtual void init();
+        	//virtual void init();
 		/*
 			This function is repeatedly called to update the robot's position.
 			To be implemented by the child class.
