@@ -2,20 +2,35 @@
 * Author: Mathieu Theerens
 */
 
+#ifndef BALLS_H_
+#define BALLS_H_
+/**
+        \class Ball
+        \brief Retrieves the coordinates of the ball.
+        \author Mathieu Theerens
+*/
+
+
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
-#include "images.h"
+#include "DataCircle.h"
 
 using namespace cv;
 using namespace std;
 
-class Ball{
+class Ball
+{
         public:
-		Ball(Mat img);
-		Point2f getCoords();
-		void showBalls(int, void* );
+		Ball(); // Constructor of the class, does nothing except making an 
+		Point2f getCoords(Mat img);
+		/*	This function takes an image as input and returns the coordinates
+		*	of the ball, if there is one in the image. Otherwise it returns an
+		*	empty Point2f parameter.
+		*/
 
         private:
-	 	char* window_dest;
 		Mat image;
 };
+
+#endif
+
