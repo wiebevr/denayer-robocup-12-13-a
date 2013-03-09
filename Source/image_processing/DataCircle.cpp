@@ -1,13 +1,15 @@
 /*
-* Author: Mathieu Theerens
+* 	Author: Mathieu Theerens
 */
 #include "DataCircle.h"
 
+//------------------------------
 DataCircle::DataCircle(vector<vector<Point> > cnt): contours(cnt)
 {
 	calcData();
 }      
 
+//------------------------------
 void DataCircle::calcData()
 {
 	center.resize(contours.size());
@@ -23,11 +25,14 @@ void DataCircle::calcData()
 		minEnclosingCircle( (Mat)contours_poly[i], center[i], radius[i] );		
 	}
 }
+
+//------------------------------
 vector<Point2f> DataCircle::getCenters()
 {
       return center;
 }
 
+//------------------------------
 vector<float> DataCircle::getRadius()
 {
       return radius;
