@@ -30,6 +30,8 @@ VisionData::VisionData()
     this->robot2rotx = 0;
     this->robot2roty = 0;
 
+    // REMINDER: robot variables converten to array
+
     this->ballx = 0;
     this->bally = 0;
 
@@ -38,4 +40,30 @@ VisionData::VisionData()
     this->goal2x = 0;
     this->goal2y = 0;
 
+}
+
+void VisionData::angle2StopidStrategie(float angle, int robot = 0)
+{
+	
+    switch (robot)
+    {
+        case (2):
+            //polarToCart(1, angle, this->robot2rotx, this->robot2rotx, 0);
+			this->robot2rotx = cos( angle * PI / 180 );
+			this->robot2roty = sin( angle * PI / 180 );
+			if (this->robot2rotx < 0.001) this->robot2rotx = 0;
+			if (this->robot2roty < 0.001) this->robot2roty = 0;
+            cout << "   [VisionData::angle2StopidStrategie] robot 2 -> angle: " << angle \
+			<< " cardisaans values: [" << this->robot2rotx << ", " << this->robot2roty << "]" << endl;
+            break;
+        case (1):
+        default:
+			this->robot1rotx = cos( angle * PI / 180 );
+			this->robot1roty = sin( angle * PI / 180 );
+			if (this->robot1rotx < 0.001) this->robot1rotx = 0;
+			if (this->robot1roty < 0.001) this->robot1roty = 0;
+            //polarToCart(1, angle, this->robot1rotx, this->robot1rotx, 0);
+            cout << "   [VisionData::angle2StopidStrategie] robot 1 -> angle: " << angle \
+			<< " cardisaans values: [" << this->robot1rotx << ", " << this->robot1roty << "]" << endl;
+    }
 }
