@@ -42,7 +42,7 @@ VisionData::VisionData()
 
 }
 
-void VisionData::angle2StopidStrategie(float angle, int robot = 0)
+void VisionData::angle2cart(float angle, int robot = 0)
 {
 	
     switch (robot)

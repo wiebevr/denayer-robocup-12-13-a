@@ -38,7 +38,7 @@ private:
     int border;
 
     /**
-     * mouseCallback is een callback functie die er voor zorgt dat alle activiteiten in de
+     * @brief mouseCallback is een callback functie die er voor zorgt dat alle activiteiten in de
      * gekozen figuur wordt verwerkt.
      * @param event muis event
      * @param x x positie
