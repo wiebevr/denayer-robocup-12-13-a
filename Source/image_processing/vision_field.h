@@ -91,7 +91,7 @@ public:
      * @param pixel
      * @return
      */
-    Vector<Point2f> getCoordinate(Vector<Point2f> pixel);
+    Point2f getCoordinate(Point2f pixel);
 };
 
 #endif // VISION_FIELD_H
