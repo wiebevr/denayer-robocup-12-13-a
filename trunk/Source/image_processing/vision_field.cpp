@@ -115,10 +115,15 @@ Mat VisionField::getCorrectedImage( Mat img )
 //---------------------------------------------------------------------------------------
 Vector<Point2f> VisionField::getCoordinateGoal()
 {
-    //cout << "   [VisionField::getCoordinateGoal] points Goal: " << cornersGoal << endl;
-    //return this->getCoordinate(cornersGoal);
+    cout << "   [VisionField::getCoordinateGoal] points Goal: " << cornersGoal << endl;
+    return this->getCoordinate(cornersGoal);
+}
+
+Vector<Point2f> VisionField::getPixelGoal()
+{
     return cornersGoal;
 }
+
 
 //---------------------------------------------------------------------------------------
 Vector<Point2f> VisionField::getCoordinate(Vector<Point2f> pixel)
