@@ -27,7 +27,6 @@ using namespace cv;
 class VisionField
 {
 private:
-    //@
     vector<Point2f> cornersPoints;
     vector<Point2f> cornersGoal;
     Mat tmp;
@@ -80,6 +79,12 @@ public:
      * @return vector van 2 coordinaten (elks x en y waarde)
      */
     Vector<Point2f> getCoordinateGoal();
+
+    /**
+     * @brief getPixelGoal Met deze methode krijg je de veld pixels van de goal terug
+     * @return vector van 2 pixel (elks x en y waarde)
+     */
+    Vector<Point2f> getPixelGoal();
 
     /**
      * @brief getCoordinate Zet de pixel waarde om naar veld coordinaten
