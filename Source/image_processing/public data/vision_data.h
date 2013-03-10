@@ -21,6 +21,11 @@ using namespace std;
 class VisionData
 {
     public:
+				/**
+		     * @brief VisionField Deze constructor zal de andere constructor oproepen met een
+		     * vaste grote van 300 op 300.
+		     * @param img camera beeld
+		     */
         float robot1x;
         float robot1y;
         float robot1rotx;
@@ -39,9 +44,18 @@ class VisionData
         float goal2x;
         float goal2y;
 
+				/**
+		     * @brief VisionData Deze constructor zal alle waardes op nul inisalizeren
+		     */
         VisionData();
-
-        void angle2StopidStrategie(float angle, int robot);
+				
+				/**
+				* @brief angle2cart De methode angle2cart zal een hoeg omzetten naar 
+				* een cartisaanse voorstelling en tegelijk in de juiste variable zetten
+				* @param angle hoek
+				* @param robot de nummer van de robot
+				*/
+        void angle2cart(float angle, int robot);
 
 };
 
