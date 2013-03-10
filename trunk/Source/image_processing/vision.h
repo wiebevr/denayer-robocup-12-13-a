@@ -35,6 +35,8 @@ class Vision
 	private:
 		VideoCapture cap;
 		Mat img;
+		VisionField field;
+		VisionData data;
 		
 	public:
 		Vision();

@@ -44,15 +44,15 @@ VisionData::VisionData()
 
 void VisionData::angle2cart(float angle, int robot = 0)
 {
-	
+	float toSmall = 0.0001;
     switch (robot)
     {
         case (2):
             //polarToCart(1, angle, this->robot2rotx, this->robot2rotx, 0);
 			this->robot2rotx = cos( angle * PI / 180 );
 			this->robot2roty = sin( angle * PI / 180 );
-			if (this->robot2rotx < 0.001) this->robot2rotx = 0;
-			if (this->robot2roty < 0.001) this->robot2roty = 0;
+			if (this->robot2rotx < toSmall && this->robot2rotx > -toSmall ) this->robot2rotx = 0;
+			if (this->robot2roty < toSmall && this->robot2roty > -toSmall ) this->robot2roty = 0;
             cout << "   [VisionData::angle2StopidStrategie] robot 2 -> angle: " << angle \
 			<< " cardisaans values: [" << this->robot2rotx << ", " << this->robot2roty << "]" << endl;
             break;
@@ -60,8 +60,8 @@ void VisionData::angle2cart(float angle, int robot = 0)
         default:
 			this->robot1rotx = cos( angle * PI / 180 );
 			this->robot1roty = sin( angle * PI / 180 );
-			if (this->robot1rotx < 0.001) this->robot1rotx = 0;
-			if (this->robot1roty < 0.001) this->robot1roty = 0;
+			if (this->robot1rotx < toSmall && this->robot1rotx > -toSmall ) this->robot1rotx = 0;
+			if (this->robot1roty < toSmall && this->robot1roty > -toSmall ) this->robot1roty = 0;
             //polarToCart(1, angle, this->robot1rotx, this->robot1rotx, 0);
             cout << "   [VisionData::angle2StopidStrategie] robot 1 -> angle: " << angle \
 			<< " cardisaans values: [" << this->robot1rotx << ", " << this->robot1roty << "]" << endl;
