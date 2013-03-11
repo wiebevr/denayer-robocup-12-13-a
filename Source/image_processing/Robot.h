@@ -12,7 +12,6 @@
 
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
-#include "images.h"
 #include <math.h>
 #include "DataCircle.h"
 

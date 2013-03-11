@@ -65,7 +65,8 @@ Point2f Robot::getCoords( Mat img )
 	// Anders gaan we een lege parameter doorsturen
 	else
 	{
-		Point2f x;		
+		Point2f x;	
+		rotation = 0;	
 		return x;
 	}
 }
@@ -165,7 +166,7 @@ void Robot::calcRotation( vector<vector<Point> > mcontour, vector<vector<Point> 
 	// Indien de hoek groter wordt dan 180 graden, dan zit men in het verkeerde quadrant,
 	// en moet moet 360 - hoek doen.
 	if ( angle > 180 )
-		angle = 360 - angle;
+		angle = angle - 360;
 	
 	rotation = angle;
 }
