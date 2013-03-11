@@ -72,9 +72,9 @@ void VisionField::mouse(int event, int x, int y)
         else if (nPoints >= 4 && nPoints < 6)
         {
             cout << "       [VisionField::mouseCallback] -> coordinate goal " << nPoints << " are: " << x << ", " << y << endl;
-            if (x > 0.8 * Width) x = Width;
+            if (x > 0.8 * Width + border) x = Width + border;
             if (x < 0.2 * Width + border) x = border;
-            if (y > 0.8 * Height) y = Height;
+            if (y > 0.8 * Height + border) y = Height + border;
             if (y < 0.2 * Height + border) y = border;
             cornersGoal.push_back(Point2f(x, y));
             nPoints++;
@@ -98,7 +98,7 @@ Mat VisionField::getCorrectedImage( Mat img )
     cout << "   [VisionField::getCorrectedImage] -> Give corrected image." << endl;
     cout << "       [VisionField::getCorrectedImage] -> Border = " << this->border << endl;
 
-    Mat trans, quad = cv::Mat::zeros(VisionField::Width + border, VisionField::Height + border, CV_8UC3);
+    Mat trans, quad = cv::Mat::zeros(VisionField::Width + border * 2, VisionField::Height + border * 2, CV_8UC3);
     vector<Point2f> scalePoints;
 
     scalePoints.push_back(cv::Point2f(0 + border, 0 + border));
