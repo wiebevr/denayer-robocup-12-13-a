@@ -66,7 +66,7 @@ void VisionField::mouse(int event, int x, int y)
             cout << "       [VisionField::mouseCallback] -> coordinate corner " << nPoints << " are: " << x << ", " << y << endl;
             cornersPoints.push_back(Point2f(x, y));
             nPoints++;
-            circle( tmp, Point( x, y ), 3,  Scalar(0,0,255), 1, 4, 0 );
+            circle( tmp, Point( x, y ), 3,  Scalar(0,0,255));
             imshow("Select 4 corners", tmp);
         }
         else if (nPoints >= 4 && nPoints < 6)
@@ -78,7 +78,7 @@ void VisionField::mouse(int event, int x, int y)
             if (y < 0.2 * Height + border) y = border;
             cornersGoal.push_back(Point2f(x, y));
             nPoints++;
-            circle( tmp, Point( x, y ), 3,  Scalar(255,0,0), 1, 4, 0 );
+            circle( tmp, Point( x, y ), 3,  Scalar(255,0,0));
             imshow("Select goal", tmp);
         } else {
             cout << "You selected enough corners" << endl;
