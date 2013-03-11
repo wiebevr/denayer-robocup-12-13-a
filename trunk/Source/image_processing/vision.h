@@ -20,7 +20,7 @@
 #include <iostream>
 
 #include "vision_field.h"
-#include "vision_data.h"
+#include "public data/vision_data.h"
 #include "Robot.h"
 #include "DataCircle.h"
 #include "Balls.h"
@@ -44,4 +44,6 @@ class Vision
 		
 		VisionData fetchData();
 	
-}
+};
+
+#endif // VISION__H

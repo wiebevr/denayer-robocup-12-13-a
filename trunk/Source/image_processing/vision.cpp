@@ -5,11 +5,13 @@ Mat img;
 VisionField field;
 VisionData data;
 
+//---------------------------------------------------------------------------------------
 Vision::Vision()
 {
 	Vision::Vision(0);
 }
 
+//---------------------------------------------------------------------------------------
 Vision::Vision(const string& filename)
 {
 	cap = VideoCapture();
@@ -29,6 +31,7 @@ Vision::Vision(const string& filename)
 	this->data.goal2y = pnt[1][1];
 }
 
+//---------------------------------------------------------------------------------------
 VisionData Vision::fetchData()
 {
 	Mat tmp;
