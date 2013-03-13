@@ -37,20 +37,39 @@ void printGameContent(Game *game)
 
 int main(int argc, char *argv[])
 {
-    int fd = open("game.pb", O_RDONLY); 
-    
-    google::protobuf::io::ZeroCopyInputStream* raw_input = new google::protobuf::io::FileInputStream(fd);
-    google::protobuf::io::CodedInputStream* coded_input = new google::protobuf::io::CodedInputStream(raw_input);
+    int fd = open("game.pb", O_WRONLY); 
+    google::protobuf::io::ZeroCopyOutputStream* raw_output = new google::protobuf::io::FileOutputStream(fd);
+    google::protobuf::io::CodedOutputStream* coded_output = new google::protobuf::io::CodedOutputStream(raw_output);
 
     Game *game = new Game;
-    printGameContent(game); 
-
-    game->MergePartialFromCodedStream(coded_input); 
+    Player *player_a = game->mutable_player_a(); 
+    player_a->set_x(1.0);
+    player_a->set_y(2.0);
+    player_a->set_rotate_x(11.0);
+    player_a->set_rotate_y(12.0);
     
+    game->mutable_player_b()->set_x(2.0);
+    game->mutable_player_b()->set_y(3.0);
+    game->mutable_player_b()->set_rotate_x(22.0);
+    game->mutable_player_b()->set_rotate_y(23.0);
+
+    game->mutable_ball()->set_x(3.0);
+    game->mutable_ball()->set_y(4.0);
+
+    game->mutable_goal()->set_pole1_x(5.0);
+    game->mutable_goal()->set_pole1_y(6.0);
+    game->mutable_goal()->set_pole2_x(7.0);
+    game->mutable_goal()->set_pole2_y(8.0);
+
     printGameContent(game); 
 
-    delete coded_input;
-    delete raw_input;
+    if(game->IsInitialized())
+    {
+        game->SerializeWithCachedSizes(coded_output);
+    }
+
+    delete coded_output;
+    delete raw_output;
     close(fd);
 
     return 0;    

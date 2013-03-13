@@ -8,7 +8,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 add_subdirectory(ipc)
-#add_subdirectory(wifi)
+add_subdirectory(wifi)
 #add_subdirectory(strategy)
 add_subdirectory(low_level)
 add_subdirectory(unit_tests)
