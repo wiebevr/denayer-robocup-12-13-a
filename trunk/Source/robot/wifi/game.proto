@@ -6,29 +6,23 @@
 *
 ******************************************************************************/
 
-message Player {
-    required float x = 1;
-    required float y = 2;
-    required float rotate_x = 3;
-    required float rotate_y = 4;
-}
-
-message Ball {
-    required float x = 1;
-    required float y = 2;
-}
-
-message Goal {
-    required float pole1_x = 1;
-    required float pole1_y = 2;
-    required float pole2_x = 3;
-    required float pole2_y = 4;
-}
-
 message Game {
-    required Player player_a = 1;
-    required Player player_b = 2;
-    required Ball ball = 3;
-    required Goal goal = 4;
+    required float player_a_x = 1;
+    required float player_a_y = 2;
+    required float player_a_rotate_x = 3;    
+    required float player_a_rotate_y = 4;    
+    
+    required float player_b_x = 5;
+    required float player_b_y = 6;
+    required float player_b_rotate_x = 7;    
+    required float player_b_rotate_y = 8;    
+
+    required float ball_x = 9;
+    required float ball_y = 10;
+
+    required float pole1_x = 11;
+    required float pole1_y = 12;
+    required float pole2_x = 13;
+    required float pole2_y = 14;
 }
 
