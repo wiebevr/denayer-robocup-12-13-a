@@ -7,13 +7,13 @@
 #include "Balls.h"
 
 // --------------------------------------
-Ball::Ball() {}  
+VisionBall::VisionBall() {}  
    
 // -------------------------------------- 
-Point2f Ball::getCoords( Mat img )
+Point2f VisionBall::getCoords( Mat img )
 {
 	image = img;
-      Mat hsv;
+      	Mat hsv;
 	cvtColor(image, hsv, CV_RGB2HSV);
 	
 	//imshow("hsv", hsv);

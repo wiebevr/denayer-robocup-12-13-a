@@ -9,21 +9,23 @@
 
 //------------------------------------------------------------------------------
 
-Vision::Vision() : field(initCamera(), 500, 500, 50), data() 
+Vision::Vision() 
+        : field(initCamera("/dev/video"), 500, 500, 50), data() 
 {
-    init("/dev/video");
+    init();
 }
 
 //------------------------------------------------------------------------------
 
-Vision::Vision(const string& filename) : field(initCamera(), 500, 500, 50), data() 
+Vision::Vision(const string& filename) 
+        : field(initCamera(filename), 500, 500, 50), data() 
 {
-    init(filename);
+    init();
 }
 
 //------------------------------------------------------------------------------
 
-void Vision::init(const string& filename) 
+void Vision::init() 
 {
     cout << "[Vision::init] initializing Vision" << endl;
     Vector<Point2f> pnt = field.getPixelGoal();
@@ -35,7 +37,8 @@ void Vision::init(const string& filename)
     namedWindow( "Overview field", CV_WINDOW_AUTOSIZE );
 }
 
-Mat Vision::initCamera()
+//------------------------------------------------------------------------------
+Mat Vision::initCamera(const string& filename)
 {
     cap = VideoCapture(0);
     if (!cap.isOpened()) {
@@ -46,42 +49,9 @@ Mat Vision::initCamera()
     return img;
 }
 
-
-
 //------------------------------------------------------------------------------
-
-VisionData &Vision::fetchData() 
+void Vision::drawUserInfo(Mat tmp)
 {
-    cout << "[Vision::fetchData] get data from images" << endl;
-    
-    Mat tmp;
-
-    // Get new camera frame
-    cap >> img;
-
-    // Get transformed image and put it in tmp image
-    field.getCorrectedImage(img).copyTo(tmp);
-
-    // Gets ball coordinates from tmp and put it in data 
-    Ball ball;
-    Point2f pnt = ball.getCoords(tmp);
-    pnt = field.getCoordinate(pnt);
-    cout << "!!![TEST] -> " << pnt << endl;
-    this->data.ballx = pnt.x;
-    this->data.bally = pnt.y;
-
-    // Get coordinates from robot 1
-    Robot robot;
-
-    pnt = robot.getCoords(tmp);
-    this->data.robot1x = pnt.x;
-    this->data.robot1y = pnt.y;
-
-    // Get rotation from robot 1
-
-    data.angle2cart(robot.getRotation(), 1);
-    
-    
     // draw user info
     rectangle(tmp, Point2f(50, 50), Point2f(550, 550), Scalar(0, 255, 0), 1);
     for (int i = 1; i < 4; i++) 
@@ -108,10 +78,49 @@ VisionData &Vision::fetchData()
     
     circle(tmp, Point2f(data.ballx, data.bally), 3, Scalar(0, 255, 255));
     
-    circle(tmp, Point2f(data.robot1x, data.robot1y), 3, Scalar(0, 255, 255));
-    line(tmp, Point2f(data.robot1x, data.robot1y), Point2f(data.robot1x + data.robot1rotx, data.robot1y + data.robot1roty), Scalar(0, 255, 255), 1);
+    Point2f pos = field.getPixel(Point2f(data.robot1x, data.robot1y));
+    circle(tmp, pos, 3, Scalar(0, 255, 255));
+    line(tmp, pos, Point2f(pos.x + data.robot1rotx, pos.y + data.robot1roty), Scalar(0, 255, 255), 1);
 
     imshow("Overview field", tmp);
+}
+
+
+//------------------------------------------------------------------------------
+
+VisionData &Vision::fetchData() 
+{
+    cout << "[Vision::fetchData] get data from images" << endl;
+    
+    Mat tmp;
+
+    // Get new camera frame
+    cap >> img;
+
+    // Get transformed image and put it in tmp image
+    field.getCorrectedImage(img).copyTo(tmp);
+
+    // Gets ball coordinates from tmp and put it in data 
+    Ball ball;
+    Point2f pnt = ball.getCoords(tmp);
+    pnt = field.getCoordinate(pnt);
+    this->data.ballx = pnt.x;
+    this->data.bally = pnt.y;
+
+    // Get coordinates from robot 1
+    Robot robot;
+
+    pnt = robot.getCoords(tmp);
+    pnt = field.getCoordinate(pnt);
+    this->data.robot1x = pnt.x;
+    this->data.robot1y = pnt.y;
+
+    // Get rotation from robot 1
+
+    data.angle2cart(robot.getRotation(), 1);
+    
+    drawUserInfo(tmp);
+    
 
     return data;
 }

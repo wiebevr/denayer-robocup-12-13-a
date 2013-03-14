@@ -38,8 +38,9 @@ class Vision
 		VisionField field;
 		VisionData data;
             
-                void init(const string& filename);
-                Mat initCamera();
+                void init();
+                Mat initCamera(const string& filename);
+                void drawUserInfo(Mat tmp);
 		
 	public:
 		Vision();

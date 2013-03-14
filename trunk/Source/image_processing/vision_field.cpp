@@ -136,3 +136,12 @@ Point2f VisionField::getCoordinate(Point2f pixel)
 
     return coordinateList;
 }
+
+//------------------------------------------------------------------------------
+Point2f VisionField::getPixel(Point2f coord)
+{
+    Point2f coordinateList( Width + border -(coord.x * Width) ,
+                    		Width + border -(coord.y * Width) );
+
+    return coordinateList;
+}
