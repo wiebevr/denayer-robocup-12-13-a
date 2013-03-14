@@ -41,6 +41,7 @@ void Vision::init()
 Mat Vision::initCamera(const string& filename)
 {
     cap = VideoCapture(0);
+    cap.set(CV_CAP_PROP_CONVERT_RGB, 1);
     if (!cap.isOpened()) {
         cout << "[Vision::initCamera] device already in use" << endl;
         exit(EXIT_FAILURE);
