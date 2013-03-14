@@ -89,9 +89,16 @@ public:
     /**
      * @brief getCoordinate Zet de pixel waarde om naar veld coordinaten
      * @param pixel
-     * @return
+     * @return 
      */
     Point2f getCoordinate(Point2f pixel);
+    
+    /**
+     * @brief getPixel Zet coordinaten terug om naar pixel waardes
+     * @param coord
+     * @return 
+     */
+    Point2f getPixel(Point2f coord);
 };
 
 #endif // VISION_FIELD_H

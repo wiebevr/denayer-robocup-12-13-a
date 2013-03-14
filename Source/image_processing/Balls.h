@@ -18,10 +18,10 @@
 using namespace cv;
 using namespace std;
 
-class Ball
+class VisionBall
 {
         public:
-		Ball(); // Constructor of the class, does nothing except making an 
+		VisionBall(); // Constructor of the class, does nothing except making an 
 		Point2f getCoords(Mat img);
 		/*	This function takes an image as input and returns the coordinates
 		*	of the ball, if there is one in the image. Otherwise it returns an

@@ -23,9 +23,9 @@ using namespace std;
 #define MAX_KERNEL_LENGTH 7
 #define MAXDIST 150000
 
-class Robot{
+class VisionRobot{
         public:
-		Robot(); // constructor of the class
+		VisionRobot(); // constructor of the class
 		
 		Point2f getCoords( Mat img );	
 		/*	This fucntion takes an image as input and returns the coordinates of the robot.
