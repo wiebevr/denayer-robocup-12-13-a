@@ -101,14 +101,14 @@ VisionData &Vision::fetchData()
     field.getCorrectedImage(img).copyTo(tmp);
 
     // Gets ball coordinates from tmp and put it in data 
-    Ball ball;
+    VisionBall ball;
     Point2f pnt = ball.getCoords(tmp);
     pnt = field.getCoordinate(pnt);
     this->data.ballx = pnt.x;
     this->data.bally = pnt.y;
 
     // Get coordinates from robot 1
-    Robot robot;
+    VisionRobot robot;
 
     pnt = robot.getCoords(tmp);
     pnt = field.getCoordinate(pnt);
