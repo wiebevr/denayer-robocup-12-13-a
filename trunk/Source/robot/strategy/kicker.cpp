@@ -30,6 +30,7 @@ void Kicker::run()
 	cout << kick_posy << endl;
 	if( co->robot1x == kick_posx && co->robot1y == kick_posy ) //Robot at kicking position
 	{
+		cout << "robot at kickpos " << endl;
 		if( turnTo(co->ballx, co->bally) == 1 )	 //Robot turned towards ball
 		{
 			driveTo(co->ballx, co->bally);	 //Let's kick!
@@ -41,6 +42,7 @@ void Kicker::run()
 	}
 	else if( turnTo(kick_posx, kick_posy) == 1 )	 //Turned to kicking position?
 	{
+		cout << "turned to kickpos " << endl;
 		driveTo(kick_posx, kick_posy);		 //Drive towards position
 	}	
 }
@@ -75,7 +77,22 @@ int Kicker::turnTo(float x, float y)
 	float y_t = y - co->robot1y;		//these are hor. and vert. sides
 
 	if(x_t == 0.00)				// point is above us!
-	{					
+	{		
+		cout << "x == 0 " << endl;
+		if(co->robot1rotx == 0)
+		{
+			return 1;		//turned upwards
+		}
+		else if(co->robot1rotx < 0)
+		{
+			ll->turnRight(max_speed);
+			return 0;
+		}
+		else
+		{
+			ll->turnLeft(max_speed);
+			return 0;
+		}
 	}
 	else					// slightly more complex turning
 	{	
