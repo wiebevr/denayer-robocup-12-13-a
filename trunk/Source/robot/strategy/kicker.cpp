@@ -49,8 +49,10 @@ void Kicker::run()
 
 void Kicker::calcKickPos()
 {
-	float x = co->goal1x - co->ballx;
-	float y = co->goal1y - co->bally;
+	float goalx = (co->goal1x + co->goal2x)/2;
+	float goaly = (co->goal1y + co->goal2y)/2;
+	float x = goalx - co->ballx;
+	float y = goaly - co->bally;
 	if(x != 0.00)
 	{
 		float f = y/x;	
@@ -171,6 +173,7 @@ int Kicker::driveTo(float x, float y)
 	}
 	else
 	{
+		cout << "heey " << endl;
 		ll->driveForward(max_speed);
 		return 0;
 	}

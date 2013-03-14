@@ -24,10 +24,10 @@ int main(int argc, char **argv)
 	VisionData *co = new VisionData();
 	
 	//add random data for tests here
-
-	co->robot1x = 0;
-     	co->robot1y = 0;
-     	co->robot1rotx = 0;
+	//all values between 0 - 1
+	co->robot1x = 0.2;
+     	co->robot1y = 0.2;
+     	co->robot1rotx = 1;
      	co->robot1roty = 0;
 
     	co->robot2x = 0;
@@ -35,13 +35,13 @@ int main(int argc, char **argv)
      	co->robot2rotx = 0;
      	co->robot2roty = 0;
 
-     	co->ballx = 0;
-     	co->bally = 0;
+     	co->ballx = 0.5;
+     	co->bally = 0.5;
 
-     	co->goal1x = 0;
-     	co->goal1y = 0;
-     	co->goal2x = 0;
-     	co->goal2y = 0;	
+     	co->goal1x = 1;
+     	co->goal1y = 0.4;
+     	co->goal2x = 1;
+     	co->goal2y = 0.6;	
 	
 	strat.setCoords(co);
 	cout << "main run" << endl;
