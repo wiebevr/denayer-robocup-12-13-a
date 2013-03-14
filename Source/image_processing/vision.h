@@ -37,12 +37,15 @@ class Vision
 		Mat img;
 		VisionField field;
 		VisionData data;
+            
+                void init(const string& filename);
+                Mat initCamera();
 		
 	public:
 		Vision();
 		Vision(const string& filename);
 		
-		VisionData fetchData();
+		VisionData &fetchData();
 	
 };
 

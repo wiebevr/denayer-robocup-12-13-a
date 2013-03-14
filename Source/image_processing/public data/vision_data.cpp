@@ -18,6 +18,7 @@ float goal1y;
 float goal2x;
 float goal2y;
 
+//------------------------------------------------------------------------------
 VisionData::VisionData()
 {
     this->robot1x = 0;
@@ -42,6 +43,7 @@ VisionData::VisionData()
 
 }
 
+//------------------------------------------------------------------------------
 void VisionData::angle2cart(float angle, int robot = 0)
 {
 	float toSmall = 0.0001;

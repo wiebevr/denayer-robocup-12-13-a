@@ -1,4 +1,4 @@
-PROJECT( Field ) 
+PROJECT( Overseer ) 
 FIND_PACKAGE( OpenCV REQUIRED )
 ADD_EXECUTABLE( ${PROJECT_NAME} ../general/main.cpp 
  								../vision_field.cpp 
@@ -14,3 +14,5 @@ ADD_EXECUTABLE( ${PROJECT_NAME} ../general/main.cpp
 								../vision.cpp 
 								../vision.h )
 TARGET_LINK_LIBRARIES( ${PROJECT_NAME} ${OpenCV_LIBS} ) 
+
+
