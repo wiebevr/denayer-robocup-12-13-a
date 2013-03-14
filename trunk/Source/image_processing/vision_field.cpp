@@ -16,13 +16,13 @@ int Width, Height;
 int border;
 
 
-//---------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 VisionField::VisionField( Mat img )
 {
     VisionField::VisionField(img, 500, 500, 50);
 }
 
-//---------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 VisionField::VisionField(Mat img, int persWidth, int persHeight, int setBorder)
 {
     cout << "   [VisionField::VisionField] -> Constructor." << endl;
@@ -56,7 +56,7 @@ VisionField::VisionField(Mat img, int persWidth, int persHeight, int setBorder)
 
 }
 
-//---------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void VisionField::mouse(int event, int x, int y)
 {
     if (event == CV_EVENT_LBUTTONUP)
@@ -86,13 +86,13 @@ void VisionField::mouse(int event, int x, int y)
     }
 }
 
-//---------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 void VisionField::mouseCallback(int event, int x, int y, int flags, void* param)
 {
     reinterpret_cast<VisionField *>(param)->mouse(event, x, y);
 }
 
-//---------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 Mat VisionField::getCorrectedImage( Mat img )
 {
     cout << "   [VisionField::getCorrectedImage] -> Give corrected image." << endl;
@@ -112,7 +112,7 @@ Mat VisionField::getCorrectedImage( Mat img )
     return quad;
 }
 
-//---------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 Vector<Point2f> VisionField::getCoordinateGoal()
 {
 	vector<Point2f> pnt;
@@ -128,7 +128,7 @@ Vector<Point2f> VisionField::getPixelGoal()
 }
 
 
-//---------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 Point2f VisionField::getCoordinate(Point2f pixel)
 {
     Point2f coordinateList( -(pixel.x - Width - border) / Width,
