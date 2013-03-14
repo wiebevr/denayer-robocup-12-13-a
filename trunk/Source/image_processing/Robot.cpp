@@ -82,7 +82,7 @@ Mat VisionRobot::smoothImage( Mat img )
 }
 
 //--------------------------------------
-Mat Robot::removeBall( Mat img, vector<vector<Point> > cnt )
+Mat VisionRobot::removeBall( Mat img, vector<vector<Point> > cnt )
 {
 	int thickness = -1;
 	int linetype = 8;
