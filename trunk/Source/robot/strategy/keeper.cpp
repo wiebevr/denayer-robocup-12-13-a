@@ -10,6 +10,7 @@
 */
 
 #include "keeper.h"
+#include <iostream>
 
 using namespace std;
 
@@ -18,14 +19,19 @@ using namespace std;
     {
         initOK = false;     //the robot first has to go to the initialisation position! The function 'run' will do this when 'initOK' = false
         maxSpeed = 100;     //100% -> move the robot at maximum speed
+	cout << "Keeper: new keeper is born" << endl;
     }     //ctor
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
     ///@fn  ~Keeper destructor
-    Keeper::~Keeper() {}    //dtor
+    Keeper::~Keeper() 
+    {
+	cout << "Keeper: keeper got killed" << endl;
+    }    //dtor
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
     ///@fn  run Let the robot keep. !! When the robot hasn't gone to the init place yet, he has to do this first (= initialisation)!!
     void Keeper::run()
     {
+	cout << "Keeper: doing his job: ";
         if (initOK)                         //when the robot has been initialised, he can go keeping
             goKeeping();                        //persuit the ball (keeping)
         else                                //when the robot is not initialised yet, he has to do this first
@@ -35,6 +41,7 @@ using namespace std;
     ///@fn  goKeeping   Simply look if the ball is under of above the robot (according the Y-axis), and follow the ball.
     void Keeper::goKeeping()
     {
+	cout << "keeping" << endl;
         //the coordinates are available in the class 'co', which is already implemented by the 'strategy' class
         if (co->bally > co->robot1y)          //is the ball above the robot?
             ll->driveForward(maxSpeed);         //go up (drive forward)
@@ -51,15 +58,18 @@ using namespace std;
     ///@return  When 'true': the robot has reached the init place (and is turned to the right direction). When'false': not there yet.
     bool Keeper::goToInitPlace()
     {
+	cout << "moving to the goal";
         if (co->robot1x == co->goal1x and co->robot1y == co->goal1y)    //robot reached the init place?
         {
             if (co->robot1roty == 1)                                     //... and turned towards the top?
             {
                 ll->driveForward(0);                                        //stand still; stop moving
+		cout << endl << "Keeper: arrived at the goal, can start with keeping" << endl;
                 return true;                                                //init complete
             }
             else
             {                                                           //... and not yet turned towards the top
+		cout << ", just need to turn" << endl;
                 if (co->robot1rotx > 0)                                      //when the robot looks to the right
                     ll->turnLeft(maxSpeed);                                     //turn left
                 else                                                        //when the robot looks to the left
@@ -71,9 +81,13 @@ using namespace std;
             if (co->robot1y == co->goal1y)                                //But does he stands on the same vertical position? (y-axis)
             {
                 if (co->robot1rotx == -1)                                     //... and is he turned towards the goal?
+		{		
+		    cout << ", straight forward to the goal" << endl;
                     ll->driveForward(maxSpeed);                                 //then go forward
+		}
                 else
                 {                                                           //... and not yet turned towards the goal
+		    cout << ", turning towards the goal" << endl;
                     if (co->robot1roty > 0)                                      //when the robot looks to the top
                         ll->turnLeft(maxSpeed);                                     //turn left
                     else                                                        //when the robot looks to the bottom
@@ -83,9 +97,13 @@ using namespace std;
             else                                                        //When the robot is completely out of position
             {
                 if (co->robot1roty == 1)                                     //... and the robot is turned towards the top
+		{
+		    cout << "driving to the middle of the field" << endl;
                     ll->driveForward(maxSpeed);                                 //then go forward
+		}
                 else                                                        //... and the robot is neither turned towards the top
                 {
+		    cout << "turning towards the middle of the field" << endl;
                     if (co->robot1rotx > 0)                                      //when the robot looks to the right
                         ll->turnLeft(maxSpeed);                                     //turn left
                     else                                                        //when the robot looks to the left
