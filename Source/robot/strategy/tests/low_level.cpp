@@ -29,25 +29,25 @@ LowLevel::~LowLevel()
 // ---------------------------------------------------------------------------
 void LowLevel::driveForward(int speed)
 {
-    cout << "forward " + speed << endl;
+    cout << "forward " << speed << endl;
 }
 
 // ---------------------------------------------------------------------------
 void LowLevel::driveBackwards(int speed)
 {   
-    cout << "backwards " + speed << endl;
+    cout << "backwards "  << speed << endl;
 }
 
 // ---------------------------------------------------------------------------
 void LowLevel::turnLeft(int speed)
 {   
-    cout << "left " + speed << endl;
+    cout << "left "  << speed << endl;
 }
 
 // ---------------------------------------------------------------------------
 void LowLevel::turnRight(int speed)
 { 
-    cout << "right " + speed << endl;
+    cout << "right " << speed << endl;
 }
 
 // ---------------------------------------------------------------------------
