@@ -29,34 +29,34 @@
             Het rijden naar de startplaats gebeurt in rechte lijken (horizontaal en verticaal): anders moet nog een draaihoek worden berekend.
             Er wordt een boolean teruggestuurd die aangeeft of de initialisatie voltooid is.
 
-                             O
-                             |
-                             |              O: mogelijke startplaats
-                    X--------+              X: init. plaats voor het doel
-                             |              -: af te leggen weg
-                             |
-                             O
+                             O											<br>
+                             |											<br>
+                             |              O: mogelijke startplaats						<br>
+                    X--------+              X: init. plaats voor het doel					<br>
+                             |              -: af te leggen weg							<br>
+                             |											<br>
+                             O											<br>
 
         - goKeeping(): hol achter de bal aan
             Er wordt nagegaan of er naar boven of naar onder moet worden gereden om de bal te volgen. Er wordt alleen vooruit en achteruit gereden.
             Er wordt dus geen rekening gehouden met eventuele draai-afwijkingen van de robot.
 
-                    GoToPlace()                                                 goKeeping()
-    (0,0)---------------------------------------------      (0,0)---------------------------------------------
-        |                                 |                     |                                 |
-        |                                 |                     |                                 |
-        |                                 |                     | ^                               |
-        |            0                    |                     | |                               |
-        |----        |                    |                     |----                             |
-        |    |       |                  / | \                   | |  |                          / | \
-        | X--|-------+                 |  o  |                  | X  |                         |  o  |
-        |    |       |                  \ | /                   | |  |                          \ | /
-        |----        |                    |                     |----                             |
-        |            o                    |                     | |                               |
-        |                                 |                     | V                               |
-        |                                 |                     |                                 |
-        |                                 |                     |                                 |
-        ----------------------------------------------          ----------------------------------------------
+                    GoToPlace()                                                 goKeeping()			<br>
+    	----------------------------------------------      	----------------------------------------------	<br>
+        |                                 |                     |                                 |		<br>
+        |                                 |                     |                                 |		<br>
+        |                                 |                     | ^                               |		<br>
+        |            0                    |                     | |                               |		<br>
+        |----        |                    |                     |----                             |		<br>
+        |    |       |                  / | \                   | |  |                          / | \		<br>
+        | X--|-------+                 |  o  |                  | X  |                         |  o  |		<br>
+        |    |       |                  \ | /                   | |  |                          \ | /		<br>
+        |----        |                    |                     |----                             |		<br>
+        |            o                    |                     | |                               |		<br>
+        |                                 |                     | V                               |		<br>
+        |                                 |                     |                                 |		<br>
+        |                                 |                     |                                 |		<br>
+        ----------------------------------------------(0,0)     ------------------------------------------(0,0)	<br>
 */
 
 /**
