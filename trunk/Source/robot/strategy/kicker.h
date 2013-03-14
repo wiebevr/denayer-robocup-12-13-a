@@ -56,9 +56,10 @@ public:
 		Drive towards a point.
 		\param x horizont&al coordinate of point.
 		\param y vertical coordinate of point.
+		\param driving speed.
 		\return gives 1 if driving completed, 0 if not.
          */
-	int driveTo(float x, float y);
+	int driveTo(float x, float y, int speed);
 	/** 
 		Checks in which quadrant a point is.
 		
