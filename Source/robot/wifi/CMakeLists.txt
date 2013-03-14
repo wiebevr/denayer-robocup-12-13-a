@@ -4,7 +4,7 @@ include_directories("${ROBOT_SOURCE_DIR}")
 
 link_directories("${ROBOT_BINARY_DIR}/lib")
 
-add_library(libwifi wifi.cpp wifi.h game.pb.cc game.pb.h)
-add_executable(wifi main.cpp wifi.cpp wifi.h game.pb.cc game.pb.h)
+add_library(libwifi wifi.cpp wifi.h game.pb.cc game.pb.h ../../image_processing/public\ data/vision_data.cpp)
+add_executable(wifi main.cpp wifi.cpp wifi.h game.pb.cc game.pb.h ../../image_processing/public\ data/vision_data.cpp)
 
 target_link_libraries(wifi libipc ${PROTOBUF_LIBRARY})

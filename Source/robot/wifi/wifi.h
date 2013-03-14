@@ -4,10 +4,11 @@
 // Standard C++:
 #include <string>
 #include <iostream>
+#include <fstream>
 #include <vector>
 
-// Protocol buffers:
-#include "game.pb.h"
+// VisionData
+#include "../../image_processing/public data/vision_data.h"
 
 /**
     \class Wifi
@@ -24,10 +25,10 @@ public:
     
     /** Returns the game protocol buffer instance. Blocks until a new
      * packet is received. */
-    const Game &getGame() const;
+    // VisionData receiveVisionData();
+    void sendVisionData(const VisionData &vision_data);
 
 private:
-    Game game;
 
 };
 #endif // WIFI_H
