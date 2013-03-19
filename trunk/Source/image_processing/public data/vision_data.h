@@ -57,6 +57,10 @@ public:
      */
     void angle2cart(float angle, int robot);
 
+    string toString() const;
+    void fromString (string& str);
+    bool operator==(const VisionData &rhs);
+    bool operator!=(const VisionData &rhs);
 };
 
 #endif // VISION_DATA_H
