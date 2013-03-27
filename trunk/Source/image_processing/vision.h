@@ -12,6 +12,8 @@
 #ifndef VISION_H
 #define VISION_H
 
+#define MT_FC_DEBAYER
+
 #include <opencv2/opencv.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -25,7 +27,9 @@
 #include "DataCircle.h"
 #include "Balls.h"
 
-
+#define width 300
+#define height 300
+#define border 100
 
 using namespace std;
 using namespace cv;

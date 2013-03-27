@@ -25,7 +25,7 @@ VisionField::VisionField( Mat img )
 //------------------------------------------------------------------------------
 VisionField::VisionField(Mat img, int persWidth, int persHeight, int setBorder)
 {
-    cout << "   [VisionField::VisionField] -> Constructor." << endl;
+    //cout << "   [VisionField::VisionField] -> Constructor." << endl;
     int status = 0;
     Width = persWidth;
     Height = persHeight;
@@ -63,7 +63,7 @@ void VisionField::mouse(int event, int x, int y)
     {
         if (nPoints < 4)
         {
-            cout << "       [VisionField::mouseCallback] -> coordinate corner " << nPoints << " are: " << x << ", " << y << endl;
+            //cout << "       [VisionField::mouseCallback] -> coordinate corner " << nPoints << " are: " << x << ", " << y << endl;
             cornersPoints.push_back(Point2f(x, y));
             nPoints++;
             circle( tmp, Point( x, y ), 3,  Scalar(0,0,255));
@@ -71,7 +71,7 @@ void VisionField::mouse(int event, int x, int y)
         }
         else if (nPoints >= 4 && nPoints < 6)
         {
-            cout << "       [VisionField::mouseCallback] -> coordinate goal " << nPoints << " are: " << x << ", " << y << endl;
+            //cout << "       [VisionField::mouseCallback] -> coordinate goal " << nPoints << " are: " << x << ", " << y << endl;
             if (x > 0.8 * Width + border) x = Width + border;
             if (x < 0.2 * Width + border) x = border;
             if (y > 0.8 * Height + border) y = Height + border;
@@ -81,7 +81,7 @@ void VisionField::mouse(int event, int x, int y)
             circle( tmp, Point( x, y ), 3,  Scalar(255,0,0));
             imshow("Select goal", tmp);
         } else {
-            cout << "You selected enough corners" << endl;
+            //cout << "You selected enough corners" << endl;
         }
     }
 }
@@ -95,8 +95,8 @@ void VisionField::mouseCallback(int event, int x, int y, int flags, void* param)
 //------------------------------------------------------------------------------
 Mat VisionField::getCorrectedImage( Mat img )
 {
-    cout << "   [VisionField::getCorrectedImage] -> Give corrected image." << endl;
-    cout << "       [VisionField::getCorrectedImage] -> Border = " << this->border << endl;
+    //cout << "   [VisionField::getCorrectedImage] -> Give corrected image." << endl;
+    //cout << "       [VisionField::getCorrectedImage] -> Border = " << this->border << endl;
 
     Mat trans, quad = cv::Mat::zeros(VisionField::Width + border * 2, VisionField::Height + border * 2, CV_8UC3);
     vector<Point2f> scalePoints;
@@ -116,7 +116,7 @@ Mat VisionField::getCorrectedImage( Mat img )
 Vector<Point2f> VisionField::getCoordinateGoal()
 {
 	vector<Point2f> pnt;
-	cout << "   [VisionField::getCoordinateGoal] points Goal: " << cornersGoal << endl;
+	//cout << "   [VisionField::getCoordinateGoal] points Goal: " << cornersGoal << endl;
 	pnt.push_back(this->getCoordinate(cornersGoal[0]));
 	pnt.push_back(this->getCoordinate(cornersGoal[1]));
     return pnt;

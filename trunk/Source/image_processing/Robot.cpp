@@ -127,7 +127,7 @@ void VisionRobot::calcRotation( vector<vector<Point> > mcontour, vector<vector<P
 	vector<Point2f> centers(4);
 	vector<float> radii(4);
 	vector<vector<Point> > cnt;	
-	DataCircle dcmiddle(mcontour), dcall(allcontours);	
+	DataCircle dcmiddle(mcontour), dcall(allcontours);
 	
 	// Hier gaan we de bollen berekenen die het dichtst bij de middenste bol van de robot zitten
 	// Met deze bollen kunnen we dan de rotatie berekenen
@@ -158,9 +158,10 @@ void VisionRobot::calcRotation( vector<vector<Point> > mcontour, vector<vector<P
 	* 	Daarna tellen we er 115 graden bij om zo de hoek te bekomen tussen de kijkrichting van
 	* 	de robot en de horizontale as.	
 	*/
+	
 	dxred = red.getCenters()[0].x - dcmiddle.getCenters()[0].x;
 	dyred = red.getCenters()[0].y - dcmiddle.getCenters()[0].y;
-		
+	
 	angle = -atan2(dyred,dxred)/PI*180 + 115;
 	
 	// Indien de hoek groter wordt dan 180 graden, dan zit men in het verkeerde quadrant,
