@@ -1,5 +1,6 @@
 #include "serial.h"
-
+#include <string.h>
+#include <iostream> 
 
 // ---------------------------------------------------------------------------
 Serial::Serial()
@@ -31,10 +32,13 @@ int Serial::init(void)
 {
 	struct termios old_flags; 
 	struct termios term_attr;
+    speed_t inputSpeed;
+    inputSpeed = B38400;
 
-    if ((this->fd = open(this->path.data(), O_RDWR | O_NOCTTY | O_NDELAY)) == -1) 
+    if ((this->fd = open("/dev/ttyUSB1", O_RDWR | O_NOCTTY | O_NDELAY)) == -1) 
     { 
-        perror("terminal: Can't open device " PORT_0); 
+        std::cout << this->path.c_str();
+        perror("terminal: Can't open device " PORT_0 ); 
         return(1); 
     } 
     /* configurare RS232 */ 
@@ -43,78 +47,25 @@ int Serial::init(void)
         perror("terminal: tcgetattr() failed"); 
         return(1); 
     } 
-    /* save old flags */ 
-    old_flags = term_attr; 
-    cfsetispeed(&term_attr, BAUDRATE); 
-    cfsetospeed(&term_attr, BAUDRATE); 
-    cfmakeraw(&term_attr);
+    // Get the current options for the port...
+    tcgetattr(this->fd, &term_attr);
+    // Set the baud rates to whatever is needed...
+    cfsetispeed(&term_attr, inputSpeed);
+    cfsetospeed(&term_attr, inputSpeed);
+    // Enable the receiver and set local mode...
+    term_attr.c_cflag |= (CLOCAL | CREAD);
 
-	term_attr.c_iflag = 0; 
-	term_attr.c_oflag = 0; 
-	term_attr.c_lflag = 0;
-	term_attr.c_cflag = 0;
+    term_attr.c_cflag &= ~PARENB;
+    term_attr.c_cflag &= ~CSTOPB;
+    term_attr.c_cflag &= ~CSIZE;
+    term_attr.c_cflag |= CS8;
 
- 
-    term_attr.c_cc[VMIN] = 1;                 // finished after one bye 
-    term_attr.c_cc[VTIME] = 8;             // or 800ms time out 
-
-    term_attr.c_cflag &= ~(PARENB | CSTOPB | CSIZE); //added
-    term_attr.c_cflag |= (this->baudrate | CS8 | CRTSCTS | CLOCAL | HUPCL);  // using flow control via CTS/RTS 
-
-
-	term_attr.c_oflag |= (OPOST | ONLCR); 
-
-
-	 /* save old configuration */ 
-
-	old_flags = term_attr; 
-	term_attr.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG); 
-
-                                                            
-    if (tcsetattr(this->fd, TCSAFLUSH, &term_attr) != 0) 
-    { 
-        perror("terminal: tcsetattr() failed"); 
-        return(1); 
-    } 
-
-    /* change standard input */ 
-    if (tcgetattr(STDIN_FILENO, &term_attr) != 0) 
-    { 
-        perror("terminal: tcgetattr() failed"); 
-        return(1); 
-    } 
-
-    if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &term_attr) != 0) 
-        perror("terminal: tcsetattr() failed"); 
-
-    FD_SET(this->fd, &input_fdset);                          /* Select the first channel 1 */ 
+    // Set the new options for the port...
+    tcsetattr(this->fd, TCSANOW, &term_attr);
+    return 0;
 
     return 0; 
 }
-
-// ---------------------------------------------------------------------------
-/*int Serial::main(void) {
-
-	int counter, i;
-	unsigned char Result[10];
-
-	this->Cmd[0] = 0x02;		//       Module 2
-	this->Cmd[1] = 0x06;		//	Get Axis Parameter (GAP) 
-	this->Cmd[2] = 0xD1;		//	209 Get Encoder Position
-	this->Cmd[3] = 0x01;		//	Encoder number 1
-	this->Cmd[4] = 0; 
-	this->Cmd[5] = 0; 
-	this->Cmd[6] = 0; 
-	this->Cmd[7] = 0;
-	checksum(this->Cmd);
-
-
-	printf("%d bytes!\n", sWrite(this->Cmd));
-	
-	printf("%d bytes\n", sRead(Result));
-
-	return 0;
-}*/
 
 // ---------------------------------------------------------------------------
 void Serial::checksum(unsigned char *Cmd){
@@ -137,13 +88,9 @@ int Serial::sWrite(const char *Cmd )
 	timeout.tv_sec = 5;
 	timeout.tv_usec = 0;
  
-	printf("write(2) function\n");
 
-
-	check = write(this->fd, Cmd, 10);		//originally strlen(bCmd) but there are some zero Bytes in the Cmd
+	check = write(this->fd, Cmd, strlen(Cmd));		//originally strlen(bCmd) but there are some zero Bytes in the Cmd
 	
-	tcdrain(fd); //waits until all output written to the object referred to by fildes is transmitted
-
 	if (check < 0) {
 		fputs("write failed!\n", stderr);
 		//close(fd);
@@ -153,7 +100,17 @@ int Serial::sWrite(const char *Cmd )
 		printf("no bytes transmitted");
 		//close(fd);
 		return 0;
-	}
+    }
+
+    char ending[1];
+    ending[0] = 13;
+    n = write(this->fd, ending,1);
+    if(n <0)
+    {
+        printf("Gefaald!! \n");
+        fputs("write failed!\n",stderr);
+        return -1;
+    }
 
 	return check;                                                                       	                                
 }
