@@ -14,7 +14,7 @@ LDFLAGS = -lpthread -pthread
 CXXFLAGS += `pkg-config --cflags`
 LDFLAGS += `pkg-config --cflags`
 
-all: test_server
+all: test_server test_client
 
 ########
 #linking
@@ -65,4 +65,4 @@ thread.o: thread.cc thread.h
 #########
 
 clean:
-	rm -rf *.o game.pb.h game.pb.cc protoc_middleman test_server log.txt
+	rm -rf *.o test_server test_client log.txt
