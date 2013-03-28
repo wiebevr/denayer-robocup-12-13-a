@@ -14,7 +14,7 @@ Kicker::Kicker()
 {
 	// TODO Auto-generated constructor stub
 	kick_distance = 0.1;
-	max_speed = 100;
+	maxSpeed = 100;
 	walk_speed = 50;
 }
 
@@ -34,7 +34,7 @@ void Kicker::run()
 		cout << "robot at kickpos " << endl;
 		if( turnTo(co->ballx, co->bally) )	 //Robot turned towards ball
 		{
-			driveTo(co->ballx, co->bally, max_speed);	 //Let's kick!
+			driveTo(co->ballx, co->bally, maxSpeed);	 //Let's kick!
 		}
 		else
 		{
@@ -94,18 +94,18 @@ int Kicker::turnTo(float x, float y)
 			}
 			else			//turned opposite direction, turn any way to change rotx
 			{
-				ll->turnRight(max_speed);
+				ll->turnRight(maxSpeed);
 				return 0;
 			}
 		}
 		else if( (co->robot1rotx < 0) )	//robot looks to left side
 		{
-			ll->turnRight(max_speed);
+			ll->turnRight(maxSpeed);
 			return 0;
 		}
 		else				//robot looks to right side
 		{
-			ll->turnLeft(max_speed);
+			ll->turnLeft(maxSpeed);
 			return 0;
 		}
 	}
@@ -126,12 +126,12 @@ int Kicker::turnTo(float x, float y)
 			
 			if( fabs(y_s) > fabs(y_t) )			// if small triangle does not equal point-triangle
 			{
-				ll->turnRight(max_speed);		// turning...
+				ll->turnRight(maxSpeed);		// turning...
 				return 0;
 			}
 			else if( fabs(y_s) < fabs(y_t) )
 			{
-				ll->turnLeft(max_speed);
+				ll->turnLeft(maxSpeed);
 				return 0;
 			}
 			else						// y_s == y_t
@@ -144,12 +144,12 @@ int Kicker::turnTo(float x, float y)
 			cout << "both upper or lower " << endl;
 			if( fabs(q_r) > fabs(q_p) )
 			{
-				ll->turnRight(max_speed);		// turn towards point-quadrant
+				ll->turnRight(maxSpeed);		// turn towards point-quadrant
 				return 0;
 			}
 			else
 			{
-				ll->turnLeft(max_speed);
+				ll->turnLeft(maxSpeed);
 				return 0;
 			}
 		}
@@ -158,12 +158,12 @@ int Kicker::turnTo(float x, float y)
 			cout << "diff sign, eq value " << endl;			
 			if( fabs(x_t) > fabs(y_t) )
 			{
-				ll->turnRight(max_speed);		// turn towards closest other quadrant
+				ll->turnRight(maxSpeed);		// turn towards closest other quadrant
 				return 0;
 			}
 			else
 			{
-				ll->turnLeft(max_speed);
+				ll->turnLeft(maxSpeed);
 				return 0;
 			}
 		}
@@ -172,12 +172,12 @@ int Kicker::turnTo(float x, float y)
 			cout << "else; other situation " << endl;
 			if( fabs(q_r) > fabs(q_p) )			// same as in upper-lower, but turn other way
 			{
-				ll->turnLeft(max_speed);		// turning...
+				ll->turnLeft(maxSpeed);		// turning...
 				return 0;
 			}
 			else
 			{
-				ll->turnRight(max_speed);
+				ll->turnRight(maxSpeed);
 				return 0;
 			}
 		}

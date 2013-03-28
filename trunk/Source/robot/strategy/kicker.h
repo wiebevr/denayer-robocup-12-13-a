@@ -79,7 +79,6 @@ private:
 	float kick_posx; //optimal position to start kicking from, X and Y coordinates
 	float kick_posy;
 	float kick_distance; //distance between ball and optimal kicking position
-	int max_speed;	// maximum speed for lowlevel
 	int walk_speed; // normal speed for lowlevel
 };
 
