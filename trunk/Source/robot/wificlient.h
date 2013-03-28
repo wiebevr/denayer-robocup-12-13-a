@@ -52,10 +52,10 @@
 #include <arpa/inet.h>
 #include <signal.h>
 #include <netdb.h>
-#include "../../shared/vision_data.h"
-#include "lib_crc.h"
-#include "thread.h"
-#include "log.h"
+#include "../shared/vision_data.h"
+#include "../shared/lib_crc.h"
+#include "../shared/thread.h"
+#include "../shared/log.h"
 
 #define       UDPPORT       12345                       //port number where the client is listening
 #define       INBUFLEN      2048                        //max number of bytes in the receive buffer for 1 packet
