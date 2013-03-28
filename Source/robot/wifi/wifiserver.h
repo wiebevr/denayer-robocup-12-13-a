@@ -47,7 +47,7 @@
 #include <signal.h>
 #include <netdb.h>
 //#include "game.pb.h"
-#include "../../../image_processing/public data/vision_data.h" // TODO fix include path
+#include "../../image_processing/public data/vision_data.h" // TODO fix include path
 #include "lib_crc.h"
 #include "thread.h"
 #include "log.h"
