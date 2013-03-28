@@ -53,7 +53,7 @@
 #include "log.h"
 
 #define       UDPPORT       12345         //port and IP address of the listener(s)
-#define       IPV4          "localhost"
+#define       IPV4          "sven-mba"
 #define       OUTBUFLEN     2048          //max size of the output buffer containing the whole datagram frame
                                           //this includes all the fields (seq nr, length, input data, CRC check)
 /**
