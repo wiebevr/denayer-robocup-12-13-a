@@ -52,7 +52,7 @@
 #include <arpa/inet.h>
 #include <signal.h>
 #include <netdb.h>
-#include "../../image_processing/public data/vision_data.h" // TODO fix path
+#include "../../shared/vision_data.h"
 #include "lib_crc.h"
 #include "thread.h"
 #include "log.h"

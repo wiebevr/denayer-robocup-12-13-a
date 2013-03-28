@@ -22,7 +22,7 @@
 #include <iostream>
 
 #include "vision_field.h"
-#include "public data/vision_data.h"
+#include "../../public/vision_data.h"
 #include "vision_robot.h"
 #include "vision_DataCircle.h"
 #include "vision_balls.h"
