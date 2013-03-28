@@ -1,3 +1,0 @@
-[5][03/28/13 16:37:32][Test_wificlient][init Log class from Test_wificlient]
-[5][03/28/13 16:37:32][Test_wificlient][init from main]
-[5][03/28/13 16:37:32][wifi client][init Log class from wifi client]
