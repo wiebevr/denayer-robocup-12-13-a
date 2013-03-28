@@ -32,7 +32,7 @@ void Kicker::run()
 	if( co->robot1x == kick_posx && co->robot1y == kick_posy ) //Robot at kicking position
 	{
 		cout << "robot at kickpos " << endl;
-		if( turnTo(co->ballx, co->bally) == 1 )	 //Robot turned towards ball
+		if( turnTo(co->ballx, co->bally) )	 //Robot turned towards ball
 		{
 			driveTo(co->ballx, co->bally, max_speed);	 //Let's kick!
 		}
@@ -41,7 +41,7 @@ void Kicker::run()
 			return;			 //Not completely turned yet
 		}
 	}
-	else if( turnTo(kick_posx, kick_posy) == 1 )	 //Turned to kicking position?
+	else if( turnTo(kick_posx, kick_posy) )	 //Turned to kicking position?
 	{
 		cout << "turned to kickpos " << endl;
 		driveTo(kick_posx, kick_posy, walk_speed);		 //Drive towards position
@@ -66,32 +66,44 @@ void Kicker::calcKickPos()
 		kick_posy = co->bally - kick_distance;
 	}
 }
-
+/*
+Unnecessary
 float Kicker::pythagoras(float x, float y)
 {
 	float z;
 	z = sqrt( (x*x)+(y*y) );
 	return z;
 }
+*/
 
+/*
+Replaced by Robot version
 int Kicker::turnTo(float x, float y)
 {
 	float x_t = x - co->robot1x;		//make triangle of robotcoords and pointcoords
 	float y_t = y - co->robot1y;		//these are hor. and vert. sides
 
-	if(co->robot1rotx == 0.00)				// point is above us!
+	if(x == 0.00)				// point is above us! (or below)
 	{		
 		cout << "xt == 0 " << endl;
-		if(co->robot1rotx == 0)
+		if(co->robot1rotx == 0.00 )	//we're looking up! (or down)
 		{
-			return 1;		//turned upwards
+			if( (co->robot1roty == 1.00 && y>0) || (co->robot1roty == -1.00 && y<0) )
+			{
+				return 1;	//turned in same direction as point
+			}
+			else			//turned opposite direction, turn any way to change rotx
+			{
+				ll->turnRight(max_speed);
+				return 0;
+			}
 		}
-		else if(co->robot1rotx < 0)
+		else if( (co->robot1rotx < 0) )	//robot looks to left side
 		{
 			ll->turnRight(max_speed);
 			return 0;
 		}
-		else
+		else				//robot looks to right side
 		{
 			ll->turnLeft(max_speed);
 			return 0;
@@ -171,6 +183,7 @@ int Kicker::turnTo(float x, float y)
 		}
 	}
 }
+*/
 
 int Kicker::driveTo(float x, float y, int speed)
 {
@@ -187,35 +200,35 @@ int Kicker::driveTo(float x, float y, int speed)
 	}
 }
 
+/*
+Replaced by Robot Turnto()
 int Kicker::checkQuadrant( float x_coordinate, float y_coordinate)
 {
-	/* check for point on origin  or axis */
+	// check for point on origin  or axis
 	if (x_coordinate == 0 || y_coordinate == 0)
 	{	
 		return 0;
 	}
-    	/* check for quadrant I */
+    	// check for quadrant I
     	else if(x_coordinate > 0 && y_coordinate > 0)
 	{
         	return -1;
     	}
-    	/* check for quadrant II */
+    	// check for quadrant II
     	else if(x_coordinate < 0 && y_coordinate > 0)
 	{
         	return -2;
     	}
-    	/* check for quadrant III */
+    	// check for quadrant III
     	else if(x_coordinate < 0 && y_coordinate < 0)
 	{
     		return 2;
     	}
-    	/* check for quadrant IV */
+    	// check for quadrant IV
     	else
 	{
         	return 1;
     	}
-    	/* all possibilities covered by now */
-    	/* terminate successfully */
     	return 0;
 } 
-
+*/
