@@ -19,13 +19,13 @@ using namespace cv;
 using namespace std;
 
 #define PI 3.14159265
-#define THRESHOLD 10
+#define THRESHOLD 20
 #define MAX_KERNEL_LENGTH 7
-#define MAXDIST 150000
+#define MAXDIST 700000
 
-class VisionRobot{
+class Robot{
         public:
-		VisionRobot(); // constructor of the class
+		Robot(); // constructor of the class
 		
 		Point2f getCoords( Mat img );	
 		/*	This fucntion takes an image as input and returns the coordinates of the robot.
