@@ -9,7 +9,6 @@
 #include <cstdlib>
 #include <iostream>
 #include "wificlient.h"
-#include "log.h"
 
 using namespace std;
 
