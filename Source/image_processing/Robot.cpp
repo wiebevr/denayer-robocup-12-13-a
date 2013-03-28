@@ -5,15 +5,16 @@
 #include "Robot.h"
 
 //--------------------------------------
-VisionRobot::VisionRobot() {}  
+Robot::Robot() {}  
     
 //--------------------------------------
-Point2f VisionRobot::getCoords( Mat img )
+Point2f Robot::getCoords( Mat img )
 {
 	image = img;
-      	int angle;
+      int angle;
 	Mat hsv, dst, bw;
 	vector<vector<Point> > contours, newcontours, middlecontour;
+	vector<Point2f> center;
 	
 	cvtColor(image, hsv, CV_RGB2HSV);
 	
@@ -36,11 +37,12 @@ Point2f VisionRobot::getCoords( Mat img )
 	* 	contouren berekenen en als resultaat krijgen we enkel de bollen van
 	*	de robot, niet de bal
 	*/
+	
 	findContours(bw.clone(), newcontours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
 	
 	dst = Mat::zeros(image.size(), image.type());
 	drawContours(dst, newcontours, -1, Scalar::all(255), CV_FILLED);
-
+	
 	// logic AND om het masker op de image te leggen, zodat enkel dat deel
 	// getoond zal worden
 	dst &= image;
@@ -52,8 +54,7 @@ Point2f VisionRobot::getCoords( Mat img )
 	
 	DataCircle dc(middlecontour);
 	
-	vector<Point2f> center = dc.getCenters();
-	
+	center = dc.getCenters();
 	
 	// Indien de robot gevonden is, sturen we de coordinaten van het middenpunt door	
 	if ( center.size() > 0 )
@@ -72,7 +73,7 @@ Point2f VisionRobot::getCoords( Mat img )
 }
 
 //--------------------------------------
-Mat VisionRobot::smoothImage( Mat img )
+Mat Robot::smoothImage( Mat img )
 {
 	Mat imgdest = img.clone();
 	for ( int i = 1; i < MAX_KERNEL_LENGTH; i = i + 2 )
@@ -82,7 +83,7 @@ Mat VisionRobot::smoothImage( Mat img )
 }
 
 //--------------------------------------
-Mat VisionRobot::removeBall( Mat img, vector<vector<Point> > cnt )
+Mat Robot::removeBall( Mat img, vector<vector<Point> > cnt )
 {
 	int thickness = -1;
 	int linetype = 8;
@@ -95,14 +96,15 @@ Mat VisionRobot::removeBall( Mat img, vector<vector<Point> > cnt )
 	for ( int i = 0; i < cnt.size(); i++ )
 	{
 		if ( radius[i] > THRESHOLD )					
-			circle(img, center[i], radius[i]+1.5, Scalar::all(0), thickness, linetype);			
+			circle(img, center[i], radius[i]+1.5, Scalar::all(0), thickness, linetype);	
+							
 	}
 	
 	return img;
 }
 
 //--------------------------------------
-vector<vector<Point> > VisionRobot::extractContourMiddle( Mat img )
+vector<vector<Point> > Robot::extractContourMiddle( Mat img )
 {
 	vector<vector<Point> > cnt;
 	Mat bw, hsv, dst;
@@ -112,13 +114,14 @@ vector<vector<Point> > VisionRobot::extractContourMiddle( Mat img )
 	// Met deze range vinden we binnenste bol van de robot
 	inRange(hsv, Scalar(2, 170, 60), Scalar(4, 210, 100), bw);
 	bw = smoothImage(bw);
+		
 	findContours(bw.clone(), cnt, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
 	
 	return cnt;	
 }
 
 //--------------------------------------
-void VisionRobot::calcRotation( vector<vector<Point> > mcontour, vector<vector<Point> > allcontours )
+void Robot::calcRotation( vector<vector<Point> > mcontour, vector<vector<Point> > allcontours )
 {
 	int shortindex=0;
 	int thickness = -1, linetype = 8;
@@ -127,7 +130,7 @@ void VisionRobot::calcRotation( vector<vector<Point> > mcontour, vector<vector<P
 	vector<Point2f> centers(4);
 	vector<float> radii(4);
 	vector<vector<Point> > cnt;	
-	DataCircle dcmiddle(mcontour), dcall(allcontours);
+	DataCircle dcmiddle(mcontour), dcall(allcontours);	
 	
 	// Hier gaan we de bollen berekenen die het dichtst bij de middenste bol van de robot zitten
 	// Met deze bollen kunnen we dan de rotatie berekenen
@@ -136,7 +139,7 @@ void VisionRobot::calcRotation( vector<vector<Point> > mcontour, vector<vector<P
 		//cout << dcall->center[i] << endl;
 		dist = calcDistance(dcall.getCenters()[i], dcmiddle.getCenters()[0]);
 		
-		if ( dist > 1 && dist < MAXDIST )
+		if ( dist > 10 && dist < MAXDIST )
 			circle(dst, dcall.getCenters()[i], dcall.getRadius()[i], Scalar::all(255), thickness, linetype);		
 	}
 	
@@ -161,7 +164,7 @@ void VisionRobot::calcRotation( vector<vector<Point> > mcontour, vector<vector<P
 	
 	dxred = red.getCenters()[0].x - dcmiddle.getCenters()[0].x;
 	dyred = red.getCenters()[0].y - dcmiddle.getCenters()[0].y;
-	
+
 	angle = -atan2(dyred,dxred)/PI*180 + 115;
 	
 	// Indien de hoek groter wordt dan 180 graden, dan zit men in het verkeerde quadrant,
@@ -170,10 +173,12 @@ void VisionRobot::calcRotation( vector<vector<Point> > mcontour, vector<vector<P
 		angle = angle - 360;
 	
 	rotation = angle;
+
+	
 }
 
 //--------------------------------------
-float VisionRobot::calcDistance(Point2f a, Point2f b)
+float Robot::calcDistance(Point2f a, Point2f b)
 {
 	float xdist, ydist, sum;
 
@@ -189,7 +194,7 @@ float VisionRobot::calcDistance(Point2f a, Point2f b)
 }
 
 //--------------------------------------
-float VisionRobot::getRotation()
+float Robot::getRotation()
 {
 	return rotation;
 }
