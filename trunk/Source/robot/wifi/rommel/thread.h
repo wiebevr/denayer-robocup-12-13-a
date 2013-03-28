@@ -8,9 +8,9 @@
 #define thread_H
 #include <iostream>
 #include <string.h>
+#include <pthread.h>
 using namespace std;
 
-#include <pthread.h>
 
 extern pthread_cond_t received_bytes;
 extern pthread_mutex_t received_mutex;

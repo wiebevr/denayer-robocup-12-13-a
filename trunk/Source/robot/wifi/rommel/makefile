@@ -8,7 +8,7 @@
 
 CXX= g++
 CXXFLAGS = -c -Wall
-LDFLAGS = -lpthread
+LDFLAGS = -lpthread -pthread
 
 #google protocol buffers support
 CXXFLAGS += `pkg-config --cflags`
