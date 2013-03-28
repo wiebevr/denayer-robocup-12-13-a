@@ -203,17 +203,18 @@ int Wifiserver::init()
        int broadcast = 1;
 
        //get the host info of the listener host(s)
-       if ((remhost = gethostbyname(IPV4)) == NULL)
+       /*if ((remhost = gethostbyname(IPV4)) == NULL)
        {
               perror("Wifiserver: init: gethostbyname failed");
               return(-1);
-       }
+       }*/
 
        //fill in the address from the listener(s)
        //this is the address we will send our datagram packets to
        memset(&addr_rem, 0, sizeof(addr_rem));
        addr_rem.sin_family = AF_INET;
-       addr_rem.sin_addr = *((struct in_addr*)remhost->h_addr);
+       //addr_rem.sin_addr = *((struct in_addr*)remhost->h_addr);
+       addr_rem.sin_addr.s_addr = inet_addr("255.255.255.255");
        addr_rem.sin_port = htons(UDPPORT);              //UDP port
 
        //create the socket to send from (socket of this host)
