@@ -29,33 +29,33 @@
             Het rijden naar de startplaats gebeurt in rechte lijken (horizontaal en verticaal): anders moet nog een draaihoek worden berekend.
             Er wordt een boolean teruggestuurd die aangeeft of de initialisatie voltooid is.
 
-                             O											<br>
-                             |											<br>
-                             |              O: mogelijke startplaats						<br>
-                    X--------+              X: init. plaats voor het doel					<br>
-                             |              -: af te leggen weg							<br>
-                             |											<br>
-                             O											<br>
+                             O											                                        <br>
+                             |											                                        <br>
+                             |              O: mogelijke startplaats						                    <br>
+                    X--------+              X: init. plaats voor het doel					                    <br>
+                             |              -: af te leggen weg							                        <br>
+                             |											                                        <br>
+                             O											                                        <br>
 
         - goKeeping(): hol achter de bal aan
             Er wordt nagegaan of er naar boven of naar onder moet worden gereden om de bal te volgen. Er wordt alleen vooruit en achteruit gereden.
             Er wordt dus geen rekening gehouden met eventuele draai-afwijkingen van de robot.
 
-                    GoToPlace()                                                 goKeeping()			<br>
+                    GoToPlace()                                                 goKeeping()			            <br>
     	----------------------------------------------      	----------------------------------------------	<br>
-        |                                 |                     |                                 |		<br>
-        |                                 |                     |                                 |		<br>
-        |                                 |                     | ^                               |		<br>
-        |            0                    |                     | |                               |		<br>
-        |----        |                    |                     |----                             |		<br>
-        |    |       |                  / | \                   | |  |                          / | \		<br>
-        | X--|-------+                 |  o  |                  | X  |                         |  o  |		<br>
-        |    |       |                  \ | /                   | |  |                          \ | /		<br>
-        |----        |                    |                     |----                             |		<br>
-        |            o                    |                     | |                               |		<br>
-        |                                 |                     | V                               |		<br>
-        |                                 |                     |                                 |		<br>
-        |                                 |                     |                                 |		<br>
+        |                                 |                     |                                 |		        <br>
+        |                                 |                     |                                 |		        <br>
+        |                                 |                     | ^                               |		        <br>
+        |            0                    |                     | |                               |		        <br>
+        |----        |                    |                     |----                             |		        <br>
+        |    |       |                  / | \                   | |  |                          / | \		    <br>
+        | X--|-------+                 |  o  |                  | X  |                         |  o  |		    <br>
+        |    |       |                  \ | /                   | |  |                          \ | /		    <br>
+        |----        |                    |                     |----                             |		        <br>
+        |            o                    |                     | |                               |		        <br>
+        |                                 |                     | V                               |		        <br>
+        |                                 |                     |                                 |		        <br>
+        |                                 |                     |                                 |		        <br>
         ----------------------------------------------(0,0)     ------------------------------------------(0,0)	<br>
 */
 
@@ -81,6 +81,8 @@ class Keeper : public Robot     //DE KLASSE KEEPER IS EEN UITBEREIDING VAN DE KL
     private:
         int  maxSpeed;		    //DE WAARDE VOOR DE MAXIMALE SNELHEID WAARMEE DE ROBOT KAN RIJDEN
         bool initOK;            //OM AAN TE DUIDEN OF DE ROBOT NOG NAAR ZIJN PLAATS (HET DOEL) MOET RIJDEN
+        float goalx;              //INITPLAATS (X-CO)
+        float goaly;              //INITPLAATS (Y_CO)
         void goKeeping();       //ACHTERVOLG DE BAL (PRIMITIEVE KEEPERFUNCTIE)
         bool goToInitPlace();   //INITIALISEER DE ROBOT DOOR NAAR ZIJN PLAATS (HET DOEL) TE RIJDEN
 };

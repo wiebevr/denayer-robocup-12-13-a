@@ -19,7 +19,7 @@ Strategy::Strategy()
 	kicker = new Kicker();
 	kicker->setll(&ll);
 	
-	mode = 0;
+	mode = 1;
 }
 
 // ---------------------------------------------------------------------------
