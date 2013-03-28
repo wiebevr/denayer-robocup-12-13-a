@@ -5,10 +5,10 @@
 #include "Robot.h"
 
 //--------------------------------------
-Robot::Robot() {}  
+VisionRobot::VisionRobot() {}  
     
 //--------------------------------------
-Point2f Robot::getCoords( Mat img )
+Point2f VisionRobot::getCoords( Mat img )
 {
 	image = img;
       int angle;
@@ -73,7 +73,7 @@ Point2f Robot::getCoords( Mat img )
 }
 
 //--------------------------------------
-Mat Robot::smoothImage( Mat img )
+Mat VisionRobot::smoothImage( Mat img )
 {
 	Mat imgdest = img.clone();
 	for ( int i = 1; i < MAX_KERNEL_LENGTH; i = i + 2 )
@@ -83,7 +83,7 @@ Mat Robot::smoothImage( Mat img )
 }
 
 //--------------------------------------
-Mat Robot::removeBall( Mat img, vector<vector<Point> > cnt )
+Mat VisionRobot::removeBall( Mat img, vector<vector<Point> > cnt )
 {
 	int thickness = -1;
 	int linetype = 8;
@@ -104,7 +104,7 @@ Mat Robot::removeBall( Mat img, vector<vector<Point> > cnt )
 }
 
 //--------------------------------------
-vector<vector<Point> > Robot::extractContourMiddle( Mat img )
+vector<vector<Point> > VisionRobot::extractContourMiddle( Mat img )
 {
 	vector<vector<Point> > cnt;
 	Mat bw, hsv, dst;
@@ -121,7 +121,7 @@ vector<vector<Point> > Robot::extractContourMiddle( Mat img )
 }
 
 //--------------------------------------
-void Robot::calcRotation( vector<vector<Point> > mcontour, vector<vector<Point> > allcontours )
+void VisionRobot::calcRotation( vector<vector<Point> > mcontour, vector<vector<Point> > allcontours )
 {
 	int shortindex=0;
 	int thickness = -1, linetype = 8;
@@ -178,7 +178,7 @@ void Robot::calcRotation( vector<vector<Point> > mcontour, vector<vector<Point> 
 }
 
 //--------------------------------------
-float Robot::calcDistance(Point2f a, Point2f b)
+float VisionRobot::calcDistance(Point2f a, Point2f b)
 {
 	float xdist, ydist, sum;
 
@@ -194,7 +194,7 @@ float Robot::calcDistance(Point2f a, Point2f b)
 }
 
 //--------------------------------------
-float Robot::getRotation()
+float VisionRobot::getRotation()
 {
 	return rotation;
 }
