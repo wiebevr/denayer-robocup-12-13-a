@@ -2,7 +2,7 @@
 *	Author: Mathieu Theerens
 */
 
-#include "vision_robot.h"
+#include "Vision_robot.h"
 
 //--------------------------------------
 VisionRobot::VisionRobot() {}  
@@ -11,7 +11,7 @@ VisionRobot::VisionRobot() {}
 Point2f VisionRobot::getCoords( Mat img )
 {
 	image = img;
-      int angle;
+      	int angle;
 	Mat hsv, dst, bw;
 	vector<vector<Point> > contours, newcontours, middlecontour;
 	vector<Point2f> center;
@@ -97,6 +97,8 @@ Mat VisionRobot::removeBall( Mat img, vector<vector<Point> > cnt )
 	{
 		if ( radius[i] > THRESHOLD )					
 			circle(img, center[i], radius[i]+1.5, Scalar::all(0), thickness, linetype);	
+
+		cout << radius[i] << endl;
 							
 	}
 	
@@ -132,13 +134,19 @@ void VisionRobot::calcRotation( vector<vector<Point> > mcontour, vector<vector<P
 	vector<vector<Point> > cnt;	
 	DataCircle dcmiddle(mcontour), dcall(allcontours);	
 	
+
+	cout << endl << endl;
+
+
 	// Hier gaan we de bollen berekenen die het dichtst bij de middenste bol van de robot zitten
 	// Met deze bollen kunnen we dan de rotatie berekenen
 	for ( int i = 0; i < allcontours.size(); i++ )
 	{
 		//cout << dcall->center[i] << endl;
 		dist = calcDistance(dcall.getCenters()[i], dcmiddle.getCenters()[0]);
-		
+
+		cout << "Hallo" << dist << endl;		
+
 		if ( dist > 10 && dist < MAXDIST )
 			circle(dst, dcall.getCenters()[i], dcall.getRadius()[i], Scalar::all(255), thickness, linetype);		
 	}

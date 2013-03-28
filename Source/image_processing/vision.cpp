@@ -44,9 +44,7 @@ Mat Vision::initCamera(const string& filename)
     cap >> img;
 	cvtColor(img, img, CV_BayerBG2BGR);
 		//img = imread("../buildHome/Img/Keeper.ppm");
-	
-
-    //cvtColor(img, img, CV_BayerBG2BGR);
+		
     return img;
 }
 
