@@ -7,7 +7,6 @@
 *
 *********************************************************************************************************/
 
-#include <cstdlib>
 #include <iostream>
 #include "wifiserver.h"
 #include "log.h"
