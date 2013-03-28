@@ -27,9 +27,9 @@
 #include "DataCircle.h"
 #include "Balls.h"
 
-#define width 300
-#define height 300
-#define border 100
+#define width 500
+#define height 500
+#define border 50
 
 using namespace std;
 using namespace cv;
