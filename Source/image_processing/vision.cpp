@@ -104,6 +104,7 @@ VisionData &Vision::fetchData()
     // Get transformed image and put it in tmp image
     field.getCorrectedImage(img).copyTo(tmp);
 
+	namedWindow("Overview field");
     // Gets ball coordinates from tmp and put it in data 
     VisionBall ball;
     Point2f pnt = ball.getCoords(tmp);
