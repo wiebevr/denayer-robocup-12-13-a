@@ -27,8 +27,9 @@ class Robot {
 			To be implemented by the child class.
 		*/
 		virtual void run();
-
 	private:
+		void turnUp();			///turn the robot upwards (called by turnto() )
+		void turnDown();		///turn the robot downwards (called by turnto() )
 	protected:
 		/*
 			Pointers to the coordinate and lowlevel objects so that they can be accessed by the child robots.
@@ -41,6 +42,7 @@ class Robot {
 			and so advoid overkill to the steering unit of the robot.
 		*/
 		char lastInstruction;
+		bool turnTo(float x float y);	///turn the robot towards a certain point. Returns 'true' when completed.
 };
 
 #endif
