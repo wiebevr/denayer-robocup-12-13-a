@@ -2,7 +2,7 @@
 *	Author: Mathieu Theerens
 */
 
-#include "Vision_robot.h"
+#include "Robot.h"
 
 //--------------------------------------
 VisionRobot::VisionRobot() {}  
@@ -11,7 +11,7 @@ VisionRobot::VisionRobot() {}
 Point2f VisionRobot::getCoords( Mat img )
 {
 	image = img;
-      	int angle;
+      int angle;
 	Mat hsv, dst, bw;
 	vector<vector<Point> > contours, newcontours, middlecontour;
 	vector<Point2f> center;
@@ -96,12 +96,10 @@ Mat VisionRobot::removeBall( Mat img, vector<vector<Point> > cnt )
 	for ( int i = 0; i < cnt.size(); i++ )
 	{
 		if ( radius[i] > THRESHOLD )					
-			circle(img, center[i], radius[i]+1.5, Scalar::all(0), thickness, linetype);	
-
-		cout << radius[i] << endl;
+			circle(img, center[i], radius[i]+1.5, Scalar::all(0), thickness, linetype);
 							
 	}
-	
+
 	return img;
 }
 
@@ -114,7 +112,7 @@ vector<vector<Point> > VisionRobot::extractContourMiddle( Mat img )
 	cvtColor(img, hsv, CV_RGB2HSV);
 
 	// Met deze range vinden we binnenste bol van de robot
-	inRange(hsv, Scalar(2, 170, 60), Scalar(4, 210, 100), bw);
+	inRange(hsv, Scalar(2, 170, 60), Scalar(4, 210, 150), bw);
 	bw = smoothImage(bw);
 		
 	findContours(bw.clone(), cnt, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
@@ -134,23 +132,17 @@ void VisionRobot::calcRotation( vector<vector<Point> > mcontour, vector<vector<P
 	vector<vector<Point> > cnt;	
 	DataCircle dcmiddle(mcontour), dcall(allcontours);	
 	
-
-	cout << endl << endl;
-
-
 	// Hier gaan we de bollen berekenen die het dichtst bij de middenste bol van de robot zitten
 	// Met deze bollen kunnen we dan de rotatie berekenen
 	for ( int i = 0; i < allcontours.size(); i++ )
 	{
 		//cout << dcall->center[i] << endl;
 		dist = calcDistance(dcall.getCenters()[i], dcmiddle.getCenters()[0]);
-
-		cout << "Hallo" << dist << endl;		
-
-		if ( dist > 10 && dist < MAXDIST )
+		
+		if ( dist > MINDIST && dist < MAXDIST )
 			circle(dst, dcall.getCenters()[i], dcall.getRadius()[i], Scalar::all(255), thickness, linetype);		
 	}
-	
+
 	dst &= image;
 	
 	// Nu gaan we de positie bepalen van de rood/roze bol, en gaan we hiermee de 
