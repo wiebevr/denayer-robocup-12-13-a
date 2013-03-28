@@ -1,5 +1,4 @@
-#include "../shared/vision_data.h"
-#include "wifi/wificlient.h"
+#include "wificlient.h"
 #include "strategy/strategy.h"
 
 int main(int argc, char **argv)

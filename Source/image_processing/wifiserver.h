@@ -47,10 +47,10 @@
 #include <signal.h>
 #include <netdb.h>
 //#include "game.pb.h"
-#include "../../image_processing/public data/vision_data.h" // TODO fix include path
-#include "lib_crc.h"
-#include "thread.h"
-#include "log.h"
+#include "../shared/vision_data.h" // TODO fix include path
+#include "../shared/lib_crc.h"
+#include "../shared/thread.h"
+#include "../shared/log.h"
 
 #define       UDPPORT       12345         //port and IP address of the listener(s)
 #define       IPV4          "sven-mba"

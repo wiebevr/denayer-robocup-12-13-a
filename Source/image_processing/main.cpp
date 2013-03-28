@@ -1,6 +1,6 @@
 //#include "wifi/wifi.h"
 #include "vision/vision.h"
-#include "wifi/wifiserver.h"
+#include "wifiserver.h"
 #include "../public/vision_data.h"
 
 using namespace std;
