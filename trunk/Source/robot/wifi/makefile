@@ -39,12 +39,12 @@ test_client.o: test_client.cc wificlient.h log.h
 
 
 #the server
-wifiserver.o: wifiserver.cc wifiserver.h thread.h log.h ../../../image_processing/public\ data/vision_data.h
+wifiserver.o: wifiserver.cc wifiserver.h thread.h log.h ../../image_processing/public\ data/vision_data.h
 	$(CXX) $(CXXFLAGS) wifiserver.cc
 
 #generated google protocol class
-vision_data.o: ../../../image_processing/public\ data/vision_data.cpp ../../../image_processing/public\ data/vision_data.h 
-	$(CXX) $(CXXFLAGS) ../../../image_processing/public\ data/vision_data.cpp
+vision_data.o: ../../image_processing/public\ data/vision_data.cpp ../../image_processing/public\ data/vision_data.h 
+	$(CXX) $(CXXFLAGS) ../../image_processing/public\ data/vision_data.cpp
 
 #CRC check header lib	
 lib_crc.o: lib_crc.c lib_crc.h
