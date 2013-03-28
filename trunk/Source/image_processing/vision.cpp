@@ -42,7 +42,9 @@ Mat Vision::initCamera(const string& filename)
         exit(EXIT_FAILURE);
     }
     cap >> img;
-		img = imread("../buildHome/Img/Keeper.ppm");
+	cvtColor(img, img, CV_BayerBG2BGR);
+		//img = imread("../buildHome/Img/Keeper.ppm");
+	
 
     //cvtColor(img, img, CV_BayerBG2BGR);
     return img;
@@ -98,7 +100,8 @@ VisionData &Vision::fetchData()
 
     // Get new camera frame
     cap >> img;
-		img = imread("../buildHome/Img/Keeper.ppm");
+	cvtColor(img, img, CV_BayerBG2BGR);
+		//img = imread("../buildHome/Img/Keeper.ppm");
 
     // Get transformed image and put it in tmp image
     field.getCorrectedImage(img).copyTo(tmp);

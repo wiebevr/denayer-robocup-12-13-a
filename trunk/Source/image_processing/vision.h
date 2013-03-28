@@ -23,9 +23,9 @@
 
 #include "vision_field.h"
 #include "public data/vision_data.h"
-#include "Robot.h"
-#include "DataCircle.h"
-#include "Balls.h"
+#include "vision_robot.h"
+#include "vision_DataCircle.h"
+#include "vision_balls.h"
 
 #define width 500
 #define height 500
