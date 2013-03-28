@@ -18,7 +18,6 @@ using namespace std;
     Keeper::Keeper()
     {
         initOK = false;     //the robot first has to go to the initialisation position! The function 'run' will do this when 'initOK' = false
-        maxSpeed = 100;     //100% -> move the robot at maximum speed
         cout << "Keeper: new keeper is born!" << endl;
     }     //ctor
 //-------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -12,6 +12,7 @@ Robot::Robot()
 {
         lastInstruction = 'a';
 	co = 0;
+	maxSpeed = 100;     //100% -> move the robot at maximum speed
 }
 
 // ---------------------------------------------------------------------------
@@ -37,7 +38,7 @@ void Robot::run()
 
 }
 // -----------------------------------------------------------------------------
-private bool Robot::turnTo(float x float y)         //met x en y de coordinaten van de bal
+bool Robot::turnTo(float x, float y)         //met x en y de coordinaten van de bal
 {
     float Rx = co->robot1rotx;          //kijkrichting van de robot volgens de x-as
     float Ry = co->robot1roty;          //kijkrichting van de robot volgens de y-as
@@ -88,28 +89,28 @@ private bool Robot::turnTo(float x float y)         //met x en y de coordinaten 
     return false;                       //we zijn nog niet goed gedraait
 }
 // ----------------------------------------------------------------------------------------------
-private void Robot::turnUp()
+void Robot::turnUp()
 {
     //draai de robot naar de bovenkant
     if (co->robot1x > 0)                //kijkt de robot naar links
     {
-        ll.turnRight(maxSpeed);             //draai dan naar rechts
+        ll->turnRight(maxSpeed);             //draai dan naar rechts
     }
     else
     {
-        ll.turnLeft(maxSpeed);              //draai anders naar links
+        ll->turnLeft(maxSpeed);              //draai anders naar links
     }
 }
 // --------------------------------------------------------------------------------------------
-private void Robot::turnDown()
+void Robot::turnDown()
 {
     //draai de robot naar de onderkant
     if (co->robot1x > 0)                //kijkt de robot naar links
     {
-        ll.turnLeft(maxSpeed);              //draai dan naar links
+        ll->turnLeft(maxSpeed);              //draai dan naar links
     }
     else
     {
-        ll.turnRight(maxSpeed);             //draai anders naar rechts
+        ll->turnRight(maxSpeed);             //draai anders naar rechts
     }
 }

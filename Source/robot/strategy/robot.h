@@ -42,7 +42,8 @@ class Robot {
 			and so advoid overkill to the steering unit of the robot.
 		*/
 		char lastInstruction;
-		bool turnTo(float x float y);	///turn the robot towards a certain point. Returns 'true' when completed.
+		int  maxSpeed;		    //DE WAARDE VOOR DE MAXIMALE SNELHEID WAARMEE DE ROBOT KAN RIJDEN
+		bool turnTo(float x, float y);	///turn the robot towards a certain point. Returns 'true' when completed.
 };
 
 #endif
