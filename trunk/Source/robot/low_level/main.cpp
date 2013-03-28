@@ -16,13 +16,25 @@ int main(int argc, char **argv)
 //    char buffer[IPCSocket::MAX_MESSAGE_LEN];
     int length;
     LowLevel * ll = new LowLevel();
-    ll->driveForward(10);
-    for( int i = 0; i < 100000; i++) {}
-    ll->stopMoving();
-    while (true)
+    //for( int i = 0; i < 100000; i++) 
+       // ll->stopMoving();
+    char a = 'b';
+    while (a != 'q')
     {
         std::cout << "Niets doen!" << std::endl;
+        std::cin >> a; 
+        switch(a)
+        {
+            case 'f':   ll->driveForward(10); break;
+            case 'b':   ll->driveBackwards(10); break;
+            case 'r':   ll->turnRight(10); break;
+            case 'l':   ll->turnLeft(10); break;
+            case 'a':   ll->ledTest(); break;
+            case 's':   ll->stopMoving(); break;
+        }
+
     }
+    ll->stopMoving();
 
     return 0;
 }

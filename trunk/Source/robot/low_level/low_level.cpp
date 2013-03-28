@@ -51,14 +51,14 @@ void LowLevel::turnRight(int speed)
 // ---------------------------------------------------------------------------
 void LowLevel::stopMoving(void)
 {
-    string s = "s\r";
+    string s = "s";
     serial->sWrite(s.data());
 }
 
 // ---------------------------------------------------------------------------
 void LowLevel::ledTest(void)
 {
-   serial->sWrite("t\r");
+   serial->sWrite("t");
 }
 
 // Private functions
@@ -86,7 +86,6 @@ void LowLevel::drive(int speed, char direction)
     buffer.append(ss);
     buffer.append(" ");
     buffer.append(ss);
-    buffer.push_back('\r');
 
     serial->sWrite(buffer.data());
 }
