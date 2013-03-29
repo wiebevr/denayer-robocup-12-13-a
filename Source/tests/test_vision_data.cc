@@ -7,7 +7,7 @@
  */
 #include <string>
 #include <sstream>
-#include "vision_data.h"
+#include "../shared/vision_data.h"
 
 using namespace std;
 
@@ -19,13 +19,14 @@ int main()
 {
 	test_equals();
 	test_toString();
+	test_toString();
 	return 0;
 }
 
 bool test_angle2cart()
 {
 	cout << "Running test_angle2cart   ";
-	cout << "Not implemented yet";
+	cout << "FAILED: Not implemented yet" <<endl;
 	// TODO
 }
 

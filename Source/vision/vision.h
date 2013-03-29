@@ -21,8 +21,8 @@
 
 #include <iostream>
 
+#include "../shared/vision_data.h"
 #include "vision_field.h"
-#include "../../public/vision_data.h"
 #include "vision_robot.h"
 #include "vision_DataCircle.h"
 #include "vision_balls.h"

@@ -52,7 +52,6 @@
 #include <arpa/inet.h>
 #include <signal.h>
 #include <netdb.h>
-#include "../shared/vision_data.h"
 #include "../shared/lib_crc.h"
 #include "../shared/thread.h"
 #include "../shared/log.h"
@@ -104,14 +103,6 @@ class Wificlient : public Thread
        *        serialization manually.
        */
        bool receive(string &data);
-       /**
-       * @brief receivePB receives a binary payload and interpretes it as a serialized google protocol
-       *        buffer bytestream. The receiver de-serializes the payload to a Game object.
-       *        The operation of the method is similar to the receive() method. When a new Game object
-       *        has been received, the method returns true and the parameter 'game' will contain the new
-       *        data. When the method returns false, game is left unchanged.
-       */
-       bool receiveVisionData(VisionData &visionData);
 
        private:
 
