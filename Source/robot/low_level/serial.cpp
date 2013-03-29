@@ -2,6 +2,7 @@
 #include <string.h>
 #include <iostream> 
 
+
 // ---------------------------------------------------------------------------
 Serial::Serial()
 {
@@ -15,11 +16,12 @@ Serial::Serial()
 // ---------------------------------------------------------------------------
 Serial::~Serial()
 {
+	// Close the filedescriptor 
 	close(fd);	
 }
 
 // ---------------------------------------------------------------------------
-Serial::Serial( string path, int baud, int databits, int stopbits ) 
+Serial::Serial( string path, double baud, int databits, int stopbits ) 
 {
     this->baudrate = convertBaud( baud );
     this->stopbits = stopbits;
@@ -32,113 +34,103 @@ int Serial::init(void)
 {
 	struct termios old_flags; 
 	struct termios term_attr;
-    speed_t inputSpeed;
-    inputSpeed = B38400;
-
+	
+	// Open the port, return -1 when failed
     if ((this->fd = open("/dev/ttyUSB1", O_RDWR | O_NOCTTY | O_NDELAY)) == -1) 
     { 
-        std::cout << this->path.c_str();
-        perror("terminal: Can't open device " PORT_0 ); 
-        return(1); 
+        cout << "ERROR: Can open the port."; 
+        return -1; 
     } 
-    /* configurare RS232 */ 
+
+    // Get the attributes of the port
     if (tcgetattr(this->fd, &term_attr) != 0) 
     { 
-        perror("terminal: tcgetattr() failed"); 
-        return(1); 
+        cout << "ERROR: tcgetattr() failed."; 
+        return -1; 
     } 
-    // Get the current options for the port...
-    tcgetattr(this->fd, &term_attr);
-    // Set the baud rates to whatever is needed...
-    cfsetispeed(&term_attr, inputSpeed);
-    cfsetospeed(&term_attr, inputSpeed);
-    // Enable the receiver and set local mode...
-    term_attr.c_cflag |= (CLOCAL | CREAD);
 
+    // Set the baud rate
+    cfsetispeed(&term_attr, this->baudrate);
+    cfsetospeed(&term_attr, this->baudrate);
+
+    // set some flags
+    term_attr.c_cflag |= (CLOCAL | CREAD);
     term_attr.c_cflag &= ~PARENB;
     term_attr.c_cflag &= ~CSTOPB;
     term_attr.c_cflag &= ~CSIZE;
     term_attr.c_cflag |= CS8;
 
-    // Set the new options for the port...
+    // Send the new attributes to the port
     tcsetattr(this->fd, TCSANOW, &term_attr);
-    return 0;
 
     return 0; 
 }
 
 // ---------------------------------------------------------------------------
-void Serial::checksum(unsigned char *Cmd){
-	int i; 
-    this->Cmd[8] = 0;
-	for(i = 0; i < 8; i++) 
-        this->Cmd[8] += this->Cmd[i];
-	return;
-}
-
-// ---------------------------------------------------------------------------
-int Serial::sWrite(const char *Cmd )
+int Serial::sWrite(const char *cmd )
 {
 	int check; 
-    char n;
-	fd_set nfds;
-	struct timeval timeout;
-
-
-	timeout.tv_sec = 5;
-	timeout.tv_usec = 0;
- 
-
-	check = write(this->fd, Cmd, strlen(Cmd));		//originally strlen(bCmd) but there are some zero Bytes in the Cmd
 	
-	if (check < 0) {
-		fputs("write failed!\n", stderr);
-		//close(fd);
+	// Write the message to the filedescriptor
+	check = write(this->fd, cmd, strlen(cmd));	
+	
+	// Check for errors 	
+	if( check < 0) 
+	{
+		fputs("Write failed!\n", stderr);
 		return -1;
 	}
 	else if(check == 0){
-		printf("no bytes transmitted");
-		//close(fd);
+		printf("No bytes transmitted");
 		return 0;
     }
-
+	
+	// End a commend always with a 'CR' (ascii = 13)
     char ending[1];
     ending[0] = 13;
-    n = write(this->fd, ending,1);
-    if(n <0)
+
+	// Write out
+    check = write(this->fd, ending,1);
+
+	// check for errors again
+    if( check < 0 )
     {
-        printf("Gefaald!! \n");
         fputs("write failed!\n",stderr);
         return -1;
     }
 
-	return check;                                                                       	                                
+	return check;
 }
 
 // ---------------------------------------------------------------------------
 int Serial::sRead( string &result) 
 {
-	fcntl(fd, F_SETFL, FNDELAY); // don't block serial read
-    char  buf[100];
-	printf("read(2) function\n");
-	int max = 12;				// 9 bytes as an answer to a Command
-	int    state=1; 
-	int    receivedbyte=0; 
-
+	// Max read = 100 characters
+    char buf[1000];
+	int max = 1000;				
+	int state=1; 
+	int receivedbyte=0; 
+	
+	// don't block serial read
+	fcntl(fd, F_SETFL, FNDELAY);
+	
+	// Keep reading until nothing more to read or 1000 chars has been read
     while( state > 0 && receivedbyte < max) 
-        { 
+    { 
         state = read(fd,&buf[receivedbyte],1); 
         if( state > 0 ) 
             receivedbyte++; 
-        } 
+    } 
+	// place the result in the variable
     result = buf;
-    return    receivedbyte;
+
+	// return number of bytes that have been read
+    return receivedbyte;
 }
 
 // ---------------------------------------------------------------------------
 double Serial::getbaud( void ) 
 {
-	//printf("getbaud\n");
 	struct termios termAttr;
 	double inputSpeed = -1;
 	speed_t baudRate;

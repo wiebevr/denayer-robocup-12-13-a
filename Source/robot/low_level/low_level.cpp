@@ -14,7 +14,8 @@ using namespace std;
 LowLevel::LowLevel()
 {
     serial = new Serial( "dev/ttyUSB0", 38400, 8 ,1 );
-    if(serial->init())
+	// initialise the serial port. Returns 0 if succeeded
+    if( serial->init() )
         exit(-1);
 }
 
