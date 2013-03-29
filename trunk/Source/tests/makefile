@@ -14,7 +14,9 @@ LDFLAGS = -lpthread -pthread
 CXXFLAGS += `pkg-config --cflags`
 LDFLAGS += `pkg-config --cflags`
 
-all: test_server test_client
+all: clean test_server test_client
+
+tests: t_vision_data
 
 ########
 #linking
@@ -43,7 +45,7 @@ wifiserver.o: wifiserver.cc wifiserver.h thread.h log.h ../../image_processing/p
 	$(CXX) $(CXXFLAGS) wifiserver.cc
 
 #generated google protocol class
-vision_data.o: ../../image_processing/public\ data/vision_data.cpp ../../image_processing/public\ data/vision_data.h 
+vision_data.o: ../shared/vision_data.cpp ../shared/vision_data.h 
 	$(CXX) $(CXXFLAGS) ../../image_processing/public\ data/vision_data.cpp
 
 #CRC check header lib	
@@ -66,3 +68,9 @@ thread.o: thread.cc thread.h
 
 clean:
 	rm -rf *.o test_server test_client log.txt
+	
+	
+#######
+# Tests
+#######
+t_vision_data: test_vision_data.o vision_data.o

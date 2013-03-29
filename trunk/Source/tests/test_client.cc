@@ -8,7 +8,8 @@
 
 #include <cstdlib>
 #include <iostream>
-#include "wificlient.h"
+#include "../robot/wificlient.h"
+#include "../shared/vision_data.h"
 
 using namespace std;
 
@@ -36,8 +37,8 @@ int main(int argc, char* argv[])
 
        // fisrt step:
        // declare a Game object. You have to do this only once in the init of the program.
-
-       VisionData data;
+       string data;
+       VisionData vis;
 
        while(1)
        {
@@ -45,10 +46,11 @@ int main(int argc, char* argv[])
               //All received data is stored in a queue until you call receivePB. It will return true if data has been
               //received. The result is written to the game object.
               //For more info about the function see the Wificlient header and source file
-              if(client->receiveVisionData(data))
+              if(client->receive(data))
               {
+            	     vis.fromString(data);
                      //print some data
-            	  	 cout << "Data packet received: object contents = " <<  data.toString() << endl;
+            	  	 cout << "Data packet received: object contents = " <<  vis.toString() << endl;
               }
        }
        delete l;

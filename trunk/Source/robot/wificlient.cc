@@ -45,38 +45,6 @@ Wificlient::Wificlient()
         }
 }
 
-/*********************************************************************************************************
-*
-*      ReceivePB method
-*
-*      Description:
-*      This method retrieves the data from the receiver queue. It converts the received payload from the
-*      queue to a google protocol buffer Game object with the ParseFromString method without making any
-*      extra copy (to speed up).
-*
-*      Params: game is a reference to the input Game object that will contain the received result
-*      The return value is true when new data has been received.
-*
-*********************************************************************************************************/
-
-bool Wificlient::receiveVisionData(VisionData &visionData)
-{
-       if(wp != rp)
-       {
-              visionData.fromString(queue[rp]);          //De-serialize the received payload and store the
-                                                        //result in the game reference, given by the caller.
-              if(rp == QUEUESIZE-1)                     //increment read pointer
-                     rp = 0;
-              else
-                     rp++;
-
-              return true;                              //flag that the data pointer has been updated
-       }
-       else
-       {
-              return false;
-       }
-}
 
 /*********************************************************************************************************
 *

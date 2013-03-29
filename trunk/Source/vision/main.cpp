@@ -1,4 +1,3 @@
-//#include "wifi/wifi.h"
 #include "vision/vision.h"
 #include "wifiserver.h"
 #include "../public/vision_data.h"

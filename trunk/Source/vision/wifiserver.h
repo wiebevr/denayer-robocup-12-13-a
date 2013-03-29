@@ -47,7 +47,6 @@
 #include <signal.h>
 #include <netdb.h>
 //#include "game.pb.h"
-#include "../shared/vision_data.h" // TODO fix include path
 #include "../shared/lib_crc.h"
 #include "../shared/thread.h"
 #include "../shared/log.h"
@@ -100,12 +99,6 @@ class Wifiserver : public Thread
        *        faster than using the send() method in combination with manual serialization.
        */
        void send(const string &data);
-       /**
-       * @brief call this method to broadcast a a VisionData object over the network.
-       *        De method works similar to the send() method, except that it takes a visiondata object as input
-       *        and serializes the object before sending it over the network.
-       */
-       void sendVisionData(const VisionData& visionData);
 
        private:
 

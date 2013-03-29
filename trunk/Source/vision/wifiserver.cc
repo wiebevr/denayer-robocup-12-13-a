@@ -44,25 +44,6 @@ Wifiserver::Wifiserver()
 
 /*********************************************************************************************************
 *
-*      SendPB method
-*
-*      Description: The method serializes the parameter 'game' to a string with the google protocol
-*                   buffers SerializeToString method. Then it will transmit the serialized string over
-*                   the network in the same way send() does this.
-*
-*      Params: game is a pointer to the 'Game' object that has to be send
-*
-*********************************************************************************************************/
-
-void Wifiserver::sendVisionData(const VisionData& visionData)
-{
-       while(sendFlag);                   	//wait for possible pending transmissions to finish
-       in = visionData.toString();		  	//serialize
-       sendFlag = true;            			//notify the internal thread that new data is ready for transmission
-}
-
-/*********************************************************************************************************
-*
 *      Send method
 *
 *      Description: The method notifies the internal thread that new data is ready for transmission.
