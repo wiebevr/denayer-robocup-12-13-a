@@ -14,7 +14,7 @@
 
 #include <iostream>
 
-#include "strategy.h"
+#include "../robot/strategy/strategy.h"
 using namespace std;
 
 // ---------------------------------------------------------------------------

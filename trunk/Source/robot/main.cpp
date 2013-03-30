@@ -3,8 +3,7 @@
 
 int main(int argc, char **argv)
 {
-    Wifi wifi();
-    Strategy strategy();
+    Strategy strategy;
 
     Log *l=new Log("Test_wificlient");
     l->stuur("init from main");
@@ -14,15 +13,18 @@ int main(int argc, char **argv)
     client = Wificlient::getInstance();       //allocate singleton instance
     client->start();                          //start the thread
 
-    VisionData data;
+    VisionData vData;
+    string data;
 
     while(1)
     {
-           if(client->receiveVisionData(data))
+           if(client->receive(data))
            {
                   //print some data
-         	  	cout << "Data packet received: object contents = " <<  data.toString() << endl;
-         	    strategy.setCoords(&data);
+        	    vData.fromString(data);
+        	   	cout << "Data packet received: object contents = " <<  vData.toString() << endl;
+
+         	    strategy.setCoords(&vData);
          	    strategy.run();
            }
     }

@@ -6,8 +6,8 @@
 	\author Gert Mertes
 */
 
-#include "tests/vision_data.h"
-#include "tests/low_level.h"
+#include "../../shared/vision_data.h"
+#include "../low_level/low_level.h"
 #include "robot.h"
 #include "keeper.h"
 #include "kicker.h"

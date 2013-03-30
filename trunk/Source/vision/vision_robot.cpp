@@ -2,7 +2,7 @@
 *	Author: Mathieu Theerens
 */
 
-#include "Robot.h"
+#include "vision_robot.h"
 
 //--------------------------------------
 VisionRobot::VisionRobot() {}  
