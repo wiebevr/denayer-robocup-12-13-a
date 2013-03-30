@@ -4,22 +4,10 @@
 
 #include "vision_field.h"
 
-vector<Point2f> cornersPoints;
-vector<Point2f> cornersGoal;
-
-Mat tmp;
-
-int nPoints;
-
-int Width, Height;
-
-int border;
-
-
 //------------------------------------------------------------------------------
 VisionField::VisionField( Mat img )
 {
-    VisionField::VisionField(img, 500, 500, 50);
+    VisionField(img, 500, 500, 50);
 }
 
 //------------------------------------------------------------------------------

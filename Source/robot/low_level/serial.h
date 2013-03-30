@@ -13,6 +13,7 @@
 #include <sys/stat.h>
        
 #define PORT_0 "/dev/ttyUSB0"
+#define BAUDRATE B38400
 #define DATABITS 8 
 #define STOPBITS 1
 #define FLOWCONTROL 0

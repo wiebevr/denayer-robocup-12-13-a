@@ -16,7 +16,7 @@ void DataCircle::calcData()
 	radius.resize(contours.size());
 	vector<vector<Point> > contours_poly( contours.size() );
 
-	for( int i = 0; i < contours.size(); i++ )
+	for( unsigned int i = 0; i < contours.size(); i++ )
 	{ 
 		approxPolyDP( Mat(contours[i]), contours_poly[i], 3, true );
 		

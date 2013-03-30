@@ -1,18 +1,20 @@
-#include "vision/vision.h"
+#include <iostream>
+#include "vision.h"
 #include "wifiserver.h"
-#include "../public/vision_data.h"
+#include "../shared/log.h"
+#include "../shared/vision_data.h"
 
 using namespace std;
 
 /*********************************************************************************************************
 *
-*      Main test program
+*      Main program
 *
 *********************************************************************************************************/
 
 int main(int argc, char* argv[])
 {
-       Log *l=new Log("Test_wifiserver");
+       Log *l = new Log("Test_wifiserver");
        l->stuur("init from main");
        cout<<"starting test main wifi server! \n";
 
@@ -20,6 +22,7 @@ int main(int argc, char* argv[])
        server = Wifiserver::getInstance();       //allocate singleton instance
        server->start();                          //start the internal thread
 
+       Vision vision;
        VisionData data;
 
        while(1)
@@ -28,7 +31,7 @@ int main(int argc, char* argv[])
 
            // final step: broadcast them!
            cout << "Sending " << data.toString() << endl;
-           server->sendVisionData(data);                     //broadcast the game object over the wifi network
+           server->send(data.toString());                     //broadcast the game object over the wifi network
            usleep(1000000);                           //tunable loop delay (do not hesitate to make it zero!)
        }
        delete l;

@@ -39,8 +39,8 @@ void VisionData::angle2cart(float angle, int robot = 0)
 			robot2roty = sin( angle * PI / 180 );
 			if (robot2rotx < toSmall && robot2rotx > -toSmall ) robot2rotx = 0;
 			if (robot2roty < toSmall && robot2roty > -toSmall ) robot2roty = 0;
-            //cout << "   [VisionData::angle2StopidStrategie] robot 2 -> angle: " << angle \
-			<< " cardisaans values: [" << robot2rotx << ", " << robot2roty << "]" << endl;
+            //cout << "   [VisionData::angle2StopidStrategie] robot 2 -> angle: " << angle
+			//<< " cardisaans values: [" << robot2rotx << ", " << robot2roty << "]" << endl;
             break;
         case (1):
         default:
@@ -49,8 +49,8 @@ void VisionData::angle2cart(float angle, int robot = 0)
 			if (robot1rotx < toSmall && robot1rotx > -toSmall ) robot1rotx = 0;
 			if (robot1roty < toSmall && robot1roty > -toSmall ) robot1roty = 0;
             //polarToCart(1, angle, this->robot1rotx, this->robot1rotx, 0);
-            //cout << "   [VisionData::angle2StopidStrategie] robot 1 -> angle: " << angle \
-			<< " cardisaans values: [" << robot1rotx << ", " << robot1roty << "]" << endl;
+            //cout << "   [VisionData::angle2StopidStrategie] robot 1 -> angle: " << angle
+			//<< " cardisaans values: [" << robot1rotx << ", " << robot1roty << "]" << endl;
     }
 }
 
