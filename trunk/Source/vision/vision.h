@@ -27,9 +27,9 @@
 #include "vision_DataCircle.h"
 #include "vision_balls.h"
 
-#define width 500
-#define height 500
-#define border 50
+#define WIDTH 500
+#define HEIGHT 500
+#define BORDER 50
 
 using namespace std;
 using namespace cv;

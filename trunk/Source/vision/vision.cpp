@@ -6,7 +6,7 @@
 //------------------------------------------------------------------------------
 
 Vision::Vision() 
-        : field(initCamera("/dev/video"), height, width, border), data() 
+        : field(initCamera("/dev/video"), HEIGHT, WIDTH, BORDER), data() 
 {
     init();
 }
@@ -14,7 +14,7 @@ Vision::Vision()
 //------------------------------------------------------------------------------
 
 Vision::Vision(const string& filename) 
-        : field(initCamera(filename), height, width, border), data() 
+        : field(initCamera(filename), HEIGHT, WIDTH, BORDER), data() 
 {
     init();
 }
@@ -52,25 +52,25 @@ Mat Vision::initCamera(const string& filename)
 void Vision::drawUserInfo(Mat tmp)
 {
     // draw user info
-    rectangle(tmp, Point2f(border, border), Point2f(border + width, border + height), Scalar(0, 255, 0), 1);
+    rectangle(tmp, Point2f(BORDER, BORDER), Point2f(BORDER + WIDTH, BORDER + HEIGHT), Scalar(0, 255, 0), 1);
     for (int i = 1; i < 4; i++) 
     {
-        line(tmp, Point2f(border , (((height / 4) * i) + border)), Point2f(border + width, (((height / 4) * i) + border)), Scalar(0, 255, 0), 1);
-        line(tmp, Point2f((((width / 4) * i) + border) , border), Point2f((((width / 4) * i) + border), border + height), Scalar(0, 255, 0), 1);
+        line(tmp, Point2f(BORDER , (((HEIGHT / 4) * i) + BORDER)), Point2f(BORDER + WIDTH, (((HEIGHT / 4) * i) + BORDER)), Scalar(0, 255, 0), 1);
+        line(tmp, Point2f((((WIDTH / 4) * i) + BORDER) , BORDER), Point2f((((WIDTH / 4) * i) + BORDER), BORDER + HEIGHT), Scalar(0, 255, 0), 1);
     }
-    circle(tmp, Point2f(border, border ), 3, Scalar(0, 255, 0));
-    circle(tmp, Point2f(border, height + border ), 3, Scalar(0, 255, 0));
-    circle(tmp, Point2f(width + border, border ), 3, Scalar(0, 255, 0));
-    circle(tmp, Point2f(width + border, height + border ), 3, Scalar(0, 255, 0));
+    circle(tmp, Point2f(BORDER, BORDER ), 3, Scalar(0, 255, 0));
+    circle(tmp, Point2f(BORDER, HEIGHT + BORDER ), 3, Scalar(0, 255, 0));
+    circle(tmp, Point2f(WIDTH + BORDER, BORDER ), 3, Scalar(0, 255, 0));
+    circle(tmp, Point2f(WIDTH + BORDER, HEIGHT + BORDER ), 3, Scalar(0, 255, 0));
 
     line(tmp, field.getPixelGoal()[0], field.getPixelGoal()[1], Scalar(255, 255, 0), 1);
     circle(tmp, field.getPixelGoal()[0], 3, Scalar(255, 255, 0));
     circle(tmp, field.getPixelGoal()[1], 3, Scalar(255, 255, 0));
 
-    putText(tmp, "(0, 0)", Point2f( width + border, height + border ), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0));
-    putText(tmp, "(1, 0)", Point2f( border, height + border ), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0));
-    putText(tmp, "(0, 1)", Point2f( width + border, border ), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0));
-    putText(tmp, "(1, 1)", Point2f( border, border ), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0));
+    putText(tmp, "(0, 0)", Point2f( WIDTH + BORDER, HEIGHT + BORDER ), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0));
+    putText(tmp, "(1, 0)", Point2f( BORDER, HEIGHT + BORDER ), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0));
+    putText(tmp, "(0, 1)", Point2f( WIDTH + BORDER, BORDER ), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0));
+    putText(tmp, "(1, 1)", Point2f( BORDER, BORDER ), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0));
 
     putText(tmp, "Goal 1", field.getPixelGoal()[0], FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255, 255, 0));
     putText(tmp, "Goal 2", field.getPixelGoal()[1], FONT_HERSHEY_SIMPLEX, 0.5, Scalar(255, 255, 0));
