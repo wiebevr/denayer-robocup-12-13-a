@@ -9,6 +9,7 @@
 CXX= g++
 CXXFLAGS = -c -g -Wall
 LDFLAGS = -lpthread -pthread -lstdc++
+LDFLAGS_VISION = -lopencv_core -lopencv_video -lopencv_highgui -lopencv_imgproc
 
 #google protocol buffers support
 #CXXFLAGS += `pkg-config --cflags`
@@ -30,7 +31,7 @@ B_TEST=${_BUILD}/${_TEST}
 BUILDDIRS=${B_LIB} ${B_ROBOT} ${B_VISION} ${B_TEST}
 
 #Main calls
-all: 	clean test vision robot
+all: 	clean tests vision robot
 	echo "Building everything."
 
 #Cleaning	
@@ -59,7 +60,7 @@ tests: 	dirs test_vision_data test_server test_client test_lowlevel test_strateg
 	
 vision: dirs wifiserver.o vision_data.o vision.o vision_field.o vision_balls.o vision_DataCircle.o vision_robot.o lib_crc.o log.o staticlog.o thread.o
 	@echo Building $@
-	${CXX} ${LDFLAGS} ${_VISION}/main.cpp -o ${B_TEST}/$@ \
+	${CXX} ${LDFLAGS} ${LDFLAGS_VISION} ${_VISION}/main.cpp -o ${B_TEST}/$@ \
 	${B_LIB}/wifiserver.o ${B_LIB}/lib_crc.o ${B_LIB}/log.o ${B_LIB}/staticlog.o ${B_LIB}/thread.o \
 	${B_LIB}/vision.o ${B_LIB}/vision_field.o ${B_LIB}/vision_balls.o ${B_LIB}/vision_DataCircle.o ${B_LIB}/vision_robot.o \
 	${B_LIB}/vision_data.o

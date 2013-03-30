@@ -28,6 +28,8 @@ bool test_angle2cart()
 	cout << "Running test_angle2cart   ";
 	cout << "FAILED: Not implemented yet" <<endl;
 	// TODO
+    
+    return false;
 }
 
 bool test_equals()

@@ -9,7 +9,7 @@ set(PIXFC_ARM_TARGET_PROCESSOR cortex-a8)
 set(PIXFC_ARM_TARGET_ARCH armv7-a)
 
 # The cross compiler, make sure it is in PATH.
-set(CMAKE_C_COMPILER  ${ROBOT_SOURCE_DIR}/env/arm-2011.03/bin/arm-none-linux-gnueabi-gcc)
-set(CMAKE_CXX_COMPILER  ${ROBOT_SOURCE_DIR}/env/arm-2011.03/bin/arm-none-linux-gnueabi-g++)
+set(CMAKE_C_COMPILER  ${ROBOT_SOURCE_DIR}/env/arm-2011.03/arm-none-linux-gnueabi/bin/gcc)
+set(CMAKE_CXX_COMPILER  ${ROBOT_SOURCE_DIR}/env/arm-2011.03/arm-none-linux-gnueabi/bin/g++)
 
-set(CMAKE_FIND_ROOT_PATH ${ROBOT_SOURCE_DIR}/env/arm-2011.03)
+set(CMAKE_FIND_ROOT_PATH ${ROBOT_SOURCE_DIR}/env/fs )
