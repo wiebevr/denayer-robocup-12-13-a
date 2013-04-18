@@ -1,0 +1,130 @@
+\hypertarget{class_staticlog}{\section{Staticlog Class Reference}
+\label{class_staticlog}\index{Staticlog@{Staticlog}}
+}
+
+
+Singleton class for uniform access to logfile.  
+
+
+
+
+{\ttfamily \#include $<$staticlog.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_staticlog_a229b8bea8e537c4fd88584f1cc0bc20a}{stuur} (string bron, string bericht, int prior)
+\begin{DoxyCompactList}\small\item\em Add msg to logfile. \end{DoxyCompactList}\item 
+void \hyperlink{class_staticlog_a229b8bea8e537c4fd88584f1cc0bc20a}{stuur} (string bron, string bericht, int prior)
+\begin{DoxyCompactList}\small\item\em Add msg to logfile. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_staticlog}{Staticlog} $\ast$ \hyperlink{class_staticlog_a1c4bb0f55cdfc3ceb1bcf381b957a8e6}{get\-Instance} ()
+\begin{DoxyCompactList}\small\item\em Function that checks if an instance of that class already exists. \end{DoxyCompactList}\item 
+static \hyperlink{class_staticlog}{Staticlog} $\ast$ \hyperlink{class_staticlog_a3fb398bcfbcfdc9b1c0f8e93feebb675}{get\-Instance} ()
+\begin{DoxyCompactList}\small\item\em Function that checks if an instance of that class already exists. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Singleton class for uniform access to logfile. 
+
+\begin{DoxyAuthor}{Author}
+De Schutter Bob 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+04-\/2011
+\end{DoxyDate}
+\hypertarget{class_staticlog_source}{}\subsection{Sources}\label{class_staticlog_source}
+log.\-h log.\-cpp\hypertarget{class_staticlog_working}{}\subsection{Writes data to the logfile}\label{class_staticlog_working}
+\hypertarget{class_staticlog_destination}{}\subsection{Destination}\label{class_staticlog_destination}
+log.\-h log.\-cpp
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_log}{Log} 
+\end{DoxySeeAlso}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_staticlog_a1c4bb0f55cdfc3ceb1bcf381b957a8e6}{\index{Staticlog@{Staticlog}!get\-Instance@{get\-Instance}}
+\index{get\-Instance@{get\-Instance}!Staticlog@{Staticlog}}
+\subsubsection[{get\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Staticlog} $\ast$ Staticlog\-::get\-Instance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_staticlog_a1c4bb0f55cdfc3ceb1bcf381b957a8e6}
+
+
+Function that checks if an instance of that class already exists. 
+
+If it doesn't exist\-: create one. If an instance exists\-: return that one \begin{DoxyReturn}{Returns}
+Pointer to the staticlog instance 
+\end{DoxyReturn}
+\hypertarget{class_staticlog_a3fb398bcfbcfdc9b1c0f8e93feebb675}{\index{Staticlog@{Staticlog}!get\-Instance@{get\-Instance}}
+\index{get\-Instance@{get\-Instance}!Staticlog@{Staticlog}}
+\subsubsection[{get\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Staticlog}$\ast$ Staticlog\-::get\-Instance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_staticlog_a3fb398bcfbcfdc9b1c0f8e93feebb675}
+
+
+Function that checks if an instance of that class already exists. 
+
+If it doesn't exist\-: create one. If an instance exists\-: return that one \begin{DoxyReturn}{Returns}
+Pointer to the staticlog instance 
+\end{DoxyReturn}
+\hypertarget{class_staticlog_a229b8bea8e537c4fd88584f1cc0bc20a}{\index{Staticlog@{Staticlog}!stuur@{stuur}}
+\index{stuur@{stuur}!Staticlog@{Staticlog}}
+\subsubsection[{stuur}]{\setlength{\rightskip}{0pt plus 5cm}void Staticlog\-::stuur (
+\begin{DoxyParamCaption}
+\item[{string}]{bron, }
+\item[{string}]{bericht, }
+\item[{int}]{prior}
+\end{DoxyParamCaption}
+)}}\label{class_staticlog_a229b8bea8e537c4fd88584f1cc0bc20a}
+
+
+Add msg to logfile. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bron} & Which class the msg came from \\
+\hline
+{\em bericht} & The msg to be written in the logfile \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_log_a76964f632ca5c006564bc4a1558e397d}{Log\-::stuur} 
+\end{DoxySeeAlso}
+\hypertarget{class_staticlog_a229b8bea8e537c4fd88584f1cc0bc20a}{\index{Staticlog@{Staticlog}!stuur@{stuur}}
+\index{stuur@{stuur}!Staticlog@{Staticlog}}
+\subsubsection[{stuur}]{\setlength{\rightskip}{0pt plus 5cm}void Staticlog\-::stuur (
+\begin{DoxyParamCaption}
+\item[{string}]{bron, }
+\item[{string}]{bericht, }
+\item[{int}]{prior}
+\end{DoxyParamCaption}
+)}}\label{class_staticlog_a229b8bea8e537c4fd88584f1cc0bc20a}
+
+
+Add msg to logfile. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bron} & Which class the msg came from \\
+\hline
+{\em bericht} & The msg to be written in the logfile \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_log_a76964f632ca5c006564bc4a1558e397d}{Log\-::stuur} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+C\-:/\-Documents and Settings/student/\-Mijn documenten/\-R\-O\-B\-O\-C\-U\-P/\-Source/robot/unit\-\_\-tests/rommel/staticlog.\-h\item 
+C\-:/\-Documents and Settings/student/\-Mijn documenten/\-R\-O\-B\-O\-C\-U\-P/\-Source/shared/staticlog.\-h\item 
+C\-:/\-Documents and Settings/student/\-Mijn documenten/\-R\-O\-B\-O\-C\-U\-P/\-Source/robot/unit\-\_\-tests/rommel/staticlog.\-cc\item 
+C\-:/\-Documents and Settings/student/\-Mijn documenten/\-R\-O\-B\-O\-C\-U\-P/\-Source/shared/staticlog.\-cc\end{DoxyCompactItemize}

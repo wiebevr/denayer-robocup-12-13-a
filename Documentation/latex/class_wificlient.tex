@@ -1,0 +1,129 @@
+\hypertarget{class_wificlient}{\section{Wificlient Class Reference}
+\label{class_wificlient}\index{Wificlient@{Wificlient}}
+}
+
+
+This is the wifi client thread that runs on the robot.  
+
+
+
+
+{\ttfamily \#include $<$wificlient.\-h$>$}
+
+Inheritance diagram for Wificlient\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_wificlient}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_wificlient_a0f1ded9f8252ef5094915c6ff9bf1d40}{run} ()
+\begin{DoxyCompactList}\small\item\em the actual thread. Call the start() method (implemented in thread.\-cpp) to start the thread \end{DoxyCompactList}\item 
+\hypertarget{class_wificlient_aab4bf3fdc0dc322772f16fa2a19490c6}{bool \hyperlink{class_wificlient_aab4bf3fdc0dc322772f16fa2a19490c6}{receive} (string \&data)}\label{class_wificlient_aab4bf3fdc0dc322772f16fa2a19490c6}
+
+\begin{DoxyCompactList}\small\item\em receive method. Call this method with a reference to a string to get the received payload. The method returns 'true' when data contains new received data. When the method returns false, data is left unchanged. When working with the google protocol buffers, one should call the receive\-P\-B() method. This method already implements de-\/serialization of the google protocol bytestream and is a bit faster than using the \hyperlink{class_wificlient_aab4bf3fdc0dc322772f16fa2a19490c6}{receive()} method and doing the de-\/ serialization manually. \end{DoxyCompactList}\item 
+\hypertarget{class_wificlient_a40c3a8952dd678120ac2d516b8e853b8}{bool \hyperlink{class_wificlient_a40c3a8952dd678120ac2d516b8e853b8}{receive\-Vision\-Data} (\hyperlink{class_vision_data}{Vision\-Data} \&vision\-Data)}\label{class_wificlient_a40c3a8952dd678120ac2d516b8e853b8}
+
+\begin{DoxyCompactList}\small\item\em receive\-P\-B receives a binary payload and interpretes it as a serialized google protocol buffer bytestream. The receiver de-\/serializes the payload to a Game object. The operation of the method is similar to the \hyperlink{class_wificlient_aab4bf3fdc0dc322772f16fa2a19490c6}{receive()} method. When a new Game object has been received, the method returns true and the parameter 'game' will contain the new data. When the method returns false, game is left unchanged. \end{DoxyCompactList}\item 
+void \hyperlink{class_wificlient_a0f1ded9f8252ef5094915c6ff9bf1d40}{run} ()
+\begin{DoxyCompactList}\small\item\em the actual thread. Call the start() method (implemented in thread.\-cpp) to start the thread \end{DoxyCompactList}\item 
+\hypertarget{class_wificlient_aab4bf3fdc0dc322772f16fa2a19490c6}{bool \hyperlink{class_wificlient_aab4bf3fdc0dc322772f16fa2a19490c6}{receive} (string \&data)}\label{class_wificlient_aab4bf3fdc0dc322772f16fa2a19490c6}
+
+\begin{DoxyCompactList}\small\item\em receive method. Call this method with a reference to a string to get the received payload. The method returns 'true' when data contains new received data. When the method returns false, data is left unchanged. When working with the google protocol buffers, one should call the receive\-P\-B() method. This method already implements de-\/serialization of the google protocol bytestream and is a bit faster than using the \hyperlink{class_wificlient_aab4bf3fdc0dc322772f16fa2a19490c6}{receive()} method and doing the de-\/ serialization manually. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_wificlient_a2c13f6bc7687f8ecd6fde0abe803d2a0}{static \hyperlink{class_wificlient}{Wificlient} $\ast$ \hyperlink{class_wificlient_a2c13f6bc7687f8ecd6fde0abe803d2a0}{get\-Instance} ()}\label{class_wificlient_a2c13f6bc7687f8ecd6fde0abe803d2a0}
+
+\begin{DoxyCompactList}\small\item\em get the pointer to the singleton instance so you can work with it. If no instance has been made yet, this method will create one. If this is the case, don't forget to call the start() method to start the thread! \end{DoxyCompactList}\item 
+\hypertarget{class_wificlient_a0a7612d4c7ff6f8809027d46d5fb5d7b}{static \hyperlink{class_wificlient}{Wificlient} $\ast$ \hyperlink{class_wificlient_a0a7612d4c7ff6f8809027d46d5fb5d7b}{get\-Instance} ()}\label{class_wificlient_a0a7612d4c7ff6f8809027d46d5fb5d7b}
+
+\begin{DoxyCompactList}\small\item\em get the pointer to the singleton instance so you can work with it. If no instance has been made yet, this method will create one. If this is the case, don't forget to call the start() method to start the thread! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+This is the wifi client thread that runs on the robot. 
+
+\begin{DoxyAuthor}{Author}
+Maarten Vandersteegen 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+03-\/2012
+\end{DoxyDate}
+\hypertarget{class_wifiserver_DESCRIPTION}{}\subsection{D\-E\-S\-C\-R\-I\-P\-T\-I\-O\-N}\label{class_wifiserver_DESCRIPTION}
+\hyperlink{class_wificlient}{Wificlient} is a singleton class (only 1 instance allowed). The class contains the client thread that picks broadcasted datagram pakkets from the wifi network. For a documented example on how to use the wificlient see the test\-\_\-client.\-cpp file.\hypertarget{class_wifiserver_NETWORK}{}\subsection{S\-E\-T\-T\-I\-N\-G\-S}\label{class_wifiserver_NETWORK}
+It listens on a given port number, on the \char`\"{}any\char`\"{} address. This means that every packet with the correct port number that arrives on any active network interface card (wifi adaptor, ethernet card,...) is received. For example\-: P\-O\-R\-T = 8000, we have 2 interfaces\-: N\-I\-C0 with I\-P 192.\-168.\-1.\-2, netmask = 255.\-255.\-255.\-0 N\-I\-C1 with I\-P 192.\-168.\-1.\-3, netmask = 255.\-255.\-255.\-0
+
+The following packets will be received\-: Packet with dest I\-P = 192.\-168.\-1.\-2, port = 8000 Packet with dest I\-P = 192.\-168.\-1.\-3, port = 8000 Packet with dest I\-P = 192.\-168.\-1.\-255, port = 8000 Packet with dest I\-P = 255.\-255.\-255.\-255,port = 8000\hypertarget{class_wifiserver_COMMUNICATION}{}\subsection{F\-R\-A\-M\-E F\-O\-R\-M\-A\-T I\-N A\-N U\-D\-P P\-A\-C\-K\-E\-T}\label{class_wifiserver_COMMUNICATION}
+
+
+ $|$ seq nr $|$ length $|$ input data ... ... $|$ C\-R\-C check $|$
+
+
+\begin{DoxyItemize}
+\item seq nr\-: A sequence number is embedded in each packet. The sequence number is 4 bytes long, and large enough to prevent wrapping around.
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
+\item length\-: Number of bytes in the input data field. The length is 4 bytes long.
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
+\item input data\-: the input data. The data is byte oriented and can contain any data.
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
+\item C\-R\-C check\-: A C\-R\-C32 check is calculated on the entire frame (all flieds included) The C\-R\-C32 checksum is 4 bytes long. 
+\end{DoxyItemize}
+
+\subsection{Member Function Documentation}
+\hypertarget{class_wificlient_a0f1ded9f8252ef5094915c6ff9bf1d40}{\index{Wificlient@{Wificlient}!run@{run}}
+\index{run@{run}!Wificlient@{Wificlient}}
+\subsubsection[{run}]{\setlength{\rightskip}{0pt plus 5cm}void Wificlient\-::run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_wificlient_a0f1ded9f8252ef5094915c6ff9bf1d40}
+
+
+the actual thread. Call the start() method (implemented in thread.\-cpp) to start the thread 
+
+\begin{DoxySeeAlso}{See Also}
+threat.\-h 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_thread}{Thread}.
+
+\hypertarget{class_wificlient_a0f1ded9f8252ef5094915c6ff9bf1d40}{\index{Wificlient@{Wificlient}!run@{run}}
+\index{run@{run}!Wificlient@{Wificlient}}
+\subsubsection[{run}]{\setlength{\rightskip}{0pt plus 5cm}void Wificlient\-::run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_wificlient_a0f1ded9f8252ef5094915c6ff9bf1d40}
+
+
+the actual thread. Call the start() method (implemented in thread.\-cpp) to start the thread 
+
+\begin{DoxySeeAlso}{See Also}
+threat.\-h 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_thread}{Thread}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+C\-:/\-Documents and Settings/student/\-Mijn documenten/\-R\-O\-B\-O\-C\-U\-P/\-Source/robot/unit\-\_\-tests/rommel/wificlient.\-h\item 
+C\-:/\-Documents and Settings/student/\-Mijn documenten/\-R\-O\-B\-O\-C\-U\-P/\-Source/robot/wificlient.\-h\item 
+C\-:/\-Documents and Settings/student/\-Mijn documenten/\-R\-O\-B\-O\-C\-U\-P/\-Source/robot/unit\-\_\-tests/rommel/wificlient.\-cc\item 
+C\-:/\-Documents and Settings/student/\-Mijn documenten/\-R\-O\-B\-O\-C\-U\-P/\-Source/robot/wificlient.\-cc\end{DoxyCompactItemize}

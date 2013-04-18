@@ -1,0 +1,131 @@
+\hypertarget{class_wifiserver}{\section{Wifiserver Class Reference}
+\label{class_wifiserver}\index{Wifiserver@{Wifiserver}}
+}
+
+
+This is the wifi server that runs on the external computer.  
+
+
+
+
+{\ttfamily \#include $<$wifiserver.\-h$>$}
+
+Inheritance diagram for Wifiserver\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_wifiserver}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_wifiserver_a90b8f75bcf303853841bb0ee6be96f02}{run} ()
+\begin{DoxyCompactList}\small\item\em the actual thread. Call the start() method (implemented in thread.\-cpp) to start the thread \end{DoxyCompactList}\item 
+\hypertarget{class_wifiserver_a059352fafb15b8213b5303f13151b4b8}{void \hyperlink{class_wifiserver_a059352fafb15b8213b5303f13151b4b8}{send} (const string \&data)}\label{class_wifiserver_a059352fafb15b8213b5303f13151b4b8}
+
+\begin{DoxyCompactList}\small\item\em call this method to broadcast a (binary) string over the network. De method notifies the internal thread that new data is ready to be send. The method waits for a possible pending transmission to finish to avoid data loss when calling this method to fast. When working with the google protocol buffers, one should call the send\-P\-B() method. This method already implements serialization of the google protocol bytestream and is a bit faster than using the \hyperlink{class_wifiserver_a059352fafb15b8213b5303f13151b4b8}{send()} method in combination with manual serialization. \end{DoxyCompactList}\item 
+\hypertarget{class_wifiserver_ab52dcb6abc601662889d3ce10d0aef99}{void \hyperlink{class_wifiserver_ab52dcb6abc601662889d3ce10d0aef99}{send\-Vision\-Data} (const \hyperlink{class_vision_data}{Vision\-Data} \&vision\-Data)}\label{class_wifiserver_ab52dcb6abc601662889d3ce10d0aef99}
+
+\begin{DoxyCompactList}\small\item\em call this method to broadcast a a \hyperlink{class_vision_data}{Vision\-Data} object over the network. De method works similar to the \hyperlink{class_wifiserver_a059352fafb15b8213b5303f13151b4b8}{send()} method, except that it takes a visiondata object as input and serializes the object before sending it over the network. \end{DoxyCompactList}\item 
+void \hyperlink{class_wifiserver_a90b8f75bcf303853841bb0ee6be96f02}{run} ()
+\begin{DoxyCompactList}\small\item\em the actual thread. Call the start() method (implemented in thread.\-cpp) to start the thread \end{DoxyCompactList}\item 
+\hypertarget{class_wifiserver_a059352fafb15b8213b5303f13151b4b8}{void \hyperlink{class_wifiserver_a059352fafb15b8213b5303f13151b4b8}{send} (const string \&data)}\label{class_wifiserver_a059352fafb15b8213b5303f13151b4b8}
+
+\begin{DoxyCompactList}\small\item\em call this method to broadcast a (binary) string over the network. De method notifies the internal thread that new data is ready to be send. The method waits for a possible pending transmission to finish to avoid data loss when calling this method to fast. When working with the google protocol buffers, one should call the send\-P\-B() method. This method already implements serialization of the google protocol bytestream and is a bit faster than using the \hyperlink{class_wifiserver_a059352fafb15b8213b5303f13151b4b8}{send()} method in combination with manual serialization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_wifiserver_a332aba644eee1ed9544fa4e916d3baa5}{static \hyperlink{class_wifiserver}{Wifiserver} $\ast$ \hyperlink{class_wifiserver_a332aba644eee1ed9544fa4e916d3baa5}{get\-Instance} ()}\label{class_wifiserver_a332aba644eee1ed9544fa4e916d3baa5}
+
+\begin{DoxyCompactList}\small\item\em get the pointer to the singleton instance so you can work with it. If no instance has been made yet, this method will create one. If this is the case, don't forget to call the start() method to start the thread! \end{DoxyCompactList}\item 
+\hypertarget{class_wifiserver_ac50428c59914509a4838fa3d074dfd0b}{static \hyperlink{class_wifiserver}{Wifiserver} $\ast$ \hyperlink{class_wifiserver_ac50428c59914509a4838fa3d074dfd0b}{get\-Instance} ()}\label{class_wifiserver_ac50428c59914509a4838fa3d074dfd0b}
+
+\begin{DoxyCompactList}\small\item\em get the pointer to the singleton instance so you can work with it. If no instance has been made yet, this method will create one. If this is the case, don't forget to call the start() method to start the thread! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+This is the wifi server that runs on the external computer. 
+
+\begin{DoxyAuthor}{Author}
+Maarten Vandersteegen 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+03-\/2012
+\end{DoxyDate}
+\hypertarget{class_wifiserver_DESCRIPTION}{}\subsection{D\-E\-S\-C\-R\-I\-P\-T\-I\-O\-N}\label{class_wifiserver_DESCRIPTION}
+\hyperlink{class_wifiserver}{Wifiserver} is a singleton class (only 1 instance allowed). The class contains the server thread that broadcasts datagram pakkets over the wifi network. For a documented example on how to use the wifiserver see the test\-\_\-server.\-cpp file.\hypertarget{class_wifiserver_NETWORK}{}\subsection{S\-E\-T\-T\-I\-N\-G\-S}\label{class_wifiserver_NETWORK}
+\begin{DoxyVerb} To enable broadcasting, just change the IPV4 address (see defines in header file) to a local
+ broadcast address (for example: 192.168.1.255). You can also change the UDP port number.
+ Make sure that the server and the server use the same portnumber.
+\end{DoxyVerb}
+\hypertarget{class_wifiserver_COMMUNICATION}{}\subsection{F\-R\-A\-M\-E F\-O\-R\-M\-A\-T I\-N A\-N U\-D\-P P\-A\-C\-K\-E\-T}\label{class_wifiserver_COMMUNICATION}
+
+
+ $|$ seq nr $|$ length $|$ input data ... ... $|$ C\-R\-C check $|$
+
+
+\begin{DoxyItemize}
+\item seq nr\-: A sequence number is embedded in each packet. The sequence number is 4 bytes long, and large enough to prevent wrapping around.
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
+\item length\-: Number of bytes in the input data field. The length is 4 bytes long.
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
+\item input data\-: the payload. The data is byte oriented and can contain any data.
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
+\item C\-R\-C check\-: A C\-R\-C32 check is calculated on the entire frame (all flieds included) The C\-R\-C32 checksum is 4 bytes long. 
+\end{DoxyItemize}
+
+\subsection{Member Function Documentation}
+\hypertarget{class_wifiserver_a90b8f75bcf303853841bb0ee6be96f02}{\index{Wifiserver@{Wifiserver}!run@{run}}
+\index{run@{run}!Wifiserver@{Wifiserver}}
+\subsubsection[{run}]{\setlength{\rightskip}{0pt plus 5cm}void Wifiserver\-::run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_wifiserver_a90b8f75bcf303853841bb0ee6be96f02}
+
+
+the actual thread. Call the start() method (implemented in thread.\-cpp) to start the thread 
+
+\begin{DoxySeeAlso}{See Also}
+threat.\-h 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_thread}{Thread}.
+
+\hypertarget{class_wifiserver_a90b8f75bcf303853841bb0ee6be96f02}{\index{Wifiserver@{Wifiserver}!run@{run}}
+\index{run@{run}!Wifiserver@{Wifiserver}}
+\subsubsection[{run}]{\setlength{\rightskip}{0pt plus 5cm}void Wifiserver\-::run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_wifiserver_a90b8f75bcf303853841bb0ee6be96f02}
+
+
+the actual thread. Call the start() method (implemented in thread.\-cpp) to start the thread 
+
+\begin{DoxySeeAlso}{See Also}
+threat.\-h 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_thread}{Thread}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+C\-:/\-Documents and Settings/student/\-Mijn documenten/\-R\-O\-B\-O\-C\-U\-P/\-Source/robot/unit\-\_\-tests/rommel/wifiserver.\-h\item 
+C\-:/\-Documents and Settings/student/\-Mijn documenten/\-R\-O\-B\-O\-C\-U\-P/\-Source/vision/wifiserver.\-h\item 
+C\-:/\-Documents and Settings/student/\-Mijn documenten/\-R\-O\-B\-O\-C\-U\-P/\-Source/robot/unit\-\_\-tests/rommel/wifiserver.\-cc\item 
+C\-:/\-Documents and Settings/student/\-Mijn documenten/\-R\-O\-B\-O\-C\-U\-P/\-Source/vision/wifiserver.\-cc\end{DoxyCompactItemize}
