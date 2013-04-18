@@ -23,9 +23,6 @@ Out of these images, the coördinates of each object on the field will be calcul
 
 Now that the coördinates are known, they have to be send to the robot. The coördinates are delivered to the WIFI-unit.
 
-
-Example of a reference^(1)^
-
 The information received from the IP-unit has to be send to the robot. The Wifi unit collects the data and assembles it into 1 object. Via protocol buffers the data is transmitted over the WIFI-network. The protocol used for this transmission is UDP. There will be know acknowledgement from the robot that he's received the package. If he were to miss one package, the next one will arrive shortly without too much data-loss.
 
 === Strategy ===
