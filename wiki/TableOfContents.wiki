@@ -1,7 +1,3 @@
  * [ProjectOverview Project Overview]
-   * [ImageProcessingIndex Image Processing]
-   * [WifiIndex Wifi Communication]
-   * [StrategyIndex Strategy]
-   * [LowLevelIndex Low-level Communication]
  * [CodeGuidelines Coding Guidelines]
  * [DoxygenDocumenting Info over de Doxygen Documentation]
