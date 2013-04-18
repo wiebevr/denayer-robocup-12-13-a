@@ -1,4 +1,4 @@
-= Project Overview
+= Project Overview =
 
 ||<wiki:toc max_depth="2" />||
 
