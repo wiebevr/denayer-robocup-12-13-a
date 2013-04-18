@@ -1,3 +1,4 @@
+#summary Guidelines for decent coding in C++ for the developers
 = Coding Guidelines =
 == Het gebruik van verschillende files ==
  * Er worden geen hoofdletters gebruikt in filenames, er wordt een `_` geplaatst tussen de verschillende woorden in de klasse naam.
