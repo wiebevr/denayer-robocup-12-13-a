@@ -1,6 +1,0 @@
-#summary Explains the Wifi module
-||<wiki:toc max_depth="2" />||
-
-= Introduction =
-
-Add your content here.
