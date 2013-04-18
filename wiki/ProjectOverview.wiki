@@ -1,6 +1,7 @@
 = Project Overview =
 --------------------
 
+== Table of Contents ==
 ||<wiki:toc max_depth="2" />||
 
 == Introduction ==
