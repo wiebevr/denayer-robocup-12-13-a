@@ -1,3 +1,0 @@
- * [ProjectOverview Project Overview]
- * [CodeGuidelines Coding Guidelines]
- * [DoxygenDocumenting Info over de Doxygen Documentation]
