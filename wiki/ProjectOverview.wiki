@@ -94,4 +94,4 @@ cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain-bb.cmake ..
 
 == Documentation ==
 
-The project is open source, and thus the code must be documented so that other people can work separatly on the code. We used doxygen, a programme that generates an HTML-file from the documented code. This HTML-file can be found at... (!!!)
+The project is open source, and thus the code must be documented so that other people can work separatly on the code. We used doxygen, a programme that generates an HTML-file from the documented code. This HTML-file can be found at the downloads-section of this project.
