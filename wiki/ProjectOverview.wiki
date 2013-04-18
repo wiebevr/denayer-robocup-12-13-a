@@ -1,9 +1,9 @@
-#summary Project Overview
-||<wiki:toc max_depth="2" />||
-
 = Introduction =
 
 For our course in Smart Embedded Systems at Lessius Mechelen Campus De Nayer, we have to create a Robocup SSL-project. The goal of this project is to create an autonomous robot, that can play a simplified version of soccer.
+
+#summary Project Overview
+||<wiki:toc max_depth="2" />||
 
 = Architecture =
 
