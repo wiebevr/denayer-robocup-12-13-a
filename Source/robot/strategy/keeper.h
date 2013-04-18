@@ -21,25 +21,8 @@
     - De robot moet het linker doel keepen
 
     - De functies:
-        - constructor, destructor
-        - init(): bereid de robot voor om te keeperen
-        - run(): keeperen! Een van de volgende twee functies wordt aangesproken (hangt af van boolean 'initOK'):
-        - GoToPlace(): initialiseer de keeper
-            Kijkt na of de robot op de beginplaats staat (voor zijn goal). Indien dit niet het geval is zal de robot naar deze plaats rijden.
-            Het rijden naar de startplaats gebeurt in rechte lijken (horizontaal en verticaal): anders moet nog een draaihoek worden berekend.
-            Er wordt een boolean teruggestuurd die aangeeft of de initialisatie voltooid is.
-
-                             O											                                        <br>
-                             |											                                        <br>
-                             |              O: mogelijke startplaats						                    <br>
-                    X--------+              X: init. plaats voor het doel					                    <br>
-                             |              -: af te leggen weg							                        <br>
-                             |											                                        <br>
-                             O											                                        <br>
-
-        - goKeeping(): hol achter de bal aan
-            Er wordt nagegaan of er naar boven of naar onder moet worden gereden om de bal te volgen. Er wordt alleen vooruit en achteruit gereden.
-            Er wordt dus geen rekening gehouden met eventuele draai-afwijkingen van de robot.
+**/
+/*
 
                     GoToPlace()                                                 goKeeping()			            <br>
     	----------------------------------------------      	----------------------------------------------	<br>
@@ -59,31 +42,60 @@
         ----------------------------------------------(0,0)     ------------------------------------------(0,0)	<br>
 */
 
-/**
-* @fn       Keeper          Constructor of the keeper = initialisation.
-* @fn       ~Keeper         Deconstructor of the keeper.
-* @fn       run             Keeping function of the robot (calls either the function 'goKeeping' or 'goToInitPlace').
-* @fn       goKeeping       The actual keeping instruction.
-* @fn       goToInitPlace   Move the keeper towards the init place, his goal. When the keeper is arrived, the function returns 'true'.
-* @var      maxSpeed        Integer, contains the value for the maximum speed to move the robot
-* @var      initOK          Boolean, indicates if the keeper has been initialised yet (= moved to his goal to start keeping)
-*/
+
 #ifndef KEEPER_H
 #define KEEPER_H
 #include "robot.h"
 class Keeper : public Robot     //DE KLASSE KEEPER IS EEN UITBEREIDING VAN DE KLASSE ROBOT
 {
     public:
+        /// @fn       Keeper          Constructor of the keeper = initialisation.
         Keeper();               //CONSTRUCTOR
+
+        /// @fn       ~Keeper         Deconstructor of the keeper.
         ~Keeper();              //DESTRUCTOR
+
+        /** @fn       run             Keeping function of the robot.
+        **  At first, the function 'goToInitPlace()' will be called by this function, because the robot has to be initialised as keeper.
+        **  (= go to the goal and turn towards the upper side)
+        **  When the initialisation of the robot is not completed, the returned boolean of the init function will be false.
+        **  So next time this function will be called again to complete the initialisation.
+        **  When the robot is successfully initialisated, the returned boolean of the init function will be true.
+        **  So next time, the robot can finally do his job (keeping).
+        **  Therefore, the function 'goKeeping' will be called.
+
+                             O											                                        <br>
+                             |											                                        <br>
+                             |              O: possible start place 						                    <br>
+                    X--------+              X: init. place at the goal  					                    <br>
+                             |              -: path to init place  						                        <br>
+                             |											                                        <br>
+                             O											                                        <br>
+        **/
         void run();             //KEEPER ACTIVEREN VOOR DE HUIDIGE COORDINATEN (NAAR PLAATS GAAN + KEEPEN)
     protected:
     private:
-        bool initOK;            //OM AAN TE DUIDEN OF DE ROBOT NOG NAAR ZIJN PLAATS (HET DOEL) MOET RIJDEN
-        float goalx;              //INITPLAATS (X-CO)
-        float goaly;              //INITPLAATS (Y_CO)
+         /** @fn       goKeeping       The actual keeping instruction.
+         ** Compare the Y-coördinates of the ball and the robot. Descide weither the robot has to move upwards or downwards to follow the ball.
+         ** This function is lik the Pong game.
+         ** The robot will only drive forward and backwards, no turning. When the robot is turned (e.g.due to friction), this will not be corrected.
+         **/
         void goKeeping();       //ACHTERVOLG DE BAL (PRIMITIEVE KEEPERFUNCTIE)
+
+        /** @fn       goToInitPlace   Move the keeper towards the init place, his goal. When the keeper is arrived, the function returns 'true'.
+        **  The init place is right before the goal. The robot must also face the top.
+        **  The robot will only move in straight lines and turn 90°. This to avoid the calculation of the turning angles.
+        **/
         bool goToInitPlace();   //INITIALISEER DE ROBOT DOOR NAAR ZIJN PLAATS (HET DOEL) TE RIJDEN
+
+        /// @var      initOK          Boolean, indicates if the keeper has been initialised yet (= moved to his goal to start keeping)
+        bool initOK;            //OM AAN TE DUIDEN OF DE ROBOT NOG NAAR ZIJN PLAATS (HET DOEL) MOET RIJDEN
+
+        /// @var      goalx           X-coördinate of the goal. Used to initialise the keeper (drive to the goal)
+        float goalx;              //INITPLAATS (X-CO)
+
+        /// @var      goaly           Y-coördinate of the goal. Used to initialise the keeper (drive to the goal)
+        float goaly;              //INITPLAATS (Y_CO)
 };
 
 #endif // KEEPER_H
