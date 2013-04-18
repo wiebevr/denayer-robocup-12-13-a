@@ -88,10 +88,3 @@ cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain-bb.cmake ..
 }}}
   Dit laad de toolchain file toolchain-bb.cmake waarin alle opties voor cmake en de compiler staan ingesteld.
  * Daarna moet enkel nog `make` uitgevoerd worden en de arm executables staan klaar in het build/bin folder.
-
-= References =
-List of references
-
- ^(1)^ Ref 1<br/>
- ^(2)^ Ref 2<br/>
- ^(3)^ Ref 3<br/>
