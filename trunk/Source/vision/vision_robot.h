@@ -13,15 +13,15 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <math.h>
-#include "vision_DataCircle.h"
+#include "DataCircle.h"
 
 using namespace cv;
 using namespace std;
 
 #define PI 3.14159265
 #define THRESHOLD 20
-#define MAX_KERNEL_LENGTH 7
-#define MAXDIST 700000
+#define MAX_KERNEL_LENGTH 5
+#define MAXDIST 1000000
 #define MINDIST 20
 
 class VisionRobot{
