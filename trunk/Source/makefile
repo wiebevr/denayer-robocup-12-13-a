@@ -60,7 +60,7 @@ tests: 	dirs test_vision_data test_server test_client test_lowlevel test_strateg
 	
 vision: dirs wifiserver.o vision_data.o vision.o vision_field.o vision_balls.o vision_DataCircle.o vision_robot.o lib_crc.o log.o staticlog.o thread.o
 	@echo Building $@
-	${CXX} ${LDFLAGS} ${LDFLAGS_VISION} ${_VISION}/main.cpp -o ${B_TEST}/$@ \
+	${CXX} ${LDFLAGS} ${LDFLAGS_VISION} ${_VISION}/main.cpp -o ${B_VISION}/$@ \
 	${B_LIB}/wifiserver.o ${B_LIB}/lib_crc.o ${B_LIB}/log.o ${B_LIB}/staticlog.o ${B_LIB}/thread.o \
 	${B_LIB}/vision.o ${B_LIB}/vision_field.o ${B_LIB}/vision_balls.o ${B_LIB}/vision_DataCircle.o ${B_LIB}/vision_robot.o \
 	${B_LIB}/vision_data.o
@@ -69,7 +69,7 @@ vision: dirs wifiserver.o vision_data.o vision.o vision_field.o vision_balls.o v
 	
 robot: dirs wificlient.o vision_data.o lib_crc.o log.o staticlog.o thread.o low_level.o serial.o keeper.o kicker.o robot.o strategy.o
 	@echo Building $@
-	${CXX} ${LDFLAGS} ${_ROBOT}/main.cpp -o ${B_TEST}/$@ \
+	${CXX} ${LDFLAGS} ${_ROBOT}/main.cpp -o ${B_ROBOT}/$@ \
 	${B_LIB}/wificlient.o ${B_LIB}/lib_crc.o ${B_LIB}/log.o ${B_LIB}/staticlog.o ${B_LIB}/thread.o \
 	${B_LIB}/low_level.o ${B_LIB}/serial.o \
 	${B_LIB}/strategy.o ${B_LIB}/keeper.o ${B_LIB}/kicker.o ${B_LIB}/robot.o \
