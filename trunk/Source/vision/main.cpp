@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 
            // final step: broadcast them!
            cout << "Sending " << data.toString() << endl;
-           server->send(data.toString());                     //broadcast the game object over the wifi network
+           server->send(data.toString());             //broadcast the game object over the wifi network
            usleep(1000000);                           //tunable loop delay (do not hesitate to make it zero!)
        }
        delete l;
