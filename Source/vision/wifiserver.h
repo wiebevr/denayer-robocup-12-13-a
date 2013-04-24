@@ -106,7 +106,7 @@ class Wifiserver : public Thread
        //functions
        int init();
        int SendDatagram(const void* data, const int size);
-       uint32_t CalcCRC(const char* data, int size);
+       LongWord CalcCRC(const char* data, int size);
        int SendPacket(const void* data, int size);
 
        //socket variables
