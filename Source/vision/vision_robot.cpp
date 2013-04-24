@@ -2,7 +2,7 @@
 *	Author: Mathieu Theerens
 */
 
-#include "vision_robot.h"
+#include "Robot.h"
 
 //--------------------------------------
 VisionRobot::VisionRobot() {}  
@@ -12,7 +12,7 @@ Point2f VisionRobot::getCoords( Mat img )
 {
 	image = img;
       int angle;
-	Mat hsv, dst, bw;
+	Mat hsv, dst, bw, bwinv;
 	vector<vector<Point> > contours, newcontours, middlecontour;
 	vector<Point2f> center;
 	
@@ -20,11 +20,13 @@ Point2f VisionRobot::getCoords( Mat img )
 	
 	// Met deze range vinden we alle bollen in de foto, dus ook 
 	// de bal 
-	inRange(hsv, Scalar(0, 150, 60), Scalar(180, 255, 255), bw);
+	inRange(hsv, Scalar(40, 0, 1), Scalar(110, 255, 254), bwinv);
+	
+	bitwise_not(bwinv, bw);
 	
 	//	We gaan we binaire foto smoothen omdat er nog wat ruis op zit
 	bw = smoothImage(bw);	
-    	
+	
     	/*	Er kunnen nog gaten in de verschillende bollen zitten, 
     	*	deze verwijderen we door de contouren te vinden en deze dan te
     	*	tekenen
@@ -87,7 +89,7 @@ Mat VisionRobot::removeBall( Mat img, vector<vector<Point> > cnt )
 {
 	int thickness = -1;
 	int linetype = 8;
-	
+
 	DataCircle dc(cnt);
 	
 	vector<Point2f> center = dc.getCenters();
@@ -97,9 +99,9 @@ Mat VisionRobot::removeBall( Mat img, vector<vector<Point> > cnt )
 	{
 		if ( radius[i] > THRESHOLD )					
 			circle(img, center[i], radius[i]+1.5, Scalar::all(0), thickness, linetype);
-							
+						
 	}
-
+	
 	return img;
 }
 
@@ -112,8 +114,8 @@ vector<vector<Point> > VisionRobot::extractContourMiddle( Mat img )
 	cvtColor(img, hsv, CV_RGB2HSV);
 
 	// Met deze range vinden we binnenste bol van de robot
-	inRange(hsv, Scalar(2, 170, 60), Scalar(4, 210, 150), bw);
-	bw = smoothImage(bw);
+	inRange(hsv, Scalar(20, 130, 50), Scalar(25, 160, 100), bw);
+	bw = smoothImage(bw);	
 		
 	findContours(bw.clone(), cnt, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
 	
@@ -150,11 +152,11 @@ void VisionRobot::calcRotation( vector<vector<Point> > mcontour, vector<vector<P
 	cvtColor(dst, hsv, CV_RGB2HSV);
 
 	// Met deze range vinden we rode bol van de robot
-	inRange(hsv, Scalar(120, 100, 100), Scalar(140, 200, 255), bw);
+	inRange(hsv, Scalar(100, 100, 100), Scalar(140, 200, 255), bw);
 	
 	vector<vector<Point> > redcontour;
 	findContours(bw.clone(), redcontour, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
-	
+
 	DataCircle red(redcontour);
 	
 	/*	We berekenen de inverse tangens van de afstand tussen beiden om zo de hoek te bekomen.
