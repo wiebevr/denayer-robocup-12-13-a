@@ -50,6 +50,7 @@
 #include "../shared/lib_crc.h"
 #include "../shared/thread.h"
 #include "../shared/log.h"
+#include <stdint.h>
 
 #define       UDPPORT       12345         //port and IP address of the listener(s)
 #define       IPV4          "sven-mba"
@@ -59,7 +60,7 @@
 * @brief This typedef must be a typedef that represents 4 bytes on the machine
 * This is important for the receiver to receive correctly.
 */
-typedef       unsigned long LongWord;
+typedef       uint32_t LongWord;
 
 using namespace std;
 
@@ -105,7 +106,7 @@ class Wifiserver : public Thread
        //functions
        int init();
        int SendDatagram(const void* data, const int size);
-       unsigned long CalcCRC(const char* data, int size);
+       uint32_t CalcCRC(const char* data, int size);
        int SendPacket(const void* data, int size);
 
        //socket variables

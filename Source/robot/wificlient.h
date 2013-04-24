@@ -52,6 +52,7 @@
 #include <arpa/inet.h>
 #include <signal.h>
 #include <netdb.h>
+#include <stdint.h>
 #include "../shared/lib_crc.h"
 #include "../shared/thread.h"
 #include "../shared/log.h"
@@ -64,7 +65,7 @@
 * @brief This typedef must be a typedef that represents 4 bytes on the machine
 * This is important for the receiver to receive correctly
 */
-typedef       unsigned long LongWord;
+typedef       uint32_t LongWord;
 
 using namespace std;
 
