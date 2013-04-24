@@ -146,23 +146,23 @@ int Wifiserver::SendDatagram(const void* data, int size)
 
 int Wifiserver::SendPacket(const void* data, int size)
 {
-       long idx=0;
-       long crc;
+	   LongWord idx=0;
+       LongWord crc;
        static char outbuf[OUTBUFLEN];
-       static long seq_nr=1;     //sequence number (initial value = 1)
+       static LongWord seq_nr=1;     //sequence number (initial value = 1)
 
-       long buffer;
+       LongWord buffer;
 
        //copy sequence number to output frame (4 bytes)
        buffer = htonl(seq_nr);
-       memcpy(&outbuf[idx], &buffer, sizeof(long));
-       idx += sizeof(long);
+       memcpy(&outbuf[idx], &buffer, sizeof(LongWord));
+       idx += sizeof(LongWord);
        seq_nr++;
 
        //copy size to output frame (4 bytes)
        buffer = htonl (size);
-       memcpy(&outbuf[idx], &buffer, sizeof(long));
-       idx += sizeof(long);
+       memcpy(&outbuf[idx], &buffer, sizeof(LongWord));
+       idx += sizeof(LongWord);
 
        //copy all the input data to the output frame
        memcpy(&outbuf[idx], data, size);
@@ -170,8 +170,8 @@ int Wifiserver::SendPacket(const void* data, int size)
 
        //calculate and add CRC32 check
        buffer = htonl(CalcCRC(outbuf, idx));
-       memcpy(&outbuf[idx], &buffer, sizeof(long));
-       idx += sizeof(long);
+       memcpy(&outbuf[idx], &buffer, sizeof(LongWord));
+       idx += sizeof(LongWord);
 
        //send the frame over the network
        return SendDatagram(outbuf, idx);

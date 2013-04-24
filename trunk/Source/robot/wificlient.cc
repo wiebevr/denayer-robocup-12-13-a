@@ -175,10 +175,10 @@ int Wificlient::ReceiveDatagram(void *out)
 int Wificlient::ReceivePacket(string *result)
 {
        static char inbuf[INBUFLEN];
-       static long seq_nr_prev=0;
-       long crc, crc2, seq_nr;
+       static LongWord seq_nr_prev=0;
+       LongWord crc, crc2, seq_nr;
        int numbytes, idx, size;
-       long buffer;
+       LongWord buffer;
        while(1)
        {
               //receive UDP packet
@@ -186,28 +186,28 @@ int Wificlient::ReceivePacket(string *result)
                      return -1;
 
               //calculate the checksum on the received data and compare with the received checksum
-              idx = numbytes - sizeof(long);
+              idx = numbytes - sizeof(LongWord);
               crc = CalcCRC(inbuf, idx);
-              memcpy( &buffer, &inbuf[idx], sizeof(long));
+              memcpy( &buffer, &inbuf[idx], sizeof(LongWord));
               crc2 = ntohl(buffer);
 
               if(crc == crc2)
               {
                      idx = 0;
                      //extract the sequence number from the packet
-                     memcpy(&buffer, &inbuf[idx], sizeof(long));
+                     memcpy(&buffer, &inbuf[idx], sizeof(LongWord));
                      seq_nr = ntohl(buffer);
 
-                     idx += sizeof(long);
+                     idx += sizeof(LongWord);
                      //check if the sequence number is valid
                      if(seq_nr > seq_nr_prev)
                      {
                             seq_nr_prev = seq_nr;       //update seq number
 
                             //extract the length of the payload
-                            memcpy(&buffer, &inbuf[idx], sizeof(long));
+                            memcpy(&buffer, &inbuf[idx], sizeof(LongWord));
                             size = ntohl(buffer);
-                            idx += sizeof(long);
+                            idx += sizeof(LongWord);
 
                             //extract the payload
                             result->assign(&inbuf[idx], size);
