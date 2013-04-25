@@ -1,40 +1,10 @@
-/*****************************************************************************************************//**
+/******************************************************************************************************
 *
 * @class Wificlient
 * @brief This is the wifi client thread that runs on the robot.
-* @author Maarten Vandersteegen
-* @date 03-2012
+* @author Bart & Jona
+* @date 04-2013
 *
-* @section DESCRIPTION
-*      Wificlient is a singleton class (only 1 instance allowed). The class contains the client thread
-*      that picks broadcasted datagram pakkets from the wifi network. For a documented example on how to
-*      use the wificlient see the test_client.cpp file.
-*
-* @section NETWORK
-*      It listens on a given port number, on the "any" address. This means that every packet with the
-*      correct port number that arrives on any active network interface card (wifi adaptor, ethernet card,...)
-*      is received.
-*      For example: PORT = 8000, we have 2 interfaces: NIC0 with IP 192.168.1.2, netmask = 255.255.255.0
-*                                                      NIC1 with IP 192.168.1.3, netmask = 255.255.255.0
-*
-*      The following packets will be received:         Packet with dest IP = 192.168.1.2,    port = 8000
-*                                                      Packet with dest IP = 192.168.1.3,    port = 8000
-*                                                      Packet with dest IP = 192.168.1.255,  port = 8000
-*                                                      Packet with dest IP = 255.255.255.255,port = 8000
-*
-* @section COMMUNICATION FRAME FORMAT IN UDP PACKET
-*       _________________________________________________________
-*      |  seq nr  |  length  | input data ...    ... | CRC check |
-*
-*    - seq nr: A sequence number is embedded in each packet. The sequence number is 4 bytes
-*      long, and large enough to prevent wrapping around.
-*
-*    - length: Number of bytes in the input data field. The length is 4 bytes long.
-*
-*    - input data: the input data. The data is byte oriented and can contain any data.
-*
-*    - CRC check: A CRC32 check is calculated on the entire frame (all flieds included)
-*      The CRC32 checksum is 4 bytes long.
 *
 *********************************************************************************************************/
 
