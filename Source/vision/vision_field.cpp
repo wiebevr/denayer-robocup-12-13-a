@@ -39,6 +39,7 @@ VisionField::VisionField(Mat img, int persWidth, int persHeight, int setBorder)
     while( waitKey(1) == -1 && VisionField::nPoints < 6);
 
     destroyWindow("Select goal");
+    waitKey(1);
 
     VisionField::nPoints = 0;
 
