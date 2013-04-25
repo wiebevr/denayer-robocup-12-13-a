@@ -20,8 +20,8 @@ void DataCircle::calcData()
 	{ 
 		approxPolyDP( Mat(contours[i]), contours_poly[i], 3, true );
 		
-		// Deze functie neemt de output van approxpoly en geeft zelf als output de 
-		// radius en middenpunt van de cirkels	
+		/** Deze functie neemt de output van approxpoly en geeft zelf als output de 
+		*/ radius en middenpunt van de cirkels	
 		minEnclosingCircle( (Mat)contours_poly[i], center[i], radius[i] );		
 	}
 }
