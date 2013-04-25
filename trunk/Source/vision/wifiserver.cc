@@ -1,8 +1,8 @@
 /*********************************************************************************************************
 *
 * @brief The implementation of the class Wifiserver
-* @author Maarten Vandersteegen
-* @date 03-2012
+* @author Bart Volkaerts, Jona Gladines
+* @date 04-2013
 * Edited by Sven Meys @ 03-2013 to support VisionData class
 *
 *********************************************************************************************************/

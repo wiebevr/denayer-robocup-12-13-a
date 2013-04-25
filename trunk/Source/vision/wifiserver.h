@@ -2,33 +2,8 @@
 *
 * @class Wifiserver
 * @brief This is the wifi server that runs on the external computer.
-* @author Maarten Vandersteegen
+* @author Bart Volkaerts, Jona Gladines
 * @date 03-2012
-*
-* @section DESCRIPTION
-*      Wifiserver is a singleton class (only 1 instance allowed). The class contains the server thread
-*      that broadcasts datagram pakkets over the wifi network. For a documented example on how to use
-*      the wifiserver see the test_server.cpp file.
-*
-* @section NETWORK SETTINGS
-*
-*      To enable broadcasting, just change the IPV4 address (see defines in header file) to a local
-*      broadcast address (for example: 192.168.1.255). You can also change the UDP port number.
-*      Make sure that the server and the server use the same portnumber.
-*
-* @section COMMUNICATION FRAME FORMAT IN AN UDP PACKET
-*       _________________________________________________________
-*      |  seq nr  |  length  | input data ...    ... | CRC check |
-*
-*    - seq nr: A sequence number is embedded in each packet. The sequence number is 4 bytes
-*      long, and large enough to prevent wrapping around.
-*
-*    - length: Number of bytes in the input data field. The length is 4 bytes long.
-*
-*    - input data: the payload. The data is byte oriented and can contain any data.
-*
-*    - CRC check: A CRC32 check is calculated on the entire frame (all flieds included)
-*      The CRC32 checksum is 4 bytes long.
 *
 *********************************************************************************************************/
 
