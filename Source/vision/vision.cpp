@@ -42,7 +42,7 @@ Mat Vision::initCamera(const string& filename)
         exit(EXIT_FAILURE);
     }
     cap >> img;
-	//cvtColor(img, img, CV_BayerBG2BGR);
+	cvtColor(img, img, CV_BayerBG2BGR);
 		//img = imread("../buildHome/Img/Keeper.ppm");
 		
     return img;
@@ -99,7 +99,7 @@ VisionData &Vision::fetchData()
 
     // Get new camera frame
     cap >> img;
-	//cvtColor(img, img, CV_BayerBG2BGR);
+	cvtColor(img, img, CV_BayerBG2BGR);
 		//img = imread("../buildHome/Img/Keeper.ppm");
 
     // Get transformed image and put it in tmp image
