@@ -5,9 +5,9 @@
 #ifndef ROBOT_H_
 #define ROBOT_H_
 /**
-        \class Robot
-        \brief Retrieves the coordinates and rotation of the robot.
-        \author Mathieu Theerens
+        @class Robot
+        @brief Retrieves the coordinates and rotation of the robot.
+        @author Mathieu Theerens
 */
 
 #include <opencv2/imgproc/imgproc.hpp>
@@ -20,7 +20,7 @@ using namespace std;
 
 #define PI 3.14159265
 #define THRESHOLD 20
-#define MAX_KERNEL_LENGTH 5
+#define MAX_KERNEL_LENGTH 9
 #define MAXDIST 1000000
 #define MINDIST 20
 
@@ -35,14 +35,8 @@ class VisionRobot{
 		* 	of the other team's robot.
 		*/
 		
-		Mat smoothImage( Mat img ); // This fucntion smoothes the picture, so that any remaining noise if removed
-		
-		Mat removeBall( Mat img, vector<vector<Point> > cnt );
-		/**	This function calculates the radii of the different circles on the picture
-		*	and since the circle with the biggest radius is the ball, we can easily
-		*	remove it this way. After this function only the circles of the different
-		*	robots remain.
-		*/
+		Mat smoothImage( Mat img ); 
+		// This fucntion smoothes the picture, so that any remaining noise if removed
 		
 		vector<vector<Point> > extractContourMiddle( Mat img );	
 		/**	This function is used by the getCoords() function, it extracts the middle

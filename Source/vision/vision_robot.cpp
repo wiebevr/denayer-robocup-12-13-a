@@ -1,5 +1,5 @@
 /*
-*	Author: Mathieu Theerens
+*	@author Mathieu Theerens
 */
 
 #include "vision_robot.h"
@@ -12,7 +12,7 @@ Point2f VisionRobot::getCoords( Mat img )
 {
 	image = img;
       int angle;
-	Mat hsv, dst, bw, bwinv;
+	Mat hsv, dst, bw, bw2, bwinv;
 	vector<vector<Point> > contours, newcontours, middlecontour;
 	vector<Point2f> center;
 	
@@ -20,20 +20,20 @@ Point2f VisionRobot::getCoords( Mat img )
 	
 	/** Met deze range vinden we alle bollen in de foto, dus ook 
 	*/ de bal 
-	inRange(hsv, Scalar(40, 0, 1), Scalar(110, 255, 254), bwinv);
-	
-	bitwise_not(bwinv, bw);
+	inRange(hsv, Scalar(100, 100, 100), Scalar(120, 200, 200), bw);
+	inRange(hsv, Scalar(20, 0, 0), Scalar(45, 200, 150), bw2);
+	//bitwise_not(bwinv, bw);
 	
 	//	We gaan we binaire foto smoothen omdat er nog wat ruis op zit
 	bw = smoothImage(bw);	
+	bw2 = smoothImage(bw2);	
 	
     	/**	Er kunnen nog gaten in de verschillende bollen zitten, 
     	*	deze verwijderen we door de contouren te vinden en deze dan te
     	*	tekenen
     	*/    	
-	findContours(bw.clone(), contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
-
-	bw = removeBall(bw, contours);
+    	
+    	bw |= bw2;
 	
 	/**	Aangezien we nu de bal hebben verwijderd uit de foto gaan we opnieuw de
 	* 	contouren berekenen en als resultaat krijgen we enkel de bollen van
@@ -45,9 +45,12 @@ Point2f VisionRobot::getCoords( Mat img )
 	dst = Mat::zeros(image.size(), image.type());
 	drawContours(dst, newcontours, -1, Scalar::all(255), CV_FILLED);
 	
-	/** logic AND om het masker op de image te leggen, zodat enkel dat deel
-	*/ getoond zal worden
+	// logic AND om het masker op de image te leggen, zodat enkel dat deel
+	// getoond zal worden
 	dst &= image;
+	
+	imshow("dst", dst);
+	waitKey();
 	
 	// Nu gaan we de middelste bol van de robot verkrijgen	
 	middlecontour = extractContourMiddle(dst);
@@ -85,27 +88,6 @@ Mat VisionRobot::smoothImage( Mat img )
 }
 
 //--------------------------------------
-Mat VisionRobot::removeBall( Mat img, vector<vector<Point> > cnt )
-{
-	int thickness = -1;
-	int linetype = 8;
-
-	DataCircle dc(cnt);
-	
-	vector<Point2f> center = dc.getCenters();
-	vector<float> radius = dc.getRadius();
-
-	for ( int i = 0; i < cnt.size(); i++ )
-	{
-		if ( radius[i] > THRESHOLD )					
-			circle(img, center[i], radius[i]+1.5, Scalar::all(0), thickness, linetype);
-						
-	}
-	
-	return img;
-}
-
-//--------------------------------------
 vector<vector<Point> > VisionRobot::extractContourMiddle( Mat img )
 {
 	vector<vector<Point> > cnt;
@@ -114,9 +96,10 @@ vector<vector<Point> > VisionRobot::extractContourMiddle( Mat img )
 	cvtColor(img, hsv, CV_RGB2HSV);
 
 	// Met deze range vinden we binnenste bol van de robot
-	inRange(hsv, Scalar(20, 130, 50), Scalar(25, 160, 100), bw);
+	//inRange(hsv, Scalar(20, 100, 0), Scalar(50, 170, 255), bw);
+	inRange(hsv, Scalar(20, 0, 0), Scalar(50, 155, 255), bw);	
 	bw = smoothImage(bw);	
-		
+	
 	findContours(bw.clone(), cnt, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
 	
 	return cnt;	
@@ -152,7 +135,10 @@ void VisionRobot::calcRotation( vector<vector<Point> > mcontour, vector<vector<P
 	cvtColor(dst, hsv, CV_RGB2HSV);
 
 	// Met deze range vinden we rode bol van de robot
-	inRange(hsv, Scalar(100, 100, 100), Scalar(140, 200, 255), bw);
+	inRange(hsv, Scalar(100, 150, 100), Scalar(140, 200, 200), bw);
+	
+	imshow("dst", bw);
+	waitKey();
 	
 	vector<vector<Point> > redcontour;
 	findContours(bw.clone(), redcontour, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
