@@ -24,6 +24,7 @@ class Strategy {
 	/**
 		Grabs the latest coordinates from wifi.
 	*/
+		void setMode(int m);
 
 		void setCoords(VisionData *coords);
 		

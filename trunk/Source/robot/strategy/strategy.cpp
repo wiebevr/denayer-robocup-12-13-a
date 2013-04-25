@@ -19,7 +19,7 @@ Strategy::Strategy()
 	kicker = new Kicker();
 	kicker->setll(&ll);
 	
-	mode = 1;
+	mode = 0;
 }
 
 // ---------------------------------------------------------------------------
@@ -52,3 +52,8 @@ void Strategy::setCoords(VisionData *coords)
 }
 
 // ---------------------------------------------------------------------------
+
+void Strategy::setMode(int m)
+{
+	mode = m;
+}
