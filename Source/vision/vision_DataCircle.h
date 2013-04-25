@@ -22,20 +22,20 @@ using namespace std;
 class DataCircle{
         public:
 		DataCircle(vector<vector<Point> > cnt);
-		/*	Constructor for the class, takes a contour as input.
+		/**	Constructor for the class, takes a contour as input.
 		*/
 		
 		void calcData();
-		/*	This gets called automatically in the constructor, it calculates
+		/**	This gets called automatically in the constructor, it calculates
 		* 	the centers and radii corresponding to the contour given.
 		*/
 		
 		vector<Point2f> getCenters();
-		/*	With this function you can get the centers obtained in the function calcData().
+		/**	With this function you can get the centers obtained in the function calcData().
 		*/
 		
 		vector<float> getRadius();
-		/* 	With this function you can get the radii obtained in the function calcData().
+		/**	With this function you can get the radii obtained in the function calcData().
 		*/
 		
         private:

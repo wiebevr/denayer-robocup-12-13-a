@@ -2,7 +2,7 @@
 *	Author: Mathieu Theerens
 */
 
-#include "Robot.h"
+#include "vision_robot.h"
 
 //--------------------------------------
 VisionRobot::VisionRobot() {}  
@@ -18,8 +18,8 @@ Point2f VisionRobot::getCoords( Mat img )
 	
 	cvtColor(image, hsv, CV_RGB2HSV);
 	
-	// Met deze range vinden we alle bollen in de foto, dus ook 
-	// de bal 
+	/** Met deze range vinden we alle bollen in de foto, dus ook 
+	*/ de bal 
 	inRange(hsv, Scalar(40, 0, 1), Scalar(110, 255, 254), bwinv);
 	
 	bitwise_not(bwinv, bw);
@@ -27,7 +27,7 @@ Point2f VisionRobot::getCoords( Mat img )
 	//	We gaan we binaire foto smoothen omdat er nog wat ruis op zit
 	bw = smoothImage(bw);	
 	
-    	/*	Er kunnen nog gaten in de verschillende bollen zitten, 
+    	/**	Er kunnen nog gaten in de verschillende bollen zitten, 
     	*	deze verwijderen we door de contouren te vinden en deze dan te
     	*	tekenen
     	*/    	
@@ -35,7 +35,7 @@ Point2f VisionRobot::getCoords( Mat img )
 
 	bw = removeBall(bw, contours);
 	
-	/*	Aangezien we nu de bal hebben verwijderd uit de foto gaan we opnieuw de
+	/**	Aangezien we nu de bal hebben verwijderd uit de foto gaan we opnieuw de
 	* 	contouren berekenen en als resultaat krijgen we enkel de bollen van
 	*	de robot, niet de bal
 	*/
@@ -45,8 +45,8 @@ Point2f VisionRobot::getCoords( Mat img )
 	dst = Mat::zeros(image.size(), image.type());
 	drawContours(dst, newcontours, -1, Scalar::all(255), CV_FILLED);
 	
-	// logic AND om het masker op de image te leggen, zodat enkel dat deel
-	// getoond zal worden
+	/** logic AND om het masker op de image te leggen, zodat enkel dat deel
+	*/ getoond zal worden
 	dst &= image;
 	
 	// Nu gaan we de middelste bol van de robot verkrijgen	
@@ -134,8 +134,8 @@ void VisionRobot::calcRotation( vector<vector<Point> > mcontour, vector<vector<P
 	vector<vector<Point> > cnt;	
 	DataCircle dcmiddle(mcontour), dcall(allcontours);	
 	
-	// Hier gaan we de bollen berekenen die het dichtst bij de middenste bol van de robot zitten
-	// Met deze bollen kunnen we dan de rotatie berekenen
+	/** Hier gaan we de bollen berekenen die het dichtst bij de middenste bol van de robot zitten
+	*/ Met deze bollen kunnen we dan de rotatie berekenen
 	for ( int i = 0; i < allcontours.size(); i++ )
 	{
 		//cout << dcall->center[i] << endl;
@@ -147,8 +147,8 @@ void VisionRobot::calcRotation( vector<vector<Point> > mcontour, vector<vector<P
 
 	dst &= image;
 	
-	// Nu gaan we de positie bepalen van de rood/roze bol, en gaan we hiermee de 
-	// rotatie berekenen	
+	/** Nu gaan we de positie bepalen van de rood/roze bol, en gaan we hiermee de 
+	*/ rotatie berekenen	
 	cvtColor(dst, hsv, CV_RGB2HSV);
 
 	// Met deze range vinden we rode bol van de robot
@@ -159,7 +159,7 @@ void VisionRobot::calcRotation( vector<vector<Point> > mcontour, vector<vector<P
 
 	DataCircle red(redcontour);
 	
-	/*	We berekenen de inverse tangens van de afstand tussen beiden om zo de hoek te bekomen.
+	/**	We berekenen de inverse tangens van de afstand tussen beiden om zo de hoek te bekomen.
 	* 	Daarna tellen we er 115 graden bij om zo de hoek te bekomen tussen de kijkrichting van
 	* 	de robot en de horizontale as.	
 	*/
@@ -169,8 +169,8 @@ void VisionRobot::calcRotation( vector<vector<Point> > mcontour, vector<vector<P
 
 	angle = -atan2(dyred,dxred)/PI*180 + 115;
 	
-	// Indien de hoek groter wordt dan 180 graden, dan zit men in het verkeerde quadrant,
-	// en moet moet 360 - hoek doen.
+	/** Indien de hoek groter wordt dan 180 graden, dan zit men in het verkeerde quadrant,
+	*/ en moet moet 360 - hoek doen.
 	if ( angle > 180 )
 		angle = angle - 360;
 	
