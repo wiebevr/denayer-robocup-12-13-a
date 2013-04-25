@@ -81,17 +81,6 @@ Als het compileren zonder error's is verlopen worden alle gegenereerde executabl
 *Zorg er steeds voor dat code die gecommit wordt naar de repo's
 compileerd zodat andere groepen deze code zonder problemen kunnen binnen halen en compileren.*
 
-==== Cross compileren ====
-Het maken van een executable dat draait op het beagle board gebeurt als volgt:
- * Ga naar de map `Source/robot/env/` in deze map staat een script `set_me_up.sh`, dit script zal de omgeving (libraries, cross compiler ..) downloaden en uitpakken in de map env.
- * Hierna moet cmake als volgt uitgevoerd worden:
-   * In de map build:
-{{{
-cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain-bb.cmake ..
-}}}
-  Dit laad de toolchain file toolchain-bb.cmake waarin alle opties voor cmake en de compiler staan ingesteld.
- * Daarna moet enkel nog `make` uitgevoerd worden en de arm executables staan klaar in het build/bin folder.
-
 == Documentation ==
 
 The project is open source, and thus the code must be documented so that other people can work separatly on the code. We used doxygen, a programme that generates an HTML-file from the documented code. This HTML-file can be found at the following website:
