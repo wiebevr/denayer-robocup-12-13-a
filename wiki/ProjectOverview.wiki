@@ -36,47 +36,22 @@ The robot needs to interpret the coordinates received over WIFI. The strategy de
 The Low-level Communication-unit receives instruction from the strategy-unit. Based on these instructions and their parameters the robot has to drive forward or turn around until a stop-instruction is received. For this to happen, the engines of the robot have to be controlled.
 
 == Technologies and Frameworks ==
-=== CMake:Out of source build (compileren met cmake) ===
-==== De `CMakeLists.txt` file ====
-Het deel van het project dat draait op de robot wordt gecompileerd met
-cmake. In elke directory van de modules staat een `CMakeLists.txt` file. In deze file worden de bestanden die gebruikt worden in het project op de volgende manier toegevoegd (voorbeeld van strategy) :
-{{{
-cmake_minimum_required (VERSION 2.8)
 
-include_directories("${ROBOT_SOURCE_DIR}")
-
-link_directories("${ROBOT_BINARY_DIR}/lib")
-
-set(strategy_source_files
-	main.cpp	
-	kicker.cpp
-	kicker.h
-	robot.cpp
-	robot.h
-)
-
-add_executable(strategy ${strategy_source_files})
-
-target_link_libraries(strategy ipc)
-}}}
-Het volstaat dus een variabele aan te maken `${strategy_source_files}` die een lijst van souce files bevat (Neem hier voor iedere module een andere naam!).
-
-Deze variabele wordt dan meegegeven met add_executable.
 
 === Het project builden ===
 Het bouwen van het project gebeurd bij voorkeur "out of source", dit betekent dat alle gegenereerde files (wat er bij cmake redelijk veel zijn) buiten de broncode-map worden gebuild. Dit zorgt ervoor dat de broncode boom mooi blijft en er geen clutter op de svn repo's komt.
 
-In de map robot is op svn als een map `build` aangemaakt. Svn is in deze map zo geconfigureerd dat alle files hierin genegeerd worden. Om te builden ga je eerst in een terminal naar de build map:
+In de map Source is op svn als een map `build` aangemaakt. Svn is in deze map zo geconfigureerd dat alle files hierin genegeerd worden. Om te builden ga je eerst in een terminal naar de build map:
 {{{
-cd robot/build
+cd Source
 }}}
-In de build map type je:
+In de Source map type je:
 {{{
-cmake ..
+make robot 
+make vision
 }}}
-De `..` verwijst naar de root directory van de broncode, de `CMakeLists.txt` file in deze map wordt ingelezen. Het cmake commando genereert een makefile. Na cmake moet enkel nog het make-commando uitgevoerd worden om het project te compilen. 
 
-Als het compileren zonder error's is verlopen worden alle gegenereerde executables in de map `robot/build/bin` gezet.
+Als het compileren zonder error's is verlopen worden alle gegenereerde executables in de map Source\build\robot of Source\build\vision gezet.
 
 *Zorg er steeds voor dat code die gecommit wordt naar de repo's
 compileerd zodat andere groepen deze code zonder problemen kunnen binnen halen en compileren.*
